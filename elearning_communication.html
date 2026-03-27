@@ -819,6 +819,41 @@ body {
   .header, .footer-nav { padding: 0 1.2rem; }
   .slide-h1 { font-size: 1.8rem; }
 }
+
+/* ── INSTRUCTION PILL (bottom-right of footer) ── */
+.instruction-pill {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--surface2);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 100px;
+  padding: 0.45rem 1rem 0.45rem 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.instruction-pill.visible { display: flex; }
+.instruction-pill .pill-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent2);
+  flex-shrink: 0;
+  animation: pulse 2s infinite;
+}
+.instruction-pill .pill-icon { font-size: 0.85rem; }
+
+/* Locked next button */
+.nav-btn.primary:disabled {
+  background: var(--surface2);
+  border-color: var(--border);
+  color: var(--muted);
+  opacity: 0.45;
+  cursor: not-allowed;
+}
 </style>
 </head>
 <body>
@@ -841,7 +876,7 @@ body {
 <div class="slides-wrapper">
 
   <!-- SLIDE 1: WELCOME -->
-  <div class="slide slide-1 active" data-slide="1">
+  <div class="slide slide-1 slide-scroll active" data-slide="1">
     <div style="position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden">
       <div class="bg-circle" style="width:400px;height:400px;background:radial-gradient(circle,rgba(79,142,247,0.08) 0%,transparent 70%);top:-100px;right:-100px"></div>
       <div class="bg-circle" style="width:250px;height:250px;background:radial-gradient(circle,rgba(79,247,168,0.06) 0%,transparent 70%);bottom:-50px;left:100px"></div>
@@ -858,7 +893,6 @@ body {
           <span class="pill">5 Topics</span>
           <span class="pill">~25 min</span>
           <span class="pill">Interactive</span>
-          <span class="pill">Scenario-Based</span>
         </div>
       </div>
       <div>
@@ -900,10 +934,10 @@ body {
   </div>
 
   <!-- SLIDE 2: WHY IT MATTERS -->
-  <div class="slide" data-slide="2">
+  <div class="slide slide-scroll" data-slide="2">
     <div class="slide-tag">Module 1 — The Business Case</div>
     <h2 class="slide-h2">Why Communication <span class="hi">Breaks Down</span></h2>
-    <p class="slide-body" style="margin-bottom:1.5rem">Click each barrier to reveal why it's more damaging than you think.</p>
+    <p class="slide-body" style="margin-bottom:1.5rem">These are the most common barriers that silently derail workplace communication.</p>
     <div class="card-grid">
       <div class="info-card" onclick="revealCard(this)">
         <span class="card-icon">🎧</span>
@@ -945,12 +979,12 @@ body {
   </div>
 
   <!-- SLIDE 3: ACTIVE LISTENING -->
-  <div class="slide" data-slide="3">
+  <div class="slide slide-scroll" data-slide="3">
     <div class="slide-tag">Module 2 — Active Listening</div>
     <div class="two-col-wide">
       <div>
         <h2 class="slide-h2">Listen to <span class="hi">Understand</span>,<br>Not to Reply</h2>
-        <p class="slide-body">Active listening isn't passive silence — it's an intentional practice. Click each level to see what it looks like in practice.</p>
+        <p class="slide-body">Active listening isn't passive silence — it's an intentional practice.</p>
         <div class="tips-list" style="margin-top:1.2rem">
           <div class="tip-item" onclick="toggleTip(this)">
             <div class="tip-num">L1</div>
@@ -1014,7 +1048,7 @@ body {
   </div>
 
   <!-- SLIDE 4: SCENARIO Q1 -->
-  <div class="slide" data-slide="4">
+  <div class="slide slide-scroll" data-slide="4">
     <div class="slide-tag">Module 2 — Scenario Check</div>
     <h2 class="slide-h2">What Would <span class="hi">You Do?</span></h2>
     <div class="scenario-box">
@@ -1047,7 +1081,7 @@ body {
   </div>
 
   <!-- SLIDE 5: CLARITY & MESSAGE STRUCTURE -->
-  <div class="slide" data-slide="5">
+  <div class="slide slide-scroll" data-slide="5">
     <div class="slide-tag">Module 3 — Clarity & Structure</div>
     <div class="two-col">
       <div>
@@ -1168,7 +1202,7 @@ body {
             </div>
           </div>
         </div>
-        <p style="font-size:0.72rem;color:var(--muted);margin-top:0.6rem;text-align:center;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;">↑ Click each person to reveal their nonverbal signals</p>
+
       </div>
       <div>
         <div style="background:var(--surface2);border-radius:16px;padding:1.8rem;border:1px solid var(--border)">
@@ -1243,7 +1277,7 @@ body {
     <div class="slide-tag">Module 5 — Difficult Conversations</div>
     <h2 class="slide-h2">The <span class="hi">SBI</span> Framework</h2>
     <p class="slide-body" style="margin-bottom:1.5rem">
-      Situation–Behavior–Impact (SBI) is the gold standard for delivering feedback and navigating tough conversations. Click each element to see it in action.
+      Situation–Behavior–Impact (SBI) is the gold standard for delivering feedback and navigating tough conversations.
     </p>
     <div class="card-grid">
       <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--accent)">
@@ -1347,37 +1381,34 @@ body {
     </div>
   </div>
 
-  <!-- SLIDE 10: CERTIFICATE / WRAP -->
-  <div class="slide slide-scroll" data-slide="10">
-    <div class="slide-tag">Course Complete</div>
-    <div style="text-align:center;max-width:700px;margin:0 auto">
-      <h2 class="slide-h2" style="text-align:center;margin-bottom:0.5rem">Congratulations — <span class="hi">Course Complete!</span></h2>
-      <p class="slide-body" style="text-align:center;margin:0 auto 2rem;max-width:50ch">You've completed <strong>Effective Communication at Work</strong>. Here's a summary of what you now carry into every conversation.</p>
-      <div class="certificate">
-        <div class="cert-inner">
-          <div class="cert-badge">🎓</div>
-          <div class="cert-title">Certificate of Completion</div>
-          <div class="cert-sub">This certifies that</div>
-          <div class="cert-name">Corporate Learner</div>
-          <div class="cert-course">Effective Communication at Work · 2025</div>
-          <div class="card-grid" style="text-align:left;margin-bottom:1.5rem">
-            <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:1rem;">
-              <div style="font-size:1.5rem;margin-bottom:0.4rem">🗣️</div>
-              <div style="font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:600;margin-bottom:0.3rem">Active Listening</div>
-              <div style="font-size:0.72rem;color:var(--muted);line-height:1.5">Listen to understand, not reply. Use L1–L4 framework.</div>
+  <!-- SLIDE 10: COURSE COMPLETION -->
+  <div class="slide" data-slide="10">
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%">
+      <div class="slide-tag" style="justify-content:center;margin-bottom:1rem">Course Complete</div>
+      <h2 class="slide-h2" style="text-align:center;margin-bottom:1.5rem">Well Done — <span class="hi">You've Finished!</span></h2>
+      <div style="background:linear-gradient(135deg,var(--surface) 0%,#1a2040 100%);border:1px solid var(--border);border-radius:16px;padding:2rem 2.5rem;text-align:center;max-width:580px;width:100%;position:relative;overflow:hidden;">
+        <div style="position:relative;z-index:1;">
+          <div style="font-size:3rem;margin-bottom:0.6rem">🏆</div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;background:linear-gradient(90deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.3rem">Course Complete</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem">Effective Communication at Work · 2025</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;text-align:left;margin-bottom:1.5rem">
+            <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:0.8rem;">
+              <div style="font-size:1.2rem;margin-bottom:0.3rem">🗣️</div>
+              <div style="font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem">Active Listening</div>
+              <div style="font-size:0.68rem;color:var(--muted);line-height:1.5">Listen to understand, not reply. Use L1–L4 framework.</div>
             </div>
-            <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:1rem;">
-              <div style="font-size:1.5rem;margin-bottom:0.4rem">📌</div>
-              <div style="font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:600;margin-bottom:0.3rem">PREP Framework</div>
-              <div style="font-size:0.72rem;color:var(--muted);line-height:1.5">Point → Reason → Evidence → Point. Structure before speaking.</div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:0.8rem;">
+              <div style="font-size:1.2rem;margin-bottom:0.3rem">📌</div>
+              <div style="font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem">PREP Framework</div>
+              <div style="font-size:0.68rem;color:var(--muted);line-height:1.5">Point → Reason → Evidence → Point.</div>
             </div>
-            <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:1rem;">
-              <div style="font-size:1.5rem;margin-bottom:0.4rem">⚡</div>
-              <div style="font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:600;margin-bottom:0.3rem">SBI Feedback</div>
-              <div style="font-size:0.72rem;color:var(--muted);line-height:1.5">Situation → Behavior → Impact. Specific, observable, factual.</div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:0.8rem;">
+              <div style="font-size:1.2rem;margin-bottom:0.3rem">⚡</div>
+              <div style="font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem">SBI Feedback</div>
+              <div style="font-size:0.68rem;color:var(--muted);line-height:1.5">Situation → Behavior → Impact.</div>
             </div>
           </div>
-          <div class="cert-seal">
+          <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(79,247,168,0.1);border:1px solid rgba(79,247,168,0.3);border-radius:100px;padding:0.4rem 1.2rem;font-family:'JetBrains Mono',monospace;font-size:0.63rem;color:var(--accent3);letter-spacing:0.1em;text-transform:uppercase;">
             ✅ &nbsp; Completed · Effective Communication at Work
           </div>
         </div>
@@ -1392,7 +1423,11 @@ body {
   <button class="nav-btn" id="prev-btn" onclick="navigate(-1)" disabled>
     ← Previous
   </button>
-  <div class="breadcrumbs" id="breadcrumbs"></div>
+  <div class="instruction-pill" id="instruction-pill">
+    <span class="pill-dot"></span>
+    <span class="pill-icon" id="pill-icon">👆</span>
+    <span id="pill-text"></span>
+  </div>
   <button class="nav-btn primary" id="next-btn" onclick="navigate(1)">
     Next →
   </button>
@@ -1402,161 +1437,247 @@ body {
 const TOTAL = 10;
 let current = 1;
 
-// ── BUILD BREADCRUMBS ──
-const bc = document.getElementById('breadcrumbs');
-for(let i=1;i<=TOTAL;i++){
-  const d = document.createElement('div');
-  d.className = 'crumb' + (i===1?' active':'');
-  d.title = 'Slide '+i;
-  d.onclick = ()=>goTo(i);
-  bc.appendChild(d);
+// ── SLIDE INSTRUCTION MESSAGES ──
+// Shown in the footer pill. Quiz slides (4,9) excluded. No instruction for slide 10.
+const SLIDE_INSTRUCTIONS = {
+  1:  { icon: '👆', text: 'Click each topic to explore' },
+  2:  { icon: '👆', text: 'Click each card to explore' },
+  3:  { icon: '👆', text: 'Click each level to explore' },
+  5:  { icon: '👆', text: 'Click all cards and topics to explore' },
+  6:  { icon: '👆', text: 'Click each person and signal to explore' },
+  7:  { icon: '✥',  text: 'Drag items to reorder' },
+  8:  { icon: '👆', text: 'Click each card to explore' },
+};
+
+// ── INTERACTION TRACKING (required clicks before Next unlocks) ──
+const SLIDE_REQUIRED = {
+  1: 4,   // 4 timeline items
+  2: 6,   // 6 info cards
+  3: 4,   // 4 tip items
+  5: 7,   // 4 PREP cards (left) + 3 timeline items (right)
+  6: 7,   // 4 hotspot figures (left) + 3 tip items (right)
+  7: 1,   // Check answer button
+  8: 6,   // 6 SBI cards
+};
+// slides 4, 9 unlock on answering quiz; all others with no entry are free
+const clickTracker = {};
+const slideUnlocked = {};
+for (let i = 1; i <= TOTAL; i++) {
+  if (!SLIDE_REQUIRED[i]) slideUnlocked[i] = true;
 }
 
-function updateUI(){
+function trackClick(slideNum, key) {
+  if (slideUnlocked[slideNum]) return;
+  if (!clickTracker[slideNum]) clickTracker[slideNum] = new Set();
+  clickTracker[slideNum].add(key);
+  if (clickTracker[slideNum].size >= SLIDE_REQUIRED[slideNum]) {
+    slideUnlocked[slideNum] = true;
+    updateNextBtn();
+  }
+}
+
+function unlockSlide(slideNum) {
+  slideUnlocked[slideNum] = true;
+  updateNextBtn();
+}
+
+function updateNextBtn() {
+  const nextBtn = document.getElementById('next-btn');
+  if (current === TOTAL) {
+    nextBtn.textContent = '↺ Restart';
+    nextBtn.disabled = false;
+    return;
+  }
+  nextBtn.textContent = 'Next →';
+  nextBtn.disabled = !slideUnlocked[current];
+}
+
+function updatePill() {
+  const pill = document.getElementById('instruction-pill');
+  const inst = SLIDE_INSTRUCTIONS[current];
+  if (inst && !slideUnlocked[current]) {
+    document.getElementById('pill-icon').textContent = inst.icon;
+    document.getElementById('pill-text').textContent = inst.text;
+    pill.classList.add('visible');
+  } else {
+    pill.classList.remove('visible');
+  }
+}
+
+// ── BUILD BREADCRUMBS (removed — no-op kept for safety) ──
+
+function updateUI() {
   document.getElementById('cur-num').textContent = current;
   document.getElementById('tot-num').textContent = TOTAL;
-  document.getElementById('progress-fill').style.width = (current/TOTAL*100)+'%';
-  document.getElementById('prev-btn').disabled = current===1;
-  const nextBtn = document.getElementById('next-btn');
-  nextBtn.textContent = current===TOTAL ? '↺ Restart' : 'Next →';
-  const crumbs = bc.querySelectorAll('.crumb');
-  crumbs.forEach((c,i)=>{
-    c.className = 'crumb';
-    if(i+1 < current) c.classList.add('done');
-    if(i+1 === current) c.classList.add('active');
-  });
+  document.getElementById('progress-fill').style.width = (current / TOTAL * 100) + '%';
+  // Hide Previous on slide 1
+  const prevBtn = document.getElementById('prev-btn');
+  prevBtn.style.visibility = current === 1 ? 'hidden' : 'visible';
+  prevBtn.disabled = current === 1;
+  updateNextBtn();
+  updatePill();
 }
 
-function goTo(n, dir){
-  const slides = document.querySelectorAll('.slide');
+function goTo(n, dir) {
   const curSlide = document.querySelector('.slide.active');
   const nextSlide = document.querySelector(`.slide[data-slide="${n}"]`);
-  if(!nextSlide || curSlide===nextSlide) return;
+  if (!nextSlide || curSlide === nextSlide) return;
 
-  const forward = (dir!==undefined) ? dir>0 : n > current;
+  const forward = (dir !== undefined) ? dir > 0 : n > current;
   curSlide.classList.remove('active');
   curSlide.classList.add(forward ? 'exit-left' : 'enter-right');
-  nextSlide.style.display='flex';
-  nextSlide.style.opacity='0';
+  nextSlide.style.display = 'flex';
+  nextSlide.style.opacity = '0';
   nextSlide.style.transform = forward ? 'translateX(40px)' : 'translateX(-40px)';
 
-  requestAnimationFrame(()=>{
-    requestAnimationFrame(()=>{
-      nextSlide.style.transition='opacity 0.4s ease,transform 0.4s ease';
-      nextSlide.style.opacity='1';
-      nextSlide.style.transform='translateX(0)';
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      nextSlide.style.transition = 'opacity 0.4s ease,transform 0.4s ease';
+      nextSlide.style.opacity = '1';
+      nextSlide.style.transform = 'translateX(0)';
       nextSlide.classList.add('active');
-      setTimeout(()=>{
-        curSlide.classList.remove('exit-left','enter-right');
-        curSlide.style.display='none';
-        nextSlide.style.transition='';
-      },420);
+      setTimeout(() => {
+        curSlide.classList.remove('exit-left', 'enter-right');
+        curSlide.style.display = 'none';
+        nextSlide.style.transition = '';
+      }, 420);
     });
   });
   current = n;
   updateUI();
 }
 
-function navigate(dir){
-  if(current+dir > TOTAL){ goTo(1,1); return; }
-  if(current+dir < 1) return;
-  goTo(current+dir, dir);
+function navigate(dir) {
+  if (current + dir > TOTAL) { goTo(1, 1); return; }
+  if (current + dir < 1) return;
+  goTo(current + dir, dir);
 }
 
 // ── INTERACTIVE FUNCTIONS ──
-function revealCard(el){
+function revealCard(el) {
   el.classList.toggle('revealed');
+  const slide = el.closest('.slide');
+  if (slide) {
+    const sn = parseInt(slide.getAttribute('data-slide'));
+    const key = el.querySelector('.card-title') ? el.querySelector('.card-title').textContent : el.innerHTML.slice(0,20);
+    trackClick(sn, key);
+    if (slideUnlocked[sn]) updatePill();
+  }
 }
 
-function toggleTL(el){
+function toggleTL(el) {
   el.classList.toggle('open');
+  const slide = el.closest('.slide');
+  if (slide) {
+    const sn = parseInt(slide.getAttribute('data-slide'));
+    const key = el.querySelector('.tl-title') ? el.querySelector('.tl-title').textContent : Math.random();
+    trackClick(sn, key);
+    if (slideUnlocked[sn]) updatePill();
+  }
 }
 
-function toggleTip(el){
-  document.querySelectorAll('.tip-item.active').forEach(t=>{ if(t!==el) t.classList.remove('active'); });
+function toggleTip(el) {
+  document.querySelectorAll('.tip-item.active').forEach(t => { if (t !== el) t.classList.remove('active'); });
   el.classList.toggle('active');
+  const slide = el.closest('.slide');
+  if (slide) {
+    const sn = parseInt(slide.getAttribute('data-slide'));
+    const key = el.querySelector('strong') ? el.querySelector('strong').textContent : Math.random();
+    trackClick(sn, key);
+    if (slideUnlocked[sn]) updatePill();
+  }
 }
 
-function toggleHS(el){
-  document.querySelectorAll('.person-fig.hs-open').forEach(p=>{ if(p!==el) p.classList.remove('hs-open'); });
+function toggleHS(el) {
+  document.querySelectorAll('.person-fig.hs-open').forEach(p => { if (p !== el) p.classList.remove('hs-open'); });
   el.classList.toggle('hs-open');
+  const slide = el.closest('.slide');
+  if (slide) {
+    const sn = parseInt(slide.getAttribute('data-slide'));
+    const key = el.querySelector('.person-body') ? el.querySelector('.person-body').textContent : Math.random();
+    trackClick(sn, key);
+    if (slideUnlocked[sn]) updatePill();
+  }
 }
 
-function answerQ(qid, btn, result){
-  const container = document.getElementById(qid+'-choices');
-  if(container.querySelector('.locked')) return;
+function answerQ(qid, btn, result) {
+  const container = document.getElementById(qid + '-choices');
+  if (container.querySelector('.locked')) return;
   const btns = container.querySelectorAll('.choice-btn');
-  btns.forEach(b=>b.classList.add('locked'));
-  btn.classList.add(result==='correct'?'correct':'wrong');
-  if(result==='correct'){
-    document.getElementById(qid+'-good').classList.add('show');
+  btns.forEach(b => b.classList.add('locked'));
+  btn.classList.add(result === 'correct' ? 'correct' : 'wrong');
+  if (result === 'correct') {
+    document.getElementById(qid + '-good').classList.add('show');
   } else {
-    document.getElementById(qid+'-bad').classList.add('show');
-    // highlight correct
-    btns.forEach(b=>{
-      if(b.getAttribute('onclick').includes("'correct'")) b.classList.add('correct');
+    document.getElementById(qid + '-bad').classList.add('show');
+    btns.forEach(b => {
+      if (b.getAttribute('onclick').includes("'correct'")) b.classList.add('correct');
     });
   }
+  // Unlock quiz slides after answering
+  const slide = btn.closest('.slide');
+  if (slide) unlockSlide(parseInt(slide.getAttribute('data-slide')));
+  updatePill();
 }
 
 // ── DRAG TO SORT ──
 let dragSrc = null;
-function initSort(){
+function initSort() {
   const items = document.querySelectorAll('.sort-item');
-  items.forEach(item=>{
-    item.addEventListener('dragstart', e=>{
+  items.forEach(item => {
+    item.addEventListener('dragstart', e => {
       dragSrc = item;
       item.classList.add('dragging');
-      e.dataTransfer.effectAllowed='move';
+      e.dataTransfer.effectAllowed = 'move';
     });
-    item.addEventListener('dragend', ()=>{
+    item.addEventListener('dragend', () => {
       item.classList.remove('dragging');
-      document.querySelectorAll('.sort-item').forEach(i=>i.classList.remove('drag-over'));
+      document.querySelectorAll('.sort-item').forEach(i => i.classList.remove('drag-over'));
     });
-    item.addEventListener('dragover', e=>{
+    item.addEventListener('dragover', e => {
       e.preventDefault();
-      e.dataTransfer.dropEffect='move';
-      if(item!==dragSrc) item.classList.add('drag-over');
+      e.dataTransfer.dropEffect = 'move';
+      if (item !== dragSrc) item.classList.add('drag-over');
     });
-    item.addEventListener('dragleave', ()=>item.classList.remove('drag-over'));
-    item.addEventListener('drop', e=>{
+    item.addEventListener('dragleave', () => item.classList.remove('drag-over'));
+    item.addEventListener('drop', e => {
       e.stopPropagation();
-      if(dragSrc!==item){
+      if (dragSrc !== item) {
         const list = document.getElementById('sort-list');
         const items = [...list.querySelectorAll('.sort-item')];
         const si = items.indexOf(dragSrc);
         const ti = items.indexOf(item);
-        if(si<ti) list.insertBefore(dragSrc, item.nextSibling);
+        if (si < ti) list.insertBefore(dragSrc, item.nextSibling);
         else list.insertBefore(dragSrc, item);
-        // update rank labels
         updateRanks();
       }
       return false;
     });
   });
 }
-function updateRanks(){
+function updateRanks() {
   const items = document.querySelectorAll('#sort-list .sort-item');
-  items.forEach((item,i)=>{ item.querySelector('.rank').textContent = i+1; });
+  items.forEach((item, i) => { item.querySelector('.rank').textContent = i + 1; });
 }
-function checkSort(){
+function checkSort() {
   const items = [...document.querySelectorAll('#sort-list .sort-item')];
-  const correctOrder = [1,2,3,4,5];
-  let correct=0;
-  items.forEach((item,i)=>{
+  let correct = 0;
+  items.forEach((item, i) => {
     const c = parseInt(item.getAttribute('data-correct'));
-    if(c===i+1){ item.classList.add('correct-pos'); correct++; }
+    if (c === i + 1) { item.classList.add('correct-pos'); correct++; }
     else { item.classList.remove('correct-pos'); }
   });
   const fb = document.getElementById('sort-feedback');
-  fb.style.display='block';
-  if(correct===5){
-    fb.style.cssText='display:block;background:rgba(79,247,168,0.1);border:1px solid rgba(79,247,168,0.3);border-radius:8px;padding:1rem;color:var(--accent3);font-size:0.83rem;margin-top:0.8rem;line-height:1.6;';
-    fb.innerHTML='✅ <strong>Perfect!</strong> You nailed the order: Set the tone privately → lead with positive intent → cite specific behavior → invite their perspective → agree on an action plan. This is a research-backed feedback structure that minimizes defensiveness.';
+  fb.style.display = 'block';
+  if (correct === 5) {
+    fb.style.cssText = 'display:block;background:rgba(79,247,168,0.1);border:1px solid rgba(79,247,168,0.3);border-radius:8px;padding:1rem;color:var(--accent3);font-size:0.83rem;margin-top:0.8rem;line-height:1.6;';
+    fb.innerHTML = '✅ <strong>Perfect!</strong> You nailed the order: Set the tone privately → lead with positive intent → cite specific behavior → invite their perspective → agree on an action plan. This is a research-backed feedback structure that minimizes defensiveness.';
   } else {
-    fb.style.cssText='display:block;background:rgba(247,90,79,0.1);border:1px solid rgba(247,90,79,0.3);border-radius:8px;padding:1rem;color:#f7a09a;font-size:0.83rem;margin-top:0.8rem;line-height:1.6;';
-    fb.innerHTML=`⚠️ <strong>${correct}/5 correct.</strong> Keep trying! Hint: Always start with the environment and intent before describing behavior. The action plan always closes the loop.`;
+    fb.style.cssText = 'display:block;background:rgba(247,90,79,0.1);border:1px solid rgba(247,90,79,0.3);border-radius:8px;padding:1rem;color:#f7a09a;font-size:0.83rem;margin-top:0.8rem;line-height:1.6;';
+    fb.innerHTML = `⚠️ <strong>${correct}/5 correct.</strong> Keep trying! Hint: Always start with the environment and intent before describing behavior. The action plan always closes the loop.`;
   }
+  unlockSlide(7);
+  updatePill();
 }
 initSort();
 updateRanks();
