@@ -835,6 +835,12 @@ body {
   color: var(--text);
   white-space: nowrap;
   pointer-events: none;
+  /* Fixed: bottom-right, floating just above the footer nav */
+  position: fixed;
+  bottom: calc(68px + 12px); /* footer height + breathing room */
+  right: 2.5rem;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
 }
 .instruction-pill.visible { display: flex; }
 .instruction-pill .pill-dot {
@@ -1418,16 +1424,18 @@ body {
 
 </div>
 
+<!-- INSTRUCTION PILL — fixed bottom-right above footer -->
+<div class="instruction-pill" id="instruction-pill">
+  <span class="pill-dot"></span>
+  <span class="pill-icon" id="pill-icon">👆</span>
+  <span id="pill-text"></span>
+</div>
+
 <!-- FOOTER NAV -->
 <div class="footer-nav">
   <button class="nav-btn" id="prev-btn" onclick="navigate(-1)" disabled>
     ← Previous
   </button>
-  <div class="instruction-pill" id="instruction-pill">
-    <span class="pill-dot"></span>
-    <span class="pill-icon" id="pill-icon">👆</span>
-    <span id="pill-text"></span>
-  </div>
   <button class="nav-btn primary" id="next-btn" onclick="navigate(1)">
     Next →
   </button>
