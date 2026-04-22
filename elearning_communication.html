@@ -4,20 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Effective Communication at Work</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,400;0,500;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0d0f14;
-  --surface: #141720;
-  --surface2: #1c2030;
-  --border: rgba(255,255,255,0.07);
-  --text: #e8eaf0;
-  --muted: #7a8099;
-  --accent: #4f8ef7;
-  --accent2: #f7c84f;
-  --accent3: #4ff7a8;
-  --danger: #f75a4f;
-  --card: #181c28;
+  --bg: #0a1628;
+  --surface: #0f1e3a;
+  --surface2: #162544;
+  --border: rgba(100,160,255,0.15);
+  --text: #f0f4ff;
+  --muted: #8baad4;
+  --accent: #60a5fa;
+  --accent2: #fbbf24;
+  --accent3: #34d399;
+  --danger: #f87171;
+  --card: #112040;
   --radius: 12px;
 }
 
@@ -25,9 +25,10 @@
 html,body{height:100%;overflow:hidden}
 
 body {
-  background: var(--bg);
+  background: linear-gradient(135deg, #060f24 0%, #0a1a3a 30%, #0d2050 60%, #0a1628 100%);
+  background-attachment: fixed;
   color: var(--text);
-  font-family: 'Lora', serif;
+  font-family: 'Merriweather', serif;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -41,13 +42,14 @@ body {
   justify-content: space-between;
   padding: 0 2.5rem;
   height: 60px;
-  background: var(--surface);
+  background: rgba(10, 26, 58, 0.92);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
   z-index: 10;
 }
 .course-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-weight: 700;
   font-size: 0.95rem;
   letter-spacing: 0.04em;
@@ -67,7 +69,7 @@ body {
   50%{opacity:0.5;transform:scale(1.3)}
 }
 .slide-counter {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 0.75rem;
   color: var(--muted);
 }
@@ -75,10 +77,7 @@ body {
 
 /* ── PROGRESS BAR ── */
 .progress-track {
-  height: 3px;
-  background: var(--border);
-  flex-shrink: 0;
-  position: relative;
+  display: none;
 }
 .progress-fill {
   height: 100%;
@@ -149,12 +148,13 @@ body {
   justify-content: space-between;
   padding: 0 2.5rem;
   height: 68px;
-  background: var(--surface);
+  background: rgba(10, 26, 58, 0.92);
+  backdrop-filter: blur(12px);
   border-top: 1px solid var(--border);
   flex-shrink: 0;
 }
 .nav-btn {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-weight: 600;
   font-size: 0.82rem;
   letter-spacing: 0.08em;
@@ -202,7 +202,7 @@ body {
 
 /* ── SLIDE ELEMENTS ── */
 .slide-tag {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 0.65rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -218,7 +218,7 @@ body {
   background: var(--accent);
 }
 .slide-h1 {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-weight: 800;
   font-size: clamp(1.8rem, 3vw, 2.8rem);
   line-height: 1.05;
@@ -227,7 +227,7 @@ body {
 }
 .slide-h1 .hi { color: var(--accent2); }
 .slide-h2 {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-weight: 700;
   font-size: clamp(1.2rem, 2vw, 1.7rem);
   line-height: 1.2;
@@ -237,7 +237,7 @@ body {
 .slide-body {
   font-size: 0.9rem;
   line-height: 1.75;
-  color: #b0b8cc;
+  color: #c8dcf8;
   max-width: 65ch;
   margin-bottom: 0.6rem;
 }
@@ -304,13 +304,13 @@ body {
   transform-origin: left;
   transition: transform 0.3s;
 }
-.info-card:hover { border-color: var(--accent); transform: translateY(-3px); background: #1e2438; }
+.info-card:hover { border-color: var(--accent); transform: translateY(-3px); background: #163060; }
 .info-card:hover::before { transform: scaleX(1); }
 .info-card.revealed { border-color: var(--accent3); background: rgba(79,247,168,0.05); }
 .info-card.revealed::before { transform: scaleX(1); background: var(--accent3); }
 .card-icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
 .card-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-weight: 600;
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
@@ -323,7 +323,7 @@ body {
   display: none;
 }
 .card-hint {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 0.6rem;
   letter-spacing: 0.1em;
   color: var(--accent);
@@ -334,13 +334,13 @@ body {
 
 /* ── SCENARIO BLOCK ── */
 .scenario-box {
-  background: var(--surface2);
+  background: rgba(22, 48, 96, 0.7);
   border-left: 3px solid var(--accent2);
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: 1.5rem 2rem;
   margin-bottom: 1.5rem;
   font-style: italic;
-  color: #c8d0e0;
+  color: #d8e8ff;
   font-size: 0.95rem;
   line-height: 1.7;
 }
@@ -354,7 +354,7 @@ body {
   padding: 1rem 1.4rem;
   cursor: pointer;
   text-align: left;
-  font-family: 'Lora', serif;
+  font-family: 'Merriweather', serif;
   font-size: 0.88rem;
   color: var(--text);
   transition: all 0.2s;
@@ -367,7 +367,7 @@ body {
 .choice-btn.wrong { border-color: var(--danger); background: rgba(247,90,79,0.1); color: var(--danger); }
 .choice-btn.locked { cursor: default; }
 .choice-label {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 0.72rem;
   width: 24px; height: 24px;
   border-radius: 50%;
@@ -395,7 +395,7 @@ body {
 
 /* ── DRAG DROP (SORTING) ── */
 .sort-instructions {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 0.68rem;
   letter-spacing: 0.1em;
   color: var(--accent);
@@ -430,7 +430,7 @@ body {
   flex-shrink: 0;
 }
 .sort-item .rank {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 0.7rem;
   width: 22px; height: 22px;
   border-radius: 50%;
@@ -446,7 +446,7 @@ body {
 .sort-item.correct-pos .rank { background: var(--accent3); color: var(--bg); border-color: var(--accent3); }
 .check-sort-btn {
   margin-top: 1rem;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-weight: 600;
   font-size: 0.78rem;
   letter-spacing: 0.1em;
@@ -475,7 +475,7 @@ body {
   border: none;
   outline: none;
   color: var(--text);
-  font-family: 'Lora', serif;
+  font-family: 'Merriweather', serif;
   font-size: 0.92rem;
   line-height: 1.7;
   resize: none;
@@ -509,7 +509,7 @@ body {
 .v-tl-item.open .tl-dot { border-color: var(--accent); background: rgba(79,142,247,0.15); }
 .tl-content { flex: 1; padding-top: 0.4rem; }
 .tl-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-weight: 600;
   font-size: 0.9rem;
   margin-bottom: 0;
@@ -546,7 +546,7 @@ body {
   position: absolute;
 }
 .score-num {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-weight: 800;
   font-size: 1.6rem;
   position: relative;
@@ -569,7 +569,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #141820 0%, #1c2238 100%);
+  background: linear-gradient(135deg, #0a1828 0%, #102040 100%);
   position: relative;
   overflow: visible;
   border-radius: var(--radius);
@@ -610,7 +610,7 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 0.6rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Fira Code', monospace;
   color: var(--muted);
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -678,7 +678,7 @@ body {
 .tip-item:hover { border-color: var(--accent3); }
 .tip-item.active { border-color: var(--accent3); background: rgba(79,247,168,0.06); }
 .tip-num {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 0.75rem;
   color: var(--accent3);
   flex-shrink: 0;
@@ -695,7 +695,7 @@ body {
 
 /* ── WRAP / CERTIFICATE ── */
 .certificate {
-  background: linear-gradient(135deg, var(--surface) 0%, #1a2040 100%);
+  background: linear-gradient(135deg, #0f1e3a 0%, #162550 100%);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 3rem;
@@ -717,7 +717,7 @@ body {
 .cert-inner { position: relative; z-index: 1; }
 .cert-badge { font-size: 4rem; margin-bottom: 1rem; }
 .cert-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-weight: 800;
   font-size: 1.8rem;
   background: linear-gradient(90deg, var(--accent), var(--accent3));
@@ -732,14 +732,14 @@ body {
   margin-bottom: 1.5rem;
 }
 .cert-name {
-  font-family: 'Lora', serif;
+  font-family: 'Merriweather', serif;
   font-style: italic;
   font-size: 1.4rem;
   color: var(--accent2);
   margin-bottom: 0.5rem;
 }
 .cert-course {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 0.68rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -754,7 +754,7 @@ body {
   border: 1px solid rgba(79,247,168,0.3);
   border-radius: 100px;
   padding: 0.4rem 1.2rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 0.65rem;
   color: var(--accent3);
   letter-spacing: 0.1em;
@@ -772,7 +772,7 @@ body {
   font-size: 0.78rem;
   color: var(--muted);
   margin-bottom: 0.4rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Fira Code', monospace;
 }
 .stat-bar-label span { color: var(--accent2); font-weight: 500; }
 .stat-bar-track {
@@ -794,7 +794,7 @@ body {
 /* PILL TAG */
 .pill {
   display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 0.62rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -829,7 +829,7 @@ body {
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 100px;
   padding: 0.45rem 1rem 0.45rem 0.7rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Fira Code', monospace;
   font-size: 0.68rem;
   letter-spacing: 0.06em;
   color: var(--text);
@@ -844,13 +844,9 @@ body {
 }
 .instruction-pill.visible { display: flex; }
 .instruction-pill .pill-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--accent2);
-  flex-shrink: 0;
-  animation: pulse 2s infinite;
+  display: none;
 }
-.instruction-pill .pill-icon { font-size: 0.85rem; }
+.instruction-pill .pill-icon { display: none; }
 
 /* Locked next button */
 .nav-btn.primary:disabled {
@@ -870,12 +866,6 @@ body {
     <span class="dot"></span>
     Effective Communication at Work
   </div>
-  <div class="slide-counter">Slide <span id="cur-num">1</span> of <span id="tot-num">10</span></div>
-</div>
-
-<!-- PROGRESS -->
-<div class="progress-track">
-  <div class="progress-fill" id="progress-fill" style="width:10%"></div>
 </div>
 
 <!-- SLIDES -->
@@ -1381,7 +1371,7 @@ body {
           <div class="reflection-area">
             <textarea placeholder="Type your reflection here... (This stays private — it's for your own growth)" rows="5"></textarea>
           </div>
-          <p style="font-size:0.7rem;color:var(--muted);margin-top:0.6rem;font-family:'JetBrains Mono',monospace;">🔒 Your reflection is not submitted or stored.</p>
+          <p style="font-size:0.7rem;color:var(--muted);margin-top:0.6rem;font-family:'Fira Code',monospace;">🔒 Your reflection is not submitted or stored.</p>
         </div>
       </div>
     </div>
@@ -1395,26 +1385,26 @@ body {
       <div style="background:linear-gradient(135deg,var(--surface) 0%,#1a2040 100%);border:1px solid var(--border);border-radius:16px;padding:2rem 2.5rem;text-align:center;max-width:580px;width:100%;position:relative;overflow:hidden;">
         <div style="position:relative;z-index:1;">
           <div style="font-size:3rem;margin-bottom:0.6rem">🏆</div>
-          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;background:linear-gradient(90deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.3rem">Course Complete</div>
-          <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem">Effective Communication at Work · 2025</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.5rem;background:linear-gradient(90deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.3rem">Course Complete</div>
+          <div style="font-family:'Fira Code',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem">Effective Communication at Work · 2025</div>
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;text-align:left;margin-bottom:1.5rem">
             <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:0.8rem;">
               <div style="font-size:1.2rem;margin-bottom:0.3rem">🗣️</div>
-              <div style="font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem">Active Listening</div>
+              <div style="font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem">Active Listening</div>
               <div style="font-size:0.68rem;color:var(--muted);line-height:1.5">Listen to understand, not reply. Use L1–L4 framework.</div>
             </div>
             <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:0.8rem;">
               <div style="font-size:1.2rem;margin-bottom:0.3rem">📌</div>
-              <div style="font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem">PREP Framework</div>
+              <div style="font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem">PREP Framework</div>
               <div style="font-size:0.68rem;color:var(--muted);line-height:1.5">Point → Reason → Evidence → Point.</div>
             </div>
             <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:0.8rem;">
               <div style="font-size:1.2rem;margin-bottom:0.3rem">⚡</div>
-              <div style="font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem">SBI Feedback</div>
+              <div style="font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem">SBI Feedback</div>
               <div style="font-size:0.68rem;color:var(--muted);line-height:1.5">Situation → Behavior → Impact.</div>
             </div>
           </div>
-          <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(79,247,168,0.1);border:1px solid rgba(79,247,168,0.3);border-radius:100px;padding:0.4rem 1.2rem;font-family:'JetBrains Mono',monospace;font-size:0.63rem;color:var(--accent3);letter-spacing:0.1em;text-transform:uppercase;">
+          <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(79,247,168,0.1);border:1px solid rgba(79,247,168,0.3);border-radius:100px;padding:0.4rem 1.2rem;font-family:'Fira Code',monospace;font-size:0.63rem;color:var(--accent3);letter-spacing:0.1em;text-transform:uppercase;">
             ✅ &nbsp; Completed · Effective Communication at Work
           </div>
         </div>
@@ -1515,9 +1505,12 @@ function updatePill() {
 // ── BUILD BREADCRUMBS (removed — no-op kept for safety) ──
 
 function updateUI() {
-  document.getElementById('cur-num').textContent = current;
-  document.getElementById('tot-num').textContent = TOTAL;
-  document.getElementById('progress-fill').style.width = (current / TOTAL * 100) + '%';
+  const curNum = document.getElementById('cur-num');
+  const totNum = document.getElementById('tot-num');
+  const progressFill = document.getElementById('progress-fill');
+  if (curNum) curNum.textContent = current;
+  if (totNum) totNum.textContent = TOTAL;
+  if (progressFill) progressFill.style.width = (current / TOTAL * 100) + '%';
   // Hide Previous on slide 1
   const prevBtn = document.getElementById('prev-btn');
   prevBtn.style.visibility = current === 1 ? 'hidden' : 'visible';
