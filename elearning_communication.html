@@ -7,17 +7,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,400;0,500;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a1628;
-  --surface: #0f1e3a;
-  --surface2: #162544;
-  --border: rgba(100,160,255,0.15);
-  --text: #f0f4ff;
-  --muted: #8baad4;
-  --accent: #60a5fa;
-  --accent2: #fbbf24;
-  --accent3: #34d399;
-  --danger: #f87171;
-  --card: #112040;
+  --bg: #f4f6f9;
+  --surface: #ffffff;
+  --surface2: #eef1f6;
+  --border: rgba(30,60,120,0.12);
+  --text: #1a2340;
+  --muted: #5a6a8a;
+  --accent: #2563eb;
+  --accent2: #d97706;
+  --accent3: #059669;
+  --danger: #dc2626;
+  --card: #ffffff;
   --radius: 12px;
 }
 
@@ -25,7 +25,7 @@
 html,body{height:100%;overflow:hidden}
 
 body {
-  background: linear-gradient(135deg, #060f24 0%, #0a1a3a 30%, #0d2050 60%, #0a1628 100%);
+  background: linear-gradient(135deg, #e8edf5 0%, #f0f4fb 40%, #eef1f8 70%, #f4f6f9 100%);
   background-attachment: fixed;
   color: var(--text);
   font-family: 'Merriweather', serif;
@@ -42,7 +42,7 @@ body {
   justify-content: space-between;
   padding: 0 2.5rem;
   height: 60px;
-  background: rgba(10, 26, 58, 0.92);
+  background: rgba(255,255,255,0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
@@ -138,7 +138,7 @@ body {
   justify-content: space-between;
   padding: 0 2.5rem;
   height: 68px;
-  background: rgba(10, 26, 58, 0.92);
+  background: rgba(255,255,255,0.95);
   backdrop-filter: blur(12px);
   border-top: 1px solid var(--border);
   flex-shrink: 0;
@@ -172,7 +172,7 @@ body {
   border-color: var(--accent);
   color: #fff;
 }
-.nav-btn.primary:hover { background: #3a7de0; }
+.nav-btn.primary:hover { background: #1d4ed8; }
 
 .breadcrumbs {
   display: flex;
@@ -227,7 +227,7 @@ body {
 .slide-body {
   font-size: 0.9rem;
   line-height: 1.75;
-  color: #c8dcf8;
+  color: #3d4f6e;
   max-width: 65ch;
   margin-bottom: 0.6rem;
 }
@@ -294,7 +294,7 @@ body {
   transform-origin: left;
   transition: transform 0.3s;
 }
-.info-card:hover { border-color: var(--accent); transform: translateY(-3px); background: #163060; }
+.info-card:hover { border-color: var(--accent); transform: translateY(-3px); background: #eff4ff; }
 .info-card:hover::before { transform: scaleX(1); }
 .info-card.revealed { border-color: var(--accent3); background: rgba(79,247,168,0.05); }
 .info-card.revealed::before { transform: scaleX(1); background: var(--accent3); }
@@ -324,13 +324,13 @@ body {
 
 /* ── SCENARIO BLOCK ── */
 .scenario-box {
-  background: rgba(22, 48, 96, 0.7);
+  background: rgba(37,99,235,0.05);
   border-left: 3px solid var(--accent2);
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: 1.5rem 2rem;
   margin-bottom: 1.5rem;
   font-style: italic;
-  color: #d8e8ff;
+  color: #2d3f60;
   font-size: 0.95rem;
   line-height: 1.7;
 }
@@ -381,7 +381,7 @@ body {
 }
 .feedback-box.show { display: block; }
 .feedback-box.good { background: rgba(79,247,168,0.1); border: 1px solid rgba(79,247,168,0.3); color: var(--accent3); }
-.feedback-box.bad { background: rgba(247,90,79,0.1); border: 1px solid rgba(247,90,79,0.3); color: #f7a09a; }
+.feedback-box.bad { background: rgba(220,38,38,0.07); border: 1px solid rgba(220,38,38,0.25); color: #b91c1c; }
 
 /* ── DRAG DROP (SORTING) ── */
 .sort-instructions {
@@ -449,7 +449,7 @@ body {
   cursor: pointer;
   transition: background 0.2s;
 }
-.check-sort-btn:hover { background: #3a7de0; }
+.check-sort-btn:hover { background: #1d4ed8; }
 
 /* ── REFLECTION ── */
 .reflection-area {
@@ -496,7 +496,7 @@ body {
   transition: all 0.25s;
 }
 .v-tl-item:hover .tl-dot,
-.v-tl-item.open .tl-dot { border-color: var(--accent); background: rgba(79,142,247,0.15); }
+.v-tl-item.open .tl-dot { border-color: var(--accent); background: rgba(37,99,235,0.1); }
 .tl-content { flex: 1; padding-top: 0.4rem; }
 .tl-title {
   font-family: 'Outfit', sans-serif;
@@ -559,7 +559,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #0a1828 0%, #102040 100%);
+  background: linear-gradient(135deg, #dde6f5 0%, #e8eef8 100%);
   position: relative;
   overflow: visible;
   border-radius: var(--radius);
@@ -626,7 +626,7 @@ body {
   bottom: calc(100% + 12px);
   left: 50%;
   transform: translateX(-50%);
-  background: #1c2238;
+  background: #ffffff;
   border: 1.5px solid var(--accent);
   border-radius: 10px;
   padding: 0.75rem 1rem;
@@ -636,8 +636,8 @@ body {
   display: none;
   z-index: 100;
   text-align: center;
-  color: #e2e8f0;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+  color: #1a2340;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
   pointer-events: none;
 }
 .person-fig.hs-open .hs-tooltip { display: block; }
@@ -685,7 +685,7 @@ body {
 
 /* ── WRAP / CERTIFICATE ── */
 .certificate {
-  background: linear-gradient(135deg, #0f1e3a 0%, #162550 100%);
+  background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 3rem;
@@ -700,7 +700,7 @@ body {
   position: absolute;
   top: -50%; left: -50%;
   width: 200%; height: 200%;
-  background: conic-gradient(from 0deg, transparent 340deg, rgba(79,142,247,0.05) 360deg);
+  background: conic-gradient(from 0deg, transparent 340deg, rgba(37,99,235,0.06) 360deg);
   animation: spin 8s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -815,8 +815,8 @@ body {
   display: none;
   align-items: center;
   gap: 0.5rem;
-  background: var(--surface2);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 100px;
   padding: 0.45rem 1rem 0.45rem 0.7rem;
   font-family: 'Fira Code', monospace;
@@ -825,12 +825,11 @@ body {
   color: var(--text);
   white-space: nowrap;
   pointer-events: none;
-  /* Fixed: bottom-right, floating just above the footer nav */
   position: fixed;
-  bottom: calc(68px + 12px); /* footer height + breathing room */
+  bottom: calc(68px + 12px);
   right: 2.5rem;
   z-index: 100;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
 }
 .instruction-pill.visible { display: flex; }
 .instruction-pill .pill-dot {
@@ -863,8 +862,8 @@ body {
   <!-- SLIDE 1: WELCOME -->
   <div class="slide slide-1 slide-scroll active" data-slide="1">
     <div style="position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden">
-      <div class="bg-circle" style="width:400px;height:400px;background:radial-gradient(circle,rgba(79,142,247,0.08) 0%,transparent 70%);top:-100px;right:-100px"></div>
-      <div class="bg-circle" style="width:250px;height:250px;background:radial-gradient(circle,rgba(79,247,168,0.06) 0%,transparent 70%);bottom:-50px;left:100px"></div>
+      <div class="bg-circle" style="width:400px;height:400px;background:radial-gradient(circle,rgba(37,99,235,0.07) 0%,transparent 70%);top:-100px;right:-100px"></div>
+      <div class="bg-circle" style="width:250px;height:250px;background:radial-gradient(circle,rgba(5,150,105,0.05) 0%,transparent 70%);bottom:-50px;left:100px"></div>
     </div>
     <div class="two-col">
       <div>
@@ -1065,38 +1064,9 @@ body {
   </div>
 
   <!-- SLIDE 5: CLARITY & MESSAGE STRUCTURE -->
-  <div class="slide slide-scroll" data-slide="5" style="position:relative;">
-    <!-- Right column: absolutely positioned so it NEVER moves regardless of left side -->
-    <div style="position:absolute;top:1.5rem;right:3rem;width:42%;z-index:2;">
-      <div style="background:var(--surface2);border-radius:16px;padding:2rem;border:1px solid var(--border)">
-        <div class="slide-tag" style="margin-bottom:1rem">Communication Principles</div>
-        <div class="v-timeline">
-          <div class="v-tl-item" onclick="toggleTL(this)">
-            <div class="tl-dot-col"><div class="tl-dot">✂️</div></div>
-            <div class="tl-content">
-              <div class="tl-title">Edit Ruthlessly</div>
-              <div class="tl-detail">If your email is over 5 sentences, it needs editing — not more sentences. Ask: "Can I cut 30% without losing meaning?" Usually, yes.</div>
-            </div>
-          </div>
-          <div class="v-tl-item" onclick="toggleTL(this)">
-            <div class="tl-dot-col"><div class="tl-dot">🎯</div></div>
-            <div class="tl-content">
-              <div class="tl-title">One Ask Per Message</div>
-              <div class="tl-detail">Multiple requests dilute urgency. "Can you review the doc AND confirm the meeting AND update the tracker?" → One gets done. One ask per message.</div>
-            </div>
-          </div>
-          <div class="v-tl-item" onclick="toggleTL(this)">
-            <div class="tl-dot-col"><div class="tl-dot">📅</div></div>
-            <div class="tl-content">
-              <div class="tl-title">Specify Deadlines</div>
-              <div class="tl-detail">"ASAP" is not a deadline. "By Thursday 5pm" is. Vague timelines create anxiety and missed expectations — specific ones create accountability.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Left column: normal flow, limited to left 50% so it never overlaps right -->
-    <div style="width:50%;">
+  <div class="slide" data-slide="5" style="flex-direction:row;align-items:stretch;padding:0;overflow:hidden;">
+    <!-- Left column: scrolls independently -->
+    <div style="flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:1.8rem 1.5rem 1.8rem 3rem;scrollbar-width:thin;scrollbar-color:rgba(37,99,235,0.2) transparent;">
       <div class="slide-tag">Clarity & Structure</div>
       <h2 class="slide-h2">Structure Your<br><span class="hi">Message</span> to Land</h2>
       <p class="slide-body" style="margin-bottom:1.2rem">Clear communication isn't about saying more — it's about saying the <strong>right things in the right order</strong>. Use the PREP framework for any high-stakes message.</p>
@@ -1124,6 +1094,35 @@ body {
           <div class="card-title">P — Point (Again)</div>
           <div class="card-hint">↗ Click to reveal</div>
           <div class="card-body">Circle back to your point, now with a call to action. "So I'd like us to agree on a two-week buffer today." This creates a memorable, action-oriented close.</div>
+        </div>
+      </div>
+    </div>
+    <!-- Right column: fixed height, never scrolls, never moves -->
+    <div style="width:42%;flex-shrink:0;padding:1.8rem 3rem 1.8rem 1.5rem;display:flex;align-items:flex-start;">
+      <div style="background:var(--surface2);border-radius:16px;padding:2rem;border:1px solid var(--border);width:100%;">
+        <div class="slide-tag" style="margin-bottom:1rem">Communication Principles</div>
+        <div class="v-timeline">
+          <div class="v-tl-item" onclick="toggleTL(this)">
+            <div class="tl-dot-col"><div class="tl-dot">✂️</div></div>
+            <div class="tl-content">
+              <div class="tl-title">Edit Ruthlessly</div>
+              <div class="tl-detail">If your email is over 5 sentences, it needs editing — not more sentences. Ask: "Can I cut 30% without losing meaning?" Usually, yes.</div>
+            </div>
+          </div>
+          <div class="v-tl-item" onclick="toggleTL(this)">
+            <div class="tl-dot-col"><div class="tl-dot">🎯</div></div>
+            <div class="tl-content">
+              <div class="tl-title">One Ask Per Message</div>
+              <div class="tl-detail">Multiple requests dilute urgency. "Can you review the doc AND confirm the meeting AND update the tracker?" → One gets done. One ask per message.</div>
+            </div>
+          </div>
+          <div class="v-tl-item" onclick="toggleTL(this)">
+            <div class="tl-dot-col"><div class="tl-dot">📅</div></div>
+            <div class="tl-content">
+              <div class="tl-title">Specify Deadlines</div>
+              <div class="tl-detail">"ASAP" is not a deadline. "By Thursday 5pm" is. Vague timelines create anxiety and missed expectations — specific ones create accountability.</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1370,23 +1369,23 @@ body {
     <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%">
       <div class="slide-tag" style="justify-content:center;margin-bottom:1rem">Course Complete</div>
       <h2 class="slide-h2" style="text-align:center;margin-bottom:1.5rem">Well Done — <span class="hi">You've Finished!</span></h2>
-      <div style="background:linear-gradient(135deg,var(--surface) 0%,#1a2040 100%);border:1px solid var(--border);border-radius:16px;padding:2rem 2.5rem;text-align:center;max-width:580px;width:100%;position:relative;overflow:hidden;">
+      <div style="background:linear-gradient(135deg,var(--surface) 0%,#e8eef8 100%);border:1px solid var(--border);border-radius:16px;padding:2rem 2.5rem;text-align:center;max-width:580px;width:100%;position:relative;overflow:hidden;">
         <div style="position:relative;z-index:1;">
           <div style="font-size:3rem;margin-bottom:0.6rem">🏆</div>
           <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.5rem;background:linear-gradient(90deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.3rem">Course Complete</div>
           <div style="font-family:'Fira Code',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem">Effective Communication at Work · 2025</div>
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;text-align:left;margin-bottom:1.5rem">
-            <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:0.8rem;">
+            <div style="background:rgba(37,99,235,0.04);border:1px solid var(--border);border-radius:8px;padding:0.8rem;">
               <div style="font-size:1.2rem;margin-bottom:0.3rem">🗣️</div>
               <div style="font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem">Active Listening</div>
               <div style="font-size:0.68rem;color:var(--muted);line-height:1.5">Listen to understand, not reply. Use L1–L4 framework.</div>
             </div>
-            <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:0.8rem;">
+            <div style="background:rgba(37,99,235,0.04);border:1px solid var(--border);border-radius:8px;padding:0.8rem;">
               <div style="font-size:1.2rem;margin-bottom:0.3rem">📌</div>
               <div style="font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem">PREP Framework</div>
               <div style="font-size:0.68rem;color:var(--muted);line-height:1.5">Point → Reason → Evidence → Point.</div>
             </div>
-            <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:0.8rem;">
+            <div style="background:rgba(37,99,235,0.04);border:1px solid var(--border);border-radius:8px;padding:0.8rem;">
               <div style="font-size:1.2rem;margin-bottom:0.3rem">⚡</div>
               <div style="font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem">SBI Feedback</div>
               <div style="font-size:0.68rem;color:var(--muted);line-height:1.5">Situation → Behavior → Impact.</div>
@@ -1670,7 +1669,7 @@ function checkSort() {
     fb.style.cssText = 'display:block;background:rgba(79,247,168,0.1);border:1px solid rgba(79,247,168,0.3);border-radius:8px;padding:1rem;color:var(--accent3);font-size:0.83rem;margin-top:0.8rem;line-height:1.6;';
     fb.innerHTML = '✅ <strong>Perfect!</strong> You nailed the order: Set the tone privately → lead with positive intent → cite specific behavior → invite their perspective → agree on an action plan. This is a research-backed feedback structure that minimizes defensiveness.';
   } else {
-    fb.style.cssText = 'display:block;background:rgba(247,90,79,0.1);border:1px solid rgba(247,90,79,0.3);border-radius:8px;padding:1rem;color:#f7a09a;font-size:0.83rem;margin-top:0.8rem;line-height:1.6;';
+    fb.style.cssText = 'display:block;background:rgba(247,90,79,0.1);border:1px solid rgba(247,90,79,0.3);border-radius:8px;padding:1rem;color:#b91c1c;font-size:0.83rem;margin-top:0.8rem;line-height:1.6;';
     fb.innerHTML = `⚠️ <strong>${correct}/5 correct.</strong> Keep trying! Hint: Always start with the environment and intent before describing behavior. The action plan always closes the loop.`;
   }
   unlockSlide(7);
