@@ -250,7 +250,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  align-items: center;
+  align-items: start;
   min-height: 0;
 }
 .two-col-wide {
@@ -1065,65 +1065,65 @@ body {
   </div>
 
   <!-- SLIDE 5: CLARITY & MESSAGE STRUCTURE -->
-  <div class="slide slide-scroll" data-slide="5">
-    <div class="slide-tag">Clarity & Structure</div>
-    <div class="two-col">
-      <div>
-        <h2 class="slide-h2">Structure Your<br><span class="hi">Message</span> to Land</h2>
-        <p class="slide-body" style="margin-bottom:1.2rem">Clear communication isn't about saying more — it's about saying the <strong>right things in the right order</strong>. Use the PREP framework for any high-stakes message.</p>
-        <div class="card-grid-2">
-          <div class="info-card" onclick="revealCard(this)" style="border-top:2px solid var(--accent)">
-            <span class="card-icon">📌</span>
-            <div class="card-title">P — Point</div>
-            <div class="card-hint">↗ Click to reveal</div>
-            <div class="card-body">Lead with your main point. Don't bury the lede. "I recommend we delay the launch by two weeks." State it first, justify it after.</div>
+  <div class="slide slide-scroll" data-slide="5" style="position:relative;">
+    <!-- Right column: absolutely positioned so it NEVER moves regardless of left side -->
+    <div style="position:absolute;top:1.5rem;right:3rem;width:42%;z-index:2;">
+      <div style="background:var(--surface2);border-radius:16px;padding:2rem;border:1px solid var(--border)">
+        <div class="slide-tag" style="margin-bottom:1rem">Communication Principles</div>
+        <div class="v-timeline">
+          <div class="v-tl-item" onclick="toggleTL(this)">
+            <div class="tl-dot-col"><div class="tl-dot">✂️</div></div>
+            <div class="tl-content">
+              <div class="tl-title">Edit Ruthlessly</div>
+              <div class="tl-detail">If your email is over 5 sentences, it needs editing — not more sentences. Ask: "Can I cut 30% without losing meaning?" Usually, yes.</div>
+            </div>
           </div>
-          <div class="info-card" onclick="revealCard(this)" style="border-top:2px solid var(--accent2)">
-            <span class="card-icon">🔍</span>
-            <div class="card-title">R — Reason</div>
-            <div class="card-hint">↗ Click to reveal</div>
-            <div class="card-body">Give the one most compelling reason. Not five. One strong reason is more persuasive than a list. "Because QA found 3 critical bugs that affect checkout."</div>
+          <div class="v-tl-item" onclick="toggleTL(this)">
+            <div class="tl-dot-col"><div class="tl-dot">🎯</div></div>
+            <div class="tl-content">
+              <div class="tl-title">One Ask Per Message</div>
+              <div class="tl-detail">Multiple requests dilute urgency. "Can you review the doc AND confirm the meeting AND update the tracker?" → One gets done. One ask per message.</div>
+            </div>
           </div>
-          <div class="info-card" onclick="revealCard(this)" style="border-top:2px solid var(--accent3)">
-            <span class="card-icon">📊</span>
-            <div class="card-title">E — Evidence</div>
-            <div class="card-hint">↗ Click to reveal</div>
-            <div class="card-body">Support with one concrete data point or example. "In the last launch with similar bugs, we saw a 34% cart abandonment spike in week one."</div>
-          </div>
-          <div class="info-card" onclick="revealCard(this)" style="border-top:2px solid #a84ff7">
-            <span class="card-icon">🔁</span>
-            <div class="card-title">P — Point (Again)</div>
-            <div class="card-hint">↗ Click to reveal</div>
-            <div class="card-body">Circle back to your point, now with a call to action. "So I'd like us to agree on a two-week buffer today." This creates a memorable, action-oriented close.</div>
+          <div class="v-tl-item" onclick="toggleTL(this)">
+            <div class="tl-dot-col"><div class="tl-dot">📅</div></div>
+            <div class="tl-content">
+              <div class="tl-title">Specify Deadlines</div>
+              <div class="tl-detail">"ASAP" is not a deadline. "By Thursday 5pm" is. Vague timelines create anxiety and missed expectations — specific ones create accountability.</div>
+            </div>
           </div>
         </div>
       </div>
-      <div>
-        <div style="background:var(--surface2);border-radius:16px;padding:2rem;border:1px solid var(--border)">
-          <div class="slide-tag" style="margin-bottom:1rem">Communication Principles</div>
-          <div class="v-timeline">
-            <div class="v-tl-item" onclick="toggleTL(this)">
-              <div class="tl-dot-col"><div class="tl-dot">✂️</div></div>
-              <div class="tl-content">
-                <div class="tl-title">Edit Ruthlessly</div>
-                <div class="tl-detail">If your email is over 5 sentences, it needs editing — not more sentences. Ask: "Can I cut 30% without losing meaning?" Usually, yes.</div>
-              </div>
-            </div>
-            <div class="v-tl-item" onclick="toggleTL(this)">
-              <div class="tl-dot-col"><div class="tl-dot">🎯</div></div>
-              <div class="tl-content">
-                <div class="tl-title">One Ask Per Message</div>
-                <div class="tl-detail">Multiple requests dilute urgency. "Can you review the doc AND confirm the meeting AND update the tracker?" → One gets done. One ask per message.</div>
-              </div>
-            </div>
-            <div class="v-tl-item" onclick="toggleTL(this)">
-              <div class="tl-dot-col"><div class="tl-dot">📅</div></div>
-              <div class="tl-content">
-                <div class="tl-title">Specify Deadlines</div>
-                <div class="tl-detail">"ASAP" is not a deadline. "By Thursday 5pm" is. Vague timelines create anxiety and missed expectations — specific ones create accountability.</div>
-              </div>
-            </div>
-          </div>
+    </div>
+    <!-- Left column: normal flow, limited to left 50% so it never overlaps right -->
+    <div style="width:50%;">
+      <div class="slide-tag">Clarity & Structure</div>
+      <h2 class="slide-h2">Structure Your<br><span class="hi">Message</span> to Land</h2>
+      <p class="slide-body" style="margin-bottom:1.2rem">Clear communication isn't about saying more — it's about saying the <strong>right things in the right order</strong>. Use the PREP framework for any high-stakes message.</p>
+      <div class="card-grid-2">
+        <div class="info-card" onclick="revealCard(this)" style="border-top:2px solid var(--accent)">
+          <span class="card-icon">📌</span>
+          <div class="card-title">P — Point</div>
+          <div class="card-hint">↗ Click to reveal</div>
+          <div class="card-body">Lead with your main point. Don't bury the lede. "I recommend we delay the launch by two weeks." State it first, justify it after.</div>
+        </div>
+        <div class="info-card" onclick="revealCard(this)" style="border-top:2px solid var(--accent2)">
+          <span class="card-icon">🔍</span>
+          <div class="card-title">R — Reason</div>
+          <div class="card-hint">↗ Click to reveal</div>
+          <div class="card-body">Give the one most compelling reason. Not five. One strong reason is more persuasive than a list. "Because QA found 3 critical bugs that affect checkout."</div>
+        </div>
+        <div class="info-card" onclick="revealCard(this)" style="border-top:2px solid var(--accent3)">
+          <span class="card-icon">📊</span>
+          <div class="card-title">E — Evidence</div>
+          <div class="card-hint">↗ Click to reveal</div>
+          <div class="card-body">Support with one concrete data point or example. "In the last launch with similar bugs, we saw a 34% cart abandonment spike in week one."</div>
+        </div>
+        <div class="info-card" onclick="revealCard(this)" style="border-top:2px solid #a84ff7">
+          <span class="card-icon">🔁</span>
+          <div class="card-title">P — Point (Again)</div>
+          <div class="card-hint">↗ Click to reveal</div>
+          <div class="card-body">Circle back to your point, now with a call to action. "So I'd like us to agree on a two-week buffer today." This creates a memorable, action-oriented close.</div>
         </div>
       </div>
     </div>
@@ -1481,9 +1481,17 @@ function updateNextBtn() {
 function updatePill() {
   const pill = document.getElementById('instruction-pill');
   const inst = SLIDE_INSTRUCTIONS[current];
+
+  // Default pill position
+  pill.style.bottom = 'calc(68px + 12px)';
+
   if (inst && !slideUnlocked[current]) {
     document.getElementById('pill-icon').textContent = inst.icon;
     document.getElementById('pill-text').textContent = inst.text;
+    if (current === 7) {
+      // Raise pill above the Check My Answer button on slide 7
+      pill.style.bottom = 'calc(68px + 60px)';
+    }
     pill.classList.add('visible');
   } else {
     pill.classList.remove('visible');
