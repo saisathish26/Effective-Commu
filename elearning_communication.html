@@ -4,197 +4,395 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Effective Communication at Work</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,400;0,500;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* ══════════════════════════════════════════════
+   OWLY TUTOR INSPIRED THEME
+   Dark navy sidebar · Yellow accent · Card-white content
+   ══════════════════════════════════════════════ */
 :root {
-  --bg: #f4f6f9;
-  --surface: #ffffff;
-  --surface2: #eef1f6;
-  --border: rgba(30,60,120,0.12);
-  --text: #1a2340;
-  --muted: #5a6a8a;
-  --accent: #2563eb;
-  --accent2: #d97706;
-  --accent3: #059669;
-  --danger: #dc2626;
-  --card: #ffffff;
-  --radius: 12px;
+  /* Owly Tutor palette */
+  --navy:       #0f1f3d;
+  --navy-mid:   #172845;
+  --navy-light: #1e3560;
+  --navy-border:#2a4070;
+  --yellow:     #f5c518;
+  --yellow-dk:  #d9a800;
+  --teal:       #00c9a7;
+  --rose:       #ff6b6b;
+  --purple:     #a259ff;
+  --white:      #ffffff;
+  --surface:    #f7f9fc;
+  --card:       #ffffff;
+  --border:     #e2e8f0;
+  --text:       #0d1b33;
+  --muted:      #64748b;
+  --accent:     #1a5cf8;
+  --accent-grad: linear-gradient(135deg, #1a5cf8 0%, #0ea5e9 100%);
+  --radius:     12px;
+  --sidebar-w:  240px;
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden}
 
 body {
-  background: linear-gradient(135deg, #e8edf5 0%, #f0f4fb 40%, #eef1f8 70%, #f4f6f9 100%);
-  background-attachment: fixed;
+  font-family: 'Nunito', sans-serif;
+  background: var(--navy);
   color: var(--text);
-  font-family: 'Merriweather', serif;
+  display: flex;
   height: 100vh;
+  overflow: hidden;
+}
+
+/* ─────────────────────────────────────
+   LEFT SIDEBAR  (Owly-style dark panel)
+   ───────────────────────────────────── */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--navy);
+  border-right: 1px solid var(--navy-border);
   display: flex;
   flex-direction: column;
-  user-select: none;
-}
-
-/* ── HEADER ── */
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2.5rem;
-  height: 60px;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
   flex-shrink: 0;
-  z-index: 10;
+  position: relative;
+  z-index: 20;
 }
-.course-title {
-  font-family: 'Outfit', sans-serif;
+
+.sidebar-logo {
+  padding: 1.4rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--navy-border);
+  flex-shrink: 0;
+}
+.logo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--yellow);
+  border-radius: 8px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--navy);
+  text-transform: uppercase;
+  margin-bottom: 0.7rem;
+}
+.course-name {
+  font-size: 0.82rem;
   font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: 0.04em;
-  color: var(--text);
+  color: #fff;
+  line-height: 1.4;
+}
+.course-meta {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.45);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.06em;
+  margin-top: 0.3rem;
+}
+
+/* Module nav list */
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--navy-border) transparent;
+}
+.nav-section-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  padding: 0.5rem 1.5rem 0.3rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+.nav-item {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.75rem;
+  padding: 0.65rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  position: relative;
 }
-.slide-counter {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.75rem;
-  color: var(--muted);
+.nav-item:hover { background: rgba(255,255,255,0.05); }
+.nav-item.locked { cursor: not-allowed; opacity: 0.4; pointer-events: none; }
+.nav-item.active { background: rgba(245,197,24,0.12); }
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--yellow);
+  border-radius: 0 2px 2px 0;
 }
-.slide-counter span { color: var(--accent); font-weight: 500; }
+.nav-dot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--navy-light);
+  border: 1.5px solid var(--navy-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+  color: rgba(255,255,255,0.5);
+  transition: all 0.2s;
+}
+.nav-item.done .nav-dot {
+  background: rgba(0,201,167,0.15);
+  border-color: var(--teal);
+  color: var(--teal);
+}
+.nav-item.active .nav-dot {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--navy);
+  font-weight: 800;
+}
+.nav-label {
+  font-size: 0.77rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.3;
+  transition: color 0.2s;
+}
+.nav-item.active .nav-label { color: #fff; }
+.nav-item.done .nav-label { color: rgba(255,255,255,0.7); }
 
-/* ── PROGRESS BAR ── */
+/* Sidebar footer */
+.sidebar-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--navy-border);
+  flex-shrink: 0;
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 0.5rem;
+}
+.progress-label span { color: var(--yellow); }
 .progress-track {
-  display: none;
+  height: 4px;
+  background: var(--navy-light);
+  border-radius: 100px;
+  overflow: hidden;
 }
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--accent), var(--accent3));
+  background: linear-gradient(90deg, var(--yellow), var(--teal));
+  border-radius: 100px;
   transition: width 0.5s cubic-bezier(.4,0,.2,1);
-  position: relative;
-}
-.progress-fill::after {
-  content: '';
-  position: absolute;
-  right: 0; top: 50%;
-  transform: translateY(-50%);
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--accent3);
-  box-shadow: 0 0 8px var(--accent3);
 }
 
-/* ── SLIDE CONTAINER ── */
-.slides-wrapper {
+/* ─────────────────────────────────────
+   MAIN CONTENT AREA
+   ───────────────────────────────────── */
+.main {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  min-width: 0;
   overflow: hidden;
   position: relative;
-  min-height: 0;
 }
+
+/* TOP BAR */
+.topbar {
+  height: 56px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  flex-shrink: 0;
+  z-index: 10;
+}
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.topbar-breadcrumb {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+.topbar-breadcrumb span { background: var(--accent-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 600; }
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.slide-counter-pill {
+  background: var(--accent-grad);
+  border: none;
+  border-radius: 100px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.68rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────
+   CONTENT + VERTICAL ARROW NAVIGATION
+   ───────────────────────────────────── */
+.content-area {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Vertical arrow nav — RIGHT SIDE */
+.vertical-nav {
+  width: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  background: var(--white);
+  border-left: 1px solid var(--border);
+  flex-shrink: 0;
+  position: relative;
+}
+.v-arrow-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.22s ease;
+  color: var(--muted);
+  font-size: 1rem;
+  position: relative;
+}
+.v-arrow-btn:hover:not(:disabled) {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--navy);
+  transform: scale(1.08);
+  box-shadow: 0 6px 18px rgba(245,197,24,0.35);
+}
+.v-arrow-btn:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+.v-arrow-btn.primary {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--navy);
+  width: 50px;
+  height: 50px;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 14px rgba(245,197,24,0.4);
+}
+.v-arrow-btn.primary:hover:not(:disabled) {
+  background: var(--yellow-dk);
+  border-color: var(--yellow-dk);
+  transform: scale(1.08);
+}
+.v-arrow-btn.primary:disabled {
+  background: var(--border);
+  border-color: var(--border);
+  color: var(--muted);
+  box-shadow: none;
+  opacity: 0.5;
+}
+.nav-divider {
+  width: 24px;
+  height: 1px;
+  background: var(--border);
+}
+.v-nav-label {
+  font-size: 0.55rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  opacity: 0.6;
+  max-height: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ─────────────────────────────────────
+   SLIDE AREA
+   ───────────────────────────────────── */
+.slides-wrapper {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+}
+
 .slide {
   position: absolute;
   inset: 0;
-  padding: 1.8rem 3rem;
+  padding: 2rem 2.5rem;
   display: none;
   flex-direction: column;
   justify-content: center;
   opacity: 0;
-  transform: translateX(40px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateY(30px);
+  transition: opacity 0.38s ease, transform 0.38s ease;
   overflow: hidden;
 }
 .slide.active {
   display: flex;
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
 }
-
-.slide.exit-left {
+.slide.exit-up {
   display: flex;
   opacity: 0;
-  transform: translateX(-40px);
+  transform: translateY(-30px);
 }
-.slide.enter-right {
+.slide.enter-down {
   display: flex;
   opacity: 0;
-  transform: translateX(40px);
+  transform: translateY(30px);
 }
-/* Slides with lots of content — align to top and allow scrolling */
 .slide-scroll {
   justify-content: flex-start;
-  padding-top: 1.5rem;
+  padding-top: 1.8rem;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
-  scrollbar-color: rgba(79,142,247,0.3) transparent;
+  scrollbar-color: rgba(26,92,248,0.25) transparent;
 }
+.slide-scroll::-webkit-scrollbar { width: 4px; }
+.slide-scroll::-webkit-scrollbar-track { background: transparent; }
+.slide-scroll::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#1a5cf8,#0ea5e9); border-radius: 2px; }
 
-/* ── FOOTER NAV ── */
-.footer-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2.5rem;
-  height: 68px;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid var(--border);
-  flex-shrink: 0;
-}
-.nav-btn {
-  font-family: 'Outfit', sans-serif;
-  font-weight: 600;
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
-  padding: 0.6rem 1.6rem;
-  border: 1px solid var(--border);
-  background: var(--surface2);
-  color: var(--text);
-  cursor: pointer;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.2s;
-  text-transform: uppercase;
-}
-.nav-btn:hover:not(:disabled) {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-  transform: translateY(-1px);
-}
-.nav-btn:disabled { opacity: 0.25; cursor: not-allowed; }
-.nav-btn.primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-}
-.nav-btn.primary:hover { background: #1d4ed8; }
-
-.breadcrumbs {
-  display: flex;
-  gap: 0.4rem;
-  align-items: center;
-}
-.crumb {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--border);
-  border: 1px solid var(--muted);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.crumb.done { background: var(--accent3); border-color: var(--accent3); }
-.crumb.active { background: var(--accent); border-color: var(--accent); transform: scale(1.3); }
-
-/* ── SLIDE ELEMENTS ── */
+/* ─────────────────────────────────────
+   SLIDE TYPOGRAPHY
+   ───────────────────────────────────── */
 .slide-tag {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 0.6rem;
@@ -204,48 +402,45 @@ body {
 }
 .slide-tag::before {
   content: '';
-  width: 20px; height: 1px;
-  background: var(--accent);
+  width: 18px; height: 2px;
+  background: var(--yellow);
+  border-radius: 2px;
+  flex-shrink: 0;
 }
+/* Dark panel overrides — always yellow for readability */
+.info-panel .slide-tag,
+.hero-accent .slide-tag { color: var(--yellow) !important; }
 .slide-h1 {
-  font-family: 'Outfit', sans-serif;
-  font-weight: 800;
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.9rem, 3vw, 3rem);
   line-height: 1.05;
   margin-bottom: 1.2rem;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  color: var(--text);
 }
-.slide-h1 .hi { color: var(--accent2); }
+.slide-h1 .hi { color: var(--yellow-dk); }
 .slide-h2 {
-  font-family: 'Outfit', sans-serif;
-  font-weight: 700;
-  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.3rem, 2vw, 1.85rem);
   line-height: 1.2;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.7rem;
+  color: var(--text);
 }
 .slide-h2 .hi { color: var(--accent); }
 .slide-body {
   font-size: 0.9rem;
-  line-height: 1.75;
+  line-height: 1.8;
   color: #3d4f6e;
-  max-width: 65ch;
-  margin-bottom: 0.6rem;
+  max-width: 60ch;
+  margin-bottom: 0.7rem;
 }
-.slide-body strong { color: var(--text); font-weight: 500; }
+.slide-body strong { color: var(--text); }
 
-/* ── DECORATIVE BG SHAPES ── */
-.bg-circle {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-  /* Ensure bg-circles never cause scroll */
-  overflow: hidden;
-}
-/* Only non-absolute children get z-index:1 */
-.slide > *:not(.bg-circle) { position: relative; z-index: 1; }
-
-/* ── TWO-COL LAYOUT ── */
+/* ─────────────────────────────────────
+   LAYOUT GRIDS
+   ───────────────────────────────────── */
 .two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -255,239 +450,132 @@ body {
 }
 .two-col-wide {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1.25fr 1fr;
   gap: 2rem;
   align-items: start;
   min-height: 0;
 }
-
-/* ── CARDS ── */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 1.2rem;
 }
 .card-grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 1.2rem;
 }
+
+/* ─────────────────────────────────────
+   INFO CARDS (clickable reveal)
+   ───────────────────────────────────── */
 .info-card {
   background: var(--card);
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.5rem;
+  padding: 1.3rem;
   cursor: pointer;
   transition: all 0.25s;
   position: relative;
   overflow: hidden;
 }
-.info-card::before {
-  content: '';
+.info-card::after {
+  content: '↗ Click to explore';
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--accent3));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s;
+  bottom: 0.7rem; right: 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  background: var(--accent-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  transition: opacity 0.2s;
 }
-.info-card:hover { border-color: var(--accent); transform: translateY(-3px); background: #eff4ff; }
-.info-card:hover::before { transform: scaleX(1); }
-.info-card.revealed { border-color: var(--accent3); background: rgba(79,247,168,0.05); }
-.info-card.revealed::before { transform: scaleX(1); background: var(--accent3); }
-.card-icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+.info-card.revealed::after { display: none; }
+.info-card:hover {
+  border-color: var(--yellow);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(245,197,24,0.15);
+}
+.info-card.revealed {
+  border-color: var(--teal);
+  background: rgba(0,201,167,0.04);
+  box-shadow: 0 4px 16px rgba(0,201,167,0.1);
+}
+.card-icon { font-size: 1.8rem; margin-bottom: 0.7rem; display: block; }
 .card-title {
-  font-family: 'Outfit', sans-serif;
-  font-weight: 600;
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+  margin-bottom: 0.4rem;
   color: var(--text);
 }
 .card-body {
-  font-size: 0.8rem;
-  line-height: 1.6;
+  font-size: 0.78rem;
+  line-height: 1.65;
   color: var(--muted);
   display: none;
-}
-.card-hint {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  color: var(--accent);
-  text-transform: uppercase;
 }
 .info-card.revealed .card-body { display: block; }
-.info-card.revealed .card-hint { display: none; }
+.click-hint {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  background: var(--accent-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.7;
+  margin-top: 0.3rem;
+  letter-spacing: 0.05em;
+}
+.info-card.revealed .click-hint { display: none; }
 
-/* ── SCENARIO BLOCK ── */
-.scenario-box {
-  background: rgba(37,99,235,0.05);
-  border-left: 3px solid var(--accent2);
-  border-radius: 0 var(--radius) var(--radius) 0;
-  padding: 1.5rem 2rem;
-  margin-bottom: 1.5rem;
-  font-style: italic;
-  color: #2d3f60;
-  font-size: 0.95rem;
-  line-height: 1.7;
-}
-.scenario-box strong { color: var(--accent2); font-style: normal; }
-
-.choice-list { display: flex; flex-direction: column; gap: 0.7rem; }
-.choice-btn {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1rem 1.4rem;
-  cursor: pointer;
-  text-align: left;
-  font-family: 'Merriweather', serif;
-  font-size: 0.88rem;
-  color: var(--text);
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-}
-.choice-btn:hover:not(.locked) { border-color: var(--accent); background: rgba(79,142,247,0.08); }
-.choice-btn.correct { border-color: var(--accent3); background: rgba(79,247,168,0.1); color: var(--accent3); }
-.choice-btn.wrong { border-color: var(--danger); background: rgba(247,90,79,0.1); color: var(--danger); }
-.choice-btn.locked { cursor: default; }
-.choice-label {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.72rem;
-  width: 24px; height: 24px;
-  border-radius: 50%;
-  background: var(--surface2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  border: 1px solid var(--border);
-}
-.choice-btn.correct .choice-label { background: var(--accent3); color: var(--bg); border-color: var(--accent3); }
-.choice-btn.wrong .choice-label { background: var(--danger); color: #fff; border-color: var(--danger); }
-
-.feedback-box {
-  margin-top: 1rem;
-  padding: 1rem 1.4rem;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  line-height: 1.6;
-  display: none;
-}
-.feedback-box.show { display: block; }
-.feedback-box.good { background: rgba(79,247,168,0.1); border: 1px solid rgba(79,247,168,0.3); color: var(--accent3); }
-.feedback-box.bad { background: rgba(220,38,38,0.07); border: 1px solid rgba(220,38,38,0.25); color: #b91c1c; }
-
-/* ── DRAG DROP (SORTING) ── */
-.sort-instructions {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
-  color: var(--accent);
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-}
-.sort-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  max-width: 480px;
-}
-.sort-item {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.9rem 1.2rem;
-  cursor: grab;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  font-size: 0.88rem;
-  transition: all 0.2s;
-  user-select: none;
-}
-.sort-item:hover { border-color: var(--accent); }
-.sort-item.dragging { opacity: 0.4; cursor: grabbing; }
-.sort-item.drag-over { border-color: var(--accent3); background: rgba(79,247,168,0.05); }
-.sort-item .grip {
-  color: var(--muted);
-  font-size: 1rem;
-  flex-shrink: 0;
-}
-.sort-item .rank {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.7rem;
-  width: 22px; height: 22px;
-  border-radius: 50%;
-  background: var(--surface2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent);
-  flex-shrink: 0;
-  border: 1px solid var(--accent);
-}
-.sort-item.correct-pos { border-color: var(--accent3); }
-.sort-item.correct-pos .rank { background: var(--accent3); color: var(--bg); border-color: var(--accent3); }
-.check-sort-btn {
-  margin-top: 1rem;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 600;
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 0.6rem 1.4rem;
-  background: var(--accent);
-  border: none;
-  border-radius: 6px;
-  color: #fff;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.check-sort-btn:hover { background: #1d4ed8; }
-
-/* ── REFLECTION ── */
-.reflection-area {
-  background: var(--surface2);
-  border: 1px solid var(--border);
+/* ─────────────────────────────────────
+   PANEL / INFO BOX
+   ───────────────────────────────────── */
+.info-panel {
+  background: var(--navy);
   border-radius: var(--radius);
-  padding: 1.5rem;
-  margin-top: 1.2rem;
+  padding: 1.6rem;
+  color: #fff;
+  border: 1px solid var(--navy-border);
 }
-.reflection-area textarea {
-  width: 100%;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: var(--text);
-  font-family: 'Merriweather', serif;
-  font-size: 0.92rem;
-  line-height: 1.7;
-  resize: none;
-  min-height: 100px;
-}
-.reflection-area textarea::placeholder { color: var(--muted); font-style: italic; }
+.info-panel .slide-tag::before { background: var(--yellow); }
 
-/* ── TIMELINE ── */
+/* White panel variant */
+.white-panel {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 1.6rem;
+  border: 1.5px solid var(--border);
+}
+
+/* ─────────────────────────────────────
+   TIMELINE / ACCORDION
+   ───────────────────────────────────── */
 .v-timeline { display: flex; flex-direction: column; gap: 0; }
 .v-tl-item {
   display: flex;
-  gap: 1.2rem;
+  gap: 1rem;
   cursor: pointer;
   padding: 0.8rem 0;
+  transition: background 0.2s;
+  border-radius: 8px;
+  padding: 0.8rem;
+  margin: 0 -0.5rem;
 }
-.v-tl-item:not(:last-child) { border-bottom: 1px solid var(--border); }
-.tl-dot-col { display: flex; flex-direction: column; align-items: center; gap: 0; }
+.v-tl-item:not(:last-child) { border-bottom: 1px solid rgba(255,255,255,0.08); }
+.info-panel .v-tl-item:not(:last-child) { border-bottom-color: rgba(255,255,255,0.08); }
+.white-panel .v-tl-item:not(:last-child) { border-bottom-color: var(--border); }
+.v-tl-item:hover { background: rgba(245,197,24,0.06); }
 .tl-dot {
   width: 36px; height: 36px;
-  border-radius: 50%;
-  background: var(--surface2);
-  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: rgba(245,197,24,0.12);
+  border: 1.5px solid rgba(245,197,24,0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -496,955 +584,1262 @@ body {
   transition: all 0.25s;
 }
 .v-tl-item:hover .tl-dot,
-.v-tl-item.open .tl-dot { border-color: var(--accent); background: rgba(37,99,235,0.1); }
-.tl-content { flex: 1; padding-top: 0.4rem; }
-.tl-title {
-  font-family: 'Outfit', sans-serif;
-  font-weight: 600;
-  font-size: 0.9rem;
-  margin-bottom: 0;
-  transition: color 0.2s;
+.v-tl-item.open .tl-dot {
+  background: var(--yellow);
+  border-color: var(--yellow);
 }
+.tl-content { flex: 1; }
+.tl-title {
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: color 0.2s;
+  color: inherit;
+}
+.info-panel .tl-title { color: rgba(255,255,255,0.9); }
+.white-panel .tl-title { color: var(--text); }
 .v-tl-item:hover .tl-title,
-.v-tl-item.open .tl-title { color: var(--accent); }
+.v-tl-item.open .tl-title { color: var(--yellow) !important; }
 .tl-detail {
-  font-size: 0.82rem;
-  line-height: 1.6;
-  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.65;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.35s ease, margin 0.2s;
+  opacity: 0.7;
 }
-.v-tl-item.open .tl-detail { max-height: 200px; margin-top: 0.5rem; }
+.info-panel .tl-detail { color: rgba(255,255,255,0.65); }
+.white-panel .tl-detail { color: var(--muted); }
+.v-tl-item.open .tl-detail { max-height: 200px; margin-top: 0.45rem; }
 
-/* ── PROGRESS CIRCLE ── */
-.score-circle {
-  width: 120px; height: 120px;
-  border-radius: 50%;
-  background: conic-gradient(var(--accent3) 0%, var(--surface2) 0%);
+/* ─────────────────────────────────────
+   TIP LIST
+   ───────────────────────────────────── */
+.tips-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.8rem; }
+.tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 0.85rem 1.1rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.tip-item:hover { border-color: var(--yellow); box-shadow: 0 4px 12px rgba(245,197,24,0.12); }
+.tip-item.active {
+  border-color: var(--teal);
+  background: rgba(0,201,167,0.04);
+}
+.tip-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--yellow-dk);
+  flex-shrink: 0;
+  font-weight: 700;
+  background: rgba(245,197,24,0.1);
+  padding: 0.2rem 0.45rem;
+  border-radius: 5px;
+  border: 1px solid rgba(245,197,24,0.25);
+}
+.tip-item .tip-detail {
+  color: var(--muted);
+  font-size: 0.77rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s, margin 0.2s;
+}
+.tip-item.active .tip-detail { max-height: 120px; margin-top: 0.35rem; }
+
+/* ─────────────────────────────────────
+   QUIZ / SCENARIO
+   ───────────────────────────────────── */
+.scenario-box {
+  background: linear-gradient(135deg, rgba(26,92,248,0.06) 0%, rgba(14,165,233,0.06) 100%);
+  border-left: 3px solid transparent;
+  border-image: linear-gradient(180deg,#1a5cf8,#0ea5e9) 1;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1.2rem 1.6rem;
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #2d3f60;
+}
+.scenario-box strong { color: var(--yellow-dk); }
+
+.choice-list { display: flex; flex-direction: column; gap: 0.6rem; }
+.choice-btn {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 0.9rem 1.2rem;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.87rem;
+  color: var(--text);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.choice-btn:hover:not(.locked) {
+  border-color: var(--yellow);
+  background: rgba(245,197,24,0.06);
+  transform: translateX(4px);
+}
+.choice-btn.correct { border-color: var(--teal); background: rgba(0,201,167,0.07); color: #0a6b56; }
+.choice-btn.wrong { border-color: var(--rose); background: rgba(255,107,107,0.07); color: #c0392b; }
+.choice-btn.locked { cursor: default; }
+.choice-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  width: 26px; height: 26px;
+  border-radius: 8px;
+  background: var(--surface);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 1.5rem auto;
-  position: relative;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  font-weight: 700;
 }
-.score-circle::before {
-  content: '';
-  width: 90px; height: 90px;
-  border-radius: 50%;
-  background: var(--surface);
-  position: absolute;
+.choice-btn.correct .choice-label { background: var(--teal); color: #fff; border-color: var(--teal); }
+.choice-btn.wrong .choice-label { background: var(--rose); color: #fff; border-color: var(--rose); }
+
+.feedback-box {
+  margin-top: 0.9rem;
+  padding: 1rem 1.3rem;
+  border-radius: 10px;
+  font-size: 0.84rem;
+  line-height: 1.65;
+  display: none;
 }
-.score-num {
-  font-family: 'Outfit', sans-serif;
-  font-weight: 800;
-  font-size: 1.6rem;
-  position: relative;
-  z-index: 1;
-  color: var(--accent3);
+.feedback-box.show { display: block; }
+.feedback-box.good { background: rgba(0,201,167,0.08); border: 1.5px solid rgba(0,201,167,0.3); color: #0a6b56; }
+.feedback-box.bad { background: rgba(255,107,107,0.08); border: 1.5px solid rgba(255,107,107,0.25); color: #c0392b; }
+
+/* ─────────────────────────────────────
+   DRAG & SORT
+   ───────────────────────────────────── */
+.sort-instructions {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  color: var(--yellow-dk);
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.sort-container { display: flex; flex-direction: column; gap: 0.55rem; max-width: 520px; }
+.sort-item {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 0.85rem 1.1rem;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.86rem;
+  transition: all 0.2s;
+  user-select: none;
+}
+.sort-item:hover { border-color: var(--yellow); }
+.sort-item.dragging { opacity: 0.38; cursor: grabbing; }
+.sort-item.drag-over { border-color: var(--teal); background: rgba(0,201,167,0.05); }
+.sort-item.correct-pos { border-color: var(--teal); }
+.sort-item .grip { color: var(--muted); font-size: 1rem; flex-shrink: 0; }
+.sort-item .rank {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  width: 24px; height: 24px;
+  border-radius: 7px;
+  background: rgba(245,197,24,0.1);
+  border: 1px solid rgba(245,197,24,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--yellow-dk);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.sort-item.correct-pos .rank { background: var(--teal); color: #fff; border-color: var(--teal); }
+
+.check-sort-btn {
+  margin-top: 1rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.6rem;
+  background: var(--navy);
+  border: 2px solid var(--yellow);
+  border-radius: 8px;
+  color: var(--yellow);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.check-sort-btn:hover { background: var(--yellow); color: var(--navy); }
+
+/* ─────────────────────────────────────
+   STAT BARS
+   ───────────────────────────────────── */
+.stat-bars { display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; }
+.stat-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 0.4rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+.stat-bar-label span { color: var(--yellow); font-weight: 700; }
+.stat-bar-track {
+  height: 7px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 100px;
+  overflow: hidden;
+}
+@keyframes fillBar {
+  from { width: 0; }
+  to   { width: var(--target-w); }
+}
+.stat-bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--yellow), var(--teal));
+  width: 0;
+}
+.slide.active .stat-bar-fill {
+  animation: fillBar 1.2s cubic-bezier(.4,0,.2,1) forwards;
 }
 
-/* ── HOTSPOT ── */
-.hotspot-img {
-  position: relative;
-  background: var(--surface2);
-  border-radius: var(--radius);
-  overflow: visible;
-  border: 1px solid var(--border);
-  margin-top: 0.5rem;
+/* ─────────────────────────────────────
+   PILL TAGS
+   ───────────────────────────────────── */
+.pill {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.75rem;
+  border-radius: 100px;
+  border: 1.5px solid var(--navy-border);
+  color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.07);
+  margin-right: 0.4rem;
+  margin-bottom: 0.4rem;
 }
+
+/* ─────────────────────────────────────
+   HOTSPOT / MEETING SCENE
+   ───────────────────────────────────── */
 .hotspot-canvas {
-  width: 100%;
+  background: linear-gradient(135deg, #dde9f8 0%, #e8f0fb 100%);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
   height: 240px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #dde6f5 0%, #e8eef8 100%);
-  position: relative;
   overflow: visible;
-  border-radius: var(--radius);
+  margin-bottom: 0.5rem;
 }
 .meeting-scene {
   display: flex;
-  gap: 2rem;
+  gap: 2.5rem;
   align-items: flex-end;
   justify-content: center;
   width: 100%;
-  padding: 3.5rem 2rem 1rem;
+  padding: 3.5rem 2rem 1.5rem;
 }
 .person-fig {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
   cursor: pointer;
   transition: transform 0.2s;
   position: relative;
 }
-.person-fig:hover { transform: translateY(-5px); }
+.person-fig:hover { transform: translateY(-6px); }
 .person-head {
-  width: 40px; height: 40px;
+  width: 44px; height: 44px;
   border-radius: 50%;
   border: 2px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   background: var(--card);
   position: relative;
 }
 .person-body {
-  width: 50px; height: 60px;
-  border-radius: 8px 8px 0 0;
+  width: 52px; height: 56px;
+  border-radius: 10px 10px 0 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.6rem;
-  font-family: 'Fira Code', monospace;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
   color: var(--muted);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 .hs-badge {
   position: absolute;
-  top: -8px; right: -8px;
+  top: -7px; right: -7px;
   width: 18px; height: 18px;
   border-radius: 50%;
-  background: var(--accent2);
-  border: 2px solid var(--bg);
+  background: var(--yellow);
+  border: 2px solid var(--surface);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.5rem;
-  font-weight: bold;
-  color: var(--bg);
-  animation: bob 1.5s infinite ease-in-out;
+  font-size: 0.55rem;
+  font-weight: 800;
+  color: var(--navy);
+  animation: bob 1.6s infinite ease-in-out;
 }
 @keyframes bob { 0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)} }
 .hs-tooltip {
   position: absolute;
-  bottom: calc(100% + 12px);
+  bottom: calc(100% + 14px);
   left: 50%;
   transform: translateX(-50%);
-  background: #ffffff;
-  border: 1.5px solid var(--accent);
+  background: var(--navy);
+  border: 1.5px solid var(--yellow);
   border-radius: 10px;
-  padding: 0.75rem 1rem;
+  padding: 0.8rem 1rem;
   font-size: 0.72rem;
   line-height: 1.55;
-  width: 175px;
+  width: 180px;
   display: none;
   z-index: 100;
   text-align: center;
-  color: #1a2340;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  color: rgba(255,255,255,0.85);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.3);
   pointer-events: none;
 }
 .person-fig.hs-open .hs-tooltip { display: block; }
+.hs-tooltip strong { color: var(--yellow); }
 .hs-tooltip::after {
   content: '';
   position: absolute;
   top: 100%; left: 50%;
   transform: translateX(-50%);
   border: 6px solid transparent;
-  border-top-color: var(--accent);
+  border-top-color: var(--yellow);
 }
 
-/* ── TIPS LIST ── */
-.tips-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
-.tip-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.8rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.9rem 1.2rem;
-  font-size: 0.85rem;
-  line-height: 1.6;
-  cursor: pointer;
-  transition: all 0.2s;
+/* ─────────────────────────────────────
+   REFLECTION
+   ───────────────────────────────────── */
+.reflection-area {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  margin-top: 1rem;
 }
-.tip-item:hover { border-color: var(--accent3); }
-.tip-item.active { border-color: var(--accent3); background: rgba(79,247,168,0.06); }
-.tip-num {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.75rem;
-  color: var(--accent3);
-  flex-shrink: 0;
-  font-weight: 500;
+.reflection-area textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  resize: none;
+  min-height: 90px;
 }
-.tip-item .tip-detail {
-  color: var(--muted);
-  font-size: 0.78rem;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s, margin 0.2s;
-}
-.tip-item.active .tip-detail { max-height: 100px; margin-top: 0.3rem; }
+.reflection-area textarea::placeholder { color: var(--muted); font-style: italic; }
 
-/* ── WRAP / CERTIFICATE ── */
+/* ─────────────────────────────────────
+   CERTIFICATE / COMPLETION
+   ───────────────────────────────────── */
 .certificate {
-  background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 3rem;
+  background: var(--navy);
+  border: 1.5px solid var(--navy-border);
+  border-radius: 20px;
+  padding: 2.5rem;
   text-align: center;
   position: relative;
   overflow: hidden;
-  max-width: 600px;
+  max-width: 560px;
   margin: 0 auto;
 }
 .certificate::before {
   content: '';
   position: absolute;
-  top: -50%; left: -50%;
-  width: 200%; height: 200%;
-  background: conic-gradient(from 0deg, transparent 340deg, rgba(37,99,235,0.06) 360deg);
-  animation: spin 8s linear infinite;
+  top: -60px; right: -60px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,197,24,0.12) 0%, transparent 70%);
+  pointer-events: none;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
 .cert-inner { position: relative; z-index: 1; }
-.cert-badge { font-size: 4rem; margin-bottom: 1rem; }
+.cert-badge { font-size: 3.5rem; margin-bottom: 0.8rem; }
 .cert-title {
-  font-family: 'Outfit', sans-serif;
-  font-weight: 800;
-  font-size: 1.8rem;
-  background: linear-gradient(90deg, var(--accent), var(--accent3));
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 1.7rem;
+  background: linear-gradient(90deg, var(--yellow), var(--teal));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 .cert-sub {
-  font-size: 0.88rem;
-  color: var(--muted);
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 1.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+}
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 0.75rem;
   margin-bottom: 1.5rem;
 }
-.cert-name {
-  font-family: 'Merriweather', serif;
-  font-style: italic;
-  font-size: 1.4rem;
-  color: var(--accent2);
-  margin-bottom: 0.5rem;
+.cert-item {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 0.8rem 0.6rem;
+  text-align: center;
 }
-.cert-course {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 2rem;
+.cert-item .ci { font-size: 1.3rem; margin-bottom: 0.3rem; }
+.cert-item-title {
+  font-weight: 700;
+  font-size: 0.72rem;
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+.cert-item-body {
+  font-size: 0.62rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.5;
 }
 .cert-seal {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(79,247,168,0.1);
-  border: 1px solid rgba(79,247,168,0.3);
+  background: rgba(0,201,167,0.12);
+  border: 1.5px solid rgba(0,201,167,0.3);
   border-radius: 100px;
   padding: 0.4rem 1.2rem;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.65rem;
-  color: var(--accent3);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-/* Slide 1 bg-circles moved to inline styles */
-
-/* STAT BAR */
-.stat-bars { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.2rem; }
-.stat-bar-item { }
-.stat-bar-label {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.78rem;
-  color: var(--muted);
-  margin-bottom: 0.4rem;
-  font-family: 'Fira Code', monospace;
-}
-.stat-bar-label span { color: var(--accent2); font-weight: 500; }
-.stat-bar-track {
-  height: 6px;
-  background: var(--surface2);
-  border-radius: 100px;
-  overflow: hidden;
-}
-.stat-bar-fill {
-  height: 100%;
-  border-radius: 100px;
-  background: linear-gradient(90deg, var(--accent), var(--accent3));
-  width: 0;
-  transition: width 1s cubic-bezier(.4,0,.2,1) 0.3s;
-}
-
-.slide.active .stat-bar-fill { width: var(--target-w); }
-
-/* PILL TAG */
-.pill {
-  display: inline-block;
-  font-family: 'Fira Code', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.62rem;
+  color: var(--teal);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 0.25rem 0.7rem;
-  border-radius: 100px;
-  border: 1px solid var(--accent);
-  color: var(--accent);
-  margin-right: 0.4rem;
-  margin-bottom: 0.4rem;
 }
 
-/* SCROLLBAR — only on scrollable slides */
-.slide-scroll::-webkit-scrollbar { width: 4px; }
-.slide-scroll::-webkit-scrollbar-track { background: transparent; }
-.slide-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-@media (max-width: 780px) {
-  .two-col, .two-col-wide { grid-template-columns: 1fr; gap: 1.5rem; }
-  .card-grid { grid-template-columns: 1fr; }
-  .card-grid-2 { grid-template-columns: 1fr; }
-  .slide { padding: 2rem 1.5rem; }
-  .header, .footer-nav { padding: 0 1.2rem; }
-  .slide-h1 { font-size: 1.8rem; }
-}
-
-/* ── INSTRUCTION PILL (bottom-right of footer) ── */
+/* ─────────────────────────────────────
+   INSTRUCTION PILL
+   ───────────────────────────────────── */
 .instruction-pill {
   display: none;
   align-items: center;
   gap: 0.5rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--navy);
+  border: 1px solid var(--yellow);
   border-radius: 100px;
-  padding: 0.45rem 1rem 0.45rem 0.7rem;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.68rem;
+  padding: 0.4rem 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
   letter-spacing: 0.06em;
-  color: var(--text);
+  color: var(--yellow);
   white-space: nowrap;
   pointer-events: none;
   position: fixed;
-  bottom: calc(68px + 12px);
-  right: 2.5rem;
+  bottom: 1.2rem;
+  right: 5rem;
   z-index: 100;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  animation: pillFloat 2.5s ease-in-out infinite;
+}
+@keyframes pillFloat {
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-4px); }
 }
 .instruction-pill.visible { display: flex; }
-.instruction-pill .pill-dot {
-  display: none;
-}
-.instruction-pill .pill-icon { display: none; }
 
-/* Locked next button */
-.nav-btn.primary:disabled {
-  background: var(--surface2);
-  border-color: var(--border);
-  color: var(--muted);
-  opacity: 0.45;
-  cursor: not-allowed;
+/* ─────────────────────────────────────
+   BG DECORATION
+   ───────────────────────────────────── */
+.bg-deco {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: 50%;
 }
+.slide > *:not(.bg-deco) { position: relative; z-index: 1; }
+
+/* SLIDE-1 HERO accent block */
+.hero-accent {
+  background: var(--navy);
+  border-radius: 16px;
+  padding: 1.6rem;
+  border: 1px solid var(--navy-border);
+  position: relative;
+  overflow: hidden;
+}
+.hero-accent::after {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(245,197,24,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+/* responsive */
+@media (max-width: 820px) {
+  :root { --sidebar-w: 0px; }
+  .sidebar { display: none; }
+  .two-col, .two-col-wide { grid-template-columns: 1fr; }
+  .card-grid { grid-template-columns: 1fr 1fr; }
+  .slide { padding: 1.5rem; }
+}
+
+/* ─────────────────────────────────────
+   SMOOTH SLIDE TRANSITION (sequential, no overlap)
+   ───────────────────────────────────── */
+@keyframes slideOutUp {
+  from { transform: translateY(0); opacity: 1; }
+  to   { transform: translateY(-100%); opacity: 0; }
+}
+@keyframes slideOutDown {
+  from { transform: translateY(0); opacity: 1; }
+  to   { transform: translateY(100%); opacity: 0; }
+}
+@keyframes slideInUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+@keyframes slideInDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+.slide.slide-out-up   { animation: slideOutUp   0.35s cubic-bezier(.4,0,.2,1) forwards; }
+.slide.slide-out-down { animation: slideOutDown 0.35s cubic-bezier(.4,0,.2,1) forwards; }
+.slide.slide-in-up    { animation: slideInUp    0.38s cubic-bezier(.4,0,.2,1) forwards; }
+.slide.slide-in-down  { animation: slideInDown  0.38s cubic-bezier(.4,0,.2,1) forwards; }
+
+/* ─────────────────────────────────────
+   ARROW BOUNCE ANIMATIONS
+   ───────────────────────────────────── */
+@keyframes arrowBounceUp {
+  0%,100% { transform: translateY(0); }
+  40%     { transform: translateY(-5px); }
+  70%     { transform: translateY(-2px); }
+}
+@keyframes arrowBounceDown {
+  0%,100% { transform: translateY(0); }
+  40%     { transform: translateY(5px); }
+  70%     { transform: translateY(2px); }
+}
+#prev-btn:not(:disabled) { animation: arrowBounceUp 1.6s ease-in-out infinite; }
+#next-btn:not(:disabled) { animation: arrowBounceDown 1.6s ease-in-out infinite; }
+#prev-btn:disabled, #next-btn:disabled { animation: none; }
+
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="course-title">
-    Effective Communication at Work
-  </div>
-</div>
-
-<!-- SLIDES -->
-<div class="slides-wrapper">
-
-  <!-- SLIDE 1: WELCOME -->
-  <div class="slide slide-1 slide-scroll active" data-slide="1">
-    <div style="position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden">
-      <div class="bg-circle" style="width:400px;height:400px;background:radial-gradient(circle,rgba(37,99,235,0.07) 0%,transparent 70%);top:-100px;right:-100px"></div>
-      <div class="bg-circle" style="width:250px;height:250px;background:radial-gradient(circle,rgba(5,150,105,0.05) 0%,transparent 70%);bottom:-50px;left:100px"></div>
-    </div>
-    <div class="two-col">
-      <div>
-        <h1 class="slide-h1">The Art of<br><span class="hi">Effective</span><br>Communication</h1>
-        <p class="slide-body">
-          Communication is the <strong>single most critical skill</strong> in any workplace. Studies show that poor communication costs businesses an average of <strong>$62.4 million per year</strong> in lost productivity.<br><br>
-          In this course, you'll learn how to listen actively, speak with clarity, navigate difficult conversations, and connect more meaningfully with your team.
-        </p>
-        <div style="margin-top:0.8rem">
-          <span class="pill">5 Topics</span>
-          <span class="pill">~25 min</span>
-          <span class="pill">Interactive</span>
-        </div>
-      </div>
-      <div>
-        <div style="background:var(--surface2);border-radius:16px;padding:1.2rem 1.4rem;border:1px solid var(--border)">
-          <div class="slide-tag" style="margin-bottom:1.2rem">What you'll learn</div>
-          <div class="v-timeline">
-            <div class="v-tl-item" onclick="toggleTL(this)">
-              <div class="tl-dot-col"><div class="tl-dot">🗣️</div></div>
-              <div class="tl-content">
-                <div class="tl-title">Active Listening</div>
-                <div class="tl-detail">Go beyond hearing — learn to truly understand what colleagues are communicating, verbally and nonverbally.</div>
-              </div>
-            </div>
-            <div class="v-tl-item" onclick="toggleTL(this)">
-              <div class="tl-dot-col"><div class="tl-dot">💡</div></div>
-              <div class="tl-content">
-                <div class="tl-title">Clarity & Brevity</div>
-                <div class="tl-detail">Structure your ideas to be understood quickly and remembered — without over-explaining or under-informing.</div>
-              </div>
-            </div>
-            <div class="v-tl-item" onclick="toggleTL(this)">
-              <div class="tl-dot-col"><div class="tl-dot">🤝</div></div>
-              <div class="tl-content">
-                <div class="tl-title">Nonverbal Signals</div>
-                <div class="tl-detail">Discover how body language, eye contact, and tone shape every message you send — and receive.</div>
-              </div>
-            </div>
-            <div class="v-tl-item" onclick="toggleTL(this)">
-              <div class="tl-dot-col"><div class="tl-dot">🔥</div></div>
-              <div class="tl-content">
-                <div class="tl-title">Difficult Conversations</div>
-                <div class="tl-detail">Practical frameworks for feedback, conflict, and high-stakes dialogue that preserve relationships.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- ══════════════ SIDEBAR ══════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-badge">📡 Course</div>
+    <div class="course-name">Effective Communication<br>at Work</div>
   </div>
 
-  <!-- SLIDE 2: WHY IT MATTERS -->
-  <div class="slide slide-scroll" data-slide="2">
-    <div class="slide-tag">The Business Case</div>
-    <h2 class="slide-h2">Why Communication <span class="hi">Breaks Down</span></h2>
-    <p class="slide-body" style="margin-bottom:1.5rem">These are the most common barriers that silently derail workplace communication.</p>
-    <div class="card-grid">
-      <div class="info-card" onclick="revealCard(this)">
-        <span class="card-icon">🎧</span>
-        <div class="card-title">Selective Listening</div>
-        <div class="card-hint">↗ Click to explore</div>
-        <div class="card-body">We hear roughly 25% of what's said, filling gaps with our own assumptions. In meetings, this creates misaligned expectations and missed action items — costing hours of rework.</div>
-      </div>
-      <div class="info-card" onclick="revealCard(this)">
-        <span class="card-icon">📱</span>
-        <div class="card-title">Digital Overload</div>
-        <div class="card-hint">↗ Click to explore</div>
-        <div class="card-body">The average employee sends 40+ emails and checks Slack 60+ times a day. Fragmented communication channels mean context gets lost, tone is misread, and urgency signals blur.</div>
-      </div>
-      <div class="info-card" onclick="revealCard(this)">
-        <span class="card-icon">🌐</span>
-        <div class="card-title">Cultural Assumptions</div>
-        <div class="card-hint">↗ Click to explore</div>
-        <div class="card-body">Directness, silence, and eye contact mean different things across cultures. What reads as confident in one culture can seem aggressive or dismissive in another.</div>
-      </div>
-      <div class="info-card" onclick="revealCard(this)">
-        <span class="card-icon">🧠</span>
-        <div class="card-title">Cognitive Bias</div>
-        <div class="card-hint">↗ Click to explore</div>
-        <div class="card-body">Confirmation bias makes us hear what we expect. Attribution errors make us assume bad intent. Both sabotage productive dialogue before it starts.</div>
-      </div>
-      <div class="info-card" onclick="revealCard(this)">
-        <span class="card-icon">😰</span>
-        <div class="card-title">Fear of Speaking Up</div>
-        <div class="card-hint">↗ Click to explore</div>
-        <div class="card-body">Psychological safety is the #1 predictor of team performance (Google's Project Aristotle). When people fear judgment, critical information stays silent — until it becomes a crisis.</div>
-      </div>
-      <div class="info-card" onclick="revealCard(this)">
-        <span class="card-icon">🔇</span>
-        <div class="card-title">Feedback Avoidance</div>
-        <div class="card-hint">↗ Click to explore</div>
-        <div class="card-body">70% of employees report they don't receive enough feedback. Without it, people operate on assumptions about their performance — leading to disengagement and turnover.</div>
-      </div>
+  <nav class="sidebar-nav">
+    <div class="nav-item active" data-target="1" onclick="goTo(1,0)">
+      <div class="nav-dot">1</div>
+      <div class="nav-label">Welcome & Overview</div>
+    </div>
+    <div class="nav-item" data-target="2" onclick="goTo(2,0)">
+      <div class="nav-dot">2</div>
+      <div class="nav-label">Why Communication Breaks Down</div>
+    </div>
+    <div class="nav-item" data-target="3" onclick="goTo(3,0)">
+      <div class="nav-dot">3</div>
+      <div class="nav-label">Active Listening</div>
+    </div>
+    <div class="nav-item" data-target="4" onclick="goTo(4,0)">
+      <div class="nav-dot">4</div>
+      <div class="nav-label">Scenario Check</div>
+    </div>
+    <div class="nav-item" data-target="5" onclick="goTo(5,0)">
+      <div class="nav-dot">5</div>
+      <div class="nav-label">Clarity & Structure</div>
+    </div>
+    <div class="nav-item" data-target="6" onclick="goTo(6,0)">
+      <div class="nav-dot">6</div>
+      <div class="nav-label">Nonverbal Communication</div>
+    </div>
+    <div class="nav-item" data-target="7" onclick="goTo(7,0)">
+      <div class="nav-dot">7</div>
+      <div class="nav-label">Rank Feedback Steps</div>
+    </div>
+    <div class="nav-item" data-target="8" onclick="goTo(8,0)">
+      <div class="nav-dot">8</div>
+      <div class="nav-label">SBI Framework</div>
+    </div>
+    <div class="nav-item" data-target="9" onclick="goTo(9,0)">
+      <div class="nav-dot">9</div>
+      <div class="nav-label">Final Scenario</div>
+    </div>
+    <div class="nav-item" data-target="10" onclick="goTo(10,0)">
+      <div class="nav-dot">10</div>
+      <div class="nav-label">Course Completion</div>
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="progress-label">Progress <span id="pct-label">10%</span></div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width:10%"></div>
+    </div>
+  </div>
+</aside>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<div class="main">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-breadcrumb">Communication Skills &rsaquo; <span id="slide-topic">Welcome &amp; Overview</span></div>
+    </div>
+    <div class="topbar-right">
     </div>
   </div>
 
-  <!-- SLIDE 3: ACTIVE LISTENING -->
-  <div class="slide slide-scroll" data-slide="3">
-    <div class="slide-tag">Active Listening</div>
-    <div class="two-col-wide">
-      <div>
-        <h2 class="slide-h2">Listen to <span class="hi">Understand</span>,<br>Not to Reply</h2>
-        <p class="slide-body">Active listening isn't passive silence — it's an intentional practice.</p>
-        <div class="tips-list" style="margin-top:1.2rem">
-          <div class="tip-item" onclick="toggleTip(this)">
-            <div class="tip-num">L1</div>
-            <div>
-              <div><strong>Pay Full Attention</strong></div>
-              <div class="tip-detail">Put your phone face-down. Close unneeded tabs. Make eye contact. Signal with your body that this conversation matters. Research shows undivided attention increases information retention by 60%.</div>
-            </div>
-          </div>
-          <div class="tip-item" onclick="toggleTip(this)">
-            <div class="tip-num">L2</div>
-            <div>
-              <div><strong>Withhold Judgment</strong></div>
-              <div class="tip-detail">Let the speaker finish before forming a response. Notice when you're mentally drafting a reply — that's the moment to refocus on their words. The pause between listening and responding is where understanding lives.</div>
-            </div>
-          </div>
-          <div class="tip-item" onclick="toggleTip(this)">
-            <div class="tip-num">L3</div>
-            <div>
-              <div><strong>Reflect & Clarify</strong></div>
-              <div class="tip-detail">Paraphrase back: "So what I'm hearing is..." This confirms understanding AND signals respect. Ask one clarifying question — not five. Depth over breadth.</div>
-            </div>
-          </div>
-          <div class="tip-item" onclick="toggleTip(this)">
-            <div class="tip-num">L4</div>
-            <div>
-              <div><strong>Acknowledge Emotion</strong></div>
-              <div class="tip-detail">Name what you sense: "That sounds frustrating." This validates the person before you solve the problem. People who feel heard are 4x more likely to accept difficult news constructively.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div style="background:var(--surface2);border-radius:16px;padding:2rem;border:1px solid var(--border);">
-          <div class="slide-tag" style="margin-bottom:1rem">Communication Impact</div>
-          <div class="stat-bars">
-            <div class="stat-bar-item">
-              <div class="stat-bar-label">Verbal Words <span>7%</span></div>
-              <div class="stat-bar-track"><div class="stat-bar-fill" style="--target-w:7%"></div></div>
-            </div>
-            <div class="stat-bar-item">
-              <div class="stat-bar-label">Tone of Voice <span>38%</span></div>
-              <div class="stat-bar-track"><div class="stat-bar-fill" style="--target-w:38%"></div></div>
-            </div>
-            <div class="stat-bar-item">
-              <div class="stat-bar-label">Body Language <span>55%</span></div>
-              <div class="stat-bar-track"><div class="stat-bar-fill" style="--target-w:55%"></div></div>
-            </div>
-          </div>
-          <p style="font-size:0.72rem;color:var(--muted);margin-top:1rem;line-height:1.6;">
-            Mehrabian's model: when tone and words conflict, listeners rely primarily on <strong style="color:var(--text)">nonverbal signals</strong> to judge meaning.
-          </p>
-          <div style="margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid var(--border);">
-            <div class="slide-tag" style="margin-bottom:0.8rem">Key Takeaway</div>
-            <p style="font-size:0.82rem;line-height:1.6;color:var(--muted);">
-              <strong style="color:var(--accent2)">93%</strong> of communication is delivered through how you say something — not the words you choose. Mastering active listening means tuning into the full signal.
+  <!-- CONTENT AREA + VERTICAL NAV -->
+  <div class="content-area">
+
+    <!-- SLIDES -->
+    <div class="slides-wrapper">
+
+      <!-- SLIDE 1: WELCOME -->
+      <div class="slide active" data-slide="1">
+        <div class="bg-deco" style="width:500px;height:500px;background:radial-gradient(circle,rgba(245,197,24,0.06) 0%,transparent 65%);top:-150px;right:-80px;"></div>
+        <div class="two-col" style="align-items:center">
+          <div>
+            <h1 class="slide-h1">The Art of<br><span class="hi">Effective</span><br>Communication</h1>
+            <p class="slide-body">
+              Communication is the <strong>single most critical skill</strong> in any workplace. Studies show poor communication costs businesses an average of <strong>$62.4 million per year</strong> in lost productivity.<br><br>
+              In this course, you'll learn to listen actively, speak with clarity, navigate difficult conversations, and connect more meaningfully with your team.
             </p>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SLIDE 4: SCENARIO Q1 -->
-  <div class="slide slide-scroll" data-slide="4">
-    <div class="slide-tag">Scenario Check</div>
-    <h2 class="slide-h2">What Would <span class="hi">You Do?</span></h2>
-    <div class="scenario-box">
-      <strong>Situation:</strong> During a team meeting, your colleague Maya starts sharing concerns about the new project timeline. While she's talking, you realize you have a strong rebuttal ready. What do you do?
-    </div>
-    <div class="choice-list" id="q1-choices">
-      <div class="choice-btn" onclick="answerQ('q1',this,'wrong')">
-        <div class="choice-label">A</div>
-        Interrupt Maya with your rebuttal to keep the meeting on schedule.
-      </div>
-      <div class="choice-btn" onclick="answerQ('q1',this,'wrong')">
-        <div class="choice-label">B</div>
-        Start drafting your response mentally while Maya is still talking.
-      </div>
-      <div class="choice-btn" onclick="answerQ('q1',this,'correct')">
-        <div class="choice-label">C</div>
-        Let Maya finish, then ask one clarifying question before sharing your perspective.
-      </div>
-      <div class="choice-btn" onclick="answerQ('q1',this,'wrong')">
-        <div class="choice-label">D</div>
-        Wait for Maya to finish, then immediately deliver your prepared rebuttal.
-      </div>
-    </div>
-    <div class="feedback-box good" id="q1-good">
-      ✅ <strong>Excellent!</strong> Letting Maya finish and asking a clarifying question first demonstrates active listening. It ensures you fully understand her concern before responding — and makes Maya feel heard, which increases receptivity to your perspective.
-    </div>
-    <div class="feedback-box bad" id="q1-bad">
-      ❌ <strong>Not quite.</strong> This approach prioritizes your response over understanding Maya's concern. Even well-intentioned interruptions or premature rebuttals signal that you've stopped listening — which often escalates tension rather than resolving it.
-    </div>
-  </div>
-
-  <!-- SLIDE 5: CLARITY & MESSAGE STRUCTURE -->
-  <div class="slide" data-slide="5" style="flex-direction:row;align-items:stretch;padding:0;overflow:hidden;">
-    <!-- Left column: scrolls independently -->
-    <div style="flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:1.8rem 1.5rem 1.8rem 3rem;scrollbar-width:thin;scrollbar-color:rgba(37,99,235,0.2) transparent;">
-      <div class="slide-tag">Clarity & Structure</div>
-      <h2 class="slide-h2">Structure Your<br><span class="hi">Message</span> to Land</h2>
-      <p class="slide-body" style="margin-bottom:1.2rem">Clear communication isn't about saying more — it's about saying the <strong>right things in the right order</strong>. Use the PREP framework for any high-stakes message.</p>
-      <div class="card-grid-2">
-        <div class="info-card" onclick="revealCard(this)" style="border-top:2px solid var(--accent)">
-          <span class="card-icon">📌</span>
-          <div class="card-title">P — Point</div>
-          <div class="card-hint">↗ Click to reveal</div>
-          <div class="card-body">Lead with your main point. Don't bury the lede. "I recommend we delay the launch by two weeks." State it first, justify it after.</div>
-        </div>
-        <div class="info-card" onclick="revealCard(this)" style="border-top:2px solid var(--accent2)">
-          <span class="card-icon">🔍</span>
-          <div class="card-title">R — Reason</div>
-          <div class="card-hint">↗ Click to reveal</div>
-          <div class="card-body">Give the one most compelling reason. Not five. One strong reason is more persuasive than a list. "Because QA found 3 critical bugs that affect checkout."</div>
-        </div>
-        <div class="info-card" onclick="revealCard(this)" style="border-top:2px solid var(--accent3)">
-          <span class="card-icon">📊</span>
-          <div class="card-title">E — Evidence</div>
-          <div class="card-hint">↗ Click to reveal</div>
-          <div class="card-body">Support with one concrete data point or example. "In the last launch with similar bugs, we saw a 34% cart abandonment spike in week one."</div>
-        </div>
-        <div class="info-card" onclick="revealCard(this)" style="border-top:2px solid #a84ff7">
-          <span class="card-icon">🔁</span>
-          <div class="card-title">P — Point (Again)</div>
-          <div class="card-hint">↗ Click to reveal</div>
-          <div class="card-body">Circle back to your point, now with a call to action. "So I'd like us to agree on a two-week buffer today." This creates a memorable, action-oriented close.</div>
-        </div>
-      </div>
-    </div>
-    <!-- Right column: fixed height, never scrolls, never moves -->
-    <div style="width:42%;flex-shrink:0;padding:1.8rem 3rem 1.8rem 1.5rem;display:flex;align-items:flex-start;">
-      <div style="background:var(--surface2);border-radius:16px;padding:2rem;border:1px solid var(--border);width:100%;">
-        <div class="slide-tag" style="margin-bottom:1rem">Communication Principles</div>
-        <div class="v-timeline">
-          <div class="v-tl-item" onclick="toggleTL(this)">
-            <div class="tl-dot-col"><div class="tl-dot">✂️</div></div>
-            <div class="tl-content">
-              <div class="tl-title">Edit Ruthlessly</div>
-              <div class="tl-detail">If your email is over 5 sentences, it needs editing — not more sentences. Ask: "Can I cut 30% without losing meaning?" Usually, yes.</div>
-            </div>
-          </div>
-          <div class="v-tl-item" onclick="toggleTL(this)">
-            <div class="tl-dot-col"><div class="tl-dot">🎯</div></div>
-            <div class="tl-content">
-              <div class="tl-title">One Ask Per Message</div>
-              <div class="tl-detail">Multiple requests dilute urgency. "Can you review the doc AND confirm the meeting AND update the tracker?" → One gets done. One ask per message.</div>
-            </div>
-          </div>
-          <div class="v-tl-item" onclick="toggleTL(this)">
-            <div class="tl-dot-col"><div class="tl-dot">📅</div></div>
-            <div class="tl-content">
-              <div class="tl-title">Specify Deadlines</div>
-              <div class="tl-detail">"ASAP" is not a deadline. "By Thursday 5pm" is. Vague timelines create anxiety and missed expectations — specific ones create accountability.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SLIDE 6: NONVERBAL HOTSPOT -->
-  <div class="slide slide-scroll" data-slide="6">
-    <div class="slide-tag">Nonverbal Communication</div>
-    <div class="two-col-wide">
-      <div>
-        <h2 class="slide-h2">Your Body<br><span class="hi">Speaks</span> Volumes</h2>
-        <p class="slide-body" style="margin-bottom:1.2rem">In this virtual meeting scene, click each person to reveal how their nonverbal communication is affecting the conversation.</p>
-        <div class="hotspot-img">
-          <div class="hotspot-canvas">
-            <div class="meeting-scene">
-              <div class="person-fig" onclick="toggleHS(this)">
-                <div class="person-head">
-                  👩
-                  <div class="hs-badge">!</div>
+          <div>
+            <div class="hero-accent">
+              <div class="slide-tag" style="color:var(--yellow);margin-bottom:1rem">What you'll learn</div>
+              <div class="v-timeline">
+                <div class="v-tl-item" onclick="toggleTL(this)">
+                  <div class="tl-dot">🗣️</div>
+                  <div class="tl-content">
+                    <div class="tl-title" style="color:rgba(255,255,255,0.9)">Active Listening</div>
+                    <div class="tl-detail" style="color:rgba(255,255,255,0.55)">Go beyond hearing — truly understand what colleagues communicate verbally and nonverbally.</div>
+                  </div>
                 </div>
-                <div class="person-body" style="background:rgba(79,142,247,0.15)">SPEAKER</div>
-                <div class="hs-tooltip">
-                  <strong style="color:var(--accent)">Sarah — Presenter</strong><br>
-                  Leaning forward, open palms, steady eye contact. Signals: confidence, openness, engagement. ✅
+                <div class="v-tl-item" onclick="toggleTL(this)">
+                  <div class="tl-dot">✏️</div>
+                  <div class="tl-content">
+                    <div class="tl-title" style="color:rgba(255,255,255,0.9)">Clarity &amp; Brevity</div>
+                    <div class="tl-detail" style="color:rgba(255,255,255,0.55)">Structure ideas to be understood quickly — without over-explaining or under-informing.</div>
+                  </div>
                 </div>
-              </div>
-              <div class="person-fig" onclick="toggleHS(this)">
-                <div class="person-head">
-                  👨
-                  <div class="hs-badge" style="background:var(--danger)">!</div>
+                <div class="v-tl-item" onclick="toggleTL(this)">
+                  <div class="tl-dot">🤚</div>
+                  <div class="tl-content">
+                    <div class="tl-title" style="color:rgba(255,255,255,0.9)">Nonverbal Signals</div>
+                    <div class="tl-detail" style="color:rgba(255,255,255,0.55)">Discover how body language, eye contact, and tone shape every message you send.</div>
+                  </div>
                 </div>
-                <div class="person-body" style="background:rgba(247,90,79,0.1)">DISTRACTED</div>
-                <div class="hs-tooltip">
-                  <strong style="color:var(--danger)">Mark — Attendee</strong><br>
-                  Arms crossed, eyes down, slouching. Signals: disengagement or disagreement — even if unintentional. ⚠️
-                </div>
-              </div>
-              <div class="person-fig" onclick="toggleHS(this)">
-                <div class="person-head">
-                  👩‍💼
-                  <div class="hs-badge" style="background:var(--accent3)">!</div>
-                </div>
-                <div class="person-body" style="background:rgba(79,247,168,0.1)">ENGAGED</div>
-                <div class="hs-tooltip">
-                  <strong style="color:var(--accent3)">Priya — Listener</strong><br>
-                  Nodding, taking notes, slight forward lean. Signals: active listening, respect for speaker. ✅
-                </div>
-              </div>
-              <div class="person-fig" onclick="toggleHS(this)">
-                <div class="person-head">
-                  🧑
-                  <div class="hs-badge" style="background:var(--accent2)">!</div>
-                </div>
-                <div class="person-body" style="background:rgba(247,200,79,0.1)">NERVOUS</div>
-                <div class="hs-tooltip">
-                  <strong style="color:var(--accent2)">Alex — New Hire</strong><br>
-                  Tight smile, stiff posture, minimal expression. Signals: discomfort or uncertainty — needs psychological safety. 💛
+                <div class="v-tl-item" onclick="toggleTL(this)">
+                  <div class="tl-dot">🔥</div>
+                  <div class="tl-content">
+                    <div class="tl-title" style="color:rgba(255,255,255,0.9)">Difficult Conversations</div>
+                    <div class="tl-detail" style="color:rgba(255,255,255,0.55)">Practical frameworks for feedback, conflict, and high-stakes dialogue that preserve relationships.</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
-      <div>
-        <div style="background:var(--surface2);border-radius:16px;padding:1.8rem;border:1px solid var(--border)">
-          <div class="slide-tag" style="margin-bottom:1rem">Key Nonverbal Signals</div>
-          <div class="tips-list">
-            <div class="tip-item" onclick="toggleTip(this)">
-              <div class="tip-num">👁️</div>
-              <div>
-                <div><strong>Eye Contact</strong></div>
-                <div class="tip-detail">Aim for 60–70% eye contact when speaking. Too little signals insecurity; too much can feel confrontational. In video calls, look at the camera — not the screen.</div>
+
+      <!-- SLIDE 2: WHY IT MATTERS -->
+      <div class="slide slide-scroll" data-slide="2">
+        <div class="slide-tag">The Business Case</div>
+        <h2 class="slide-h2">Why Communication <span class="hi">Breaks Down</span></h2>
+        <p class="slide-body" style="margin-bottom:1.2rem">These are the most common barriers that silently derail workplace communication. <strong>Click each card to explore.</strong></p>
+        <div class="card-grid">
+          <div class="info-card" onclick="revealCard(this)">
+            <span class="card-icon">🎧</span>
+            <div class="card-title">Selective Listening</div>
+            <div class="card-body">We hear roughly 25% of what's said, filling gaps with our own assumptions. In meetings, this creates misaligned expectations and missed action items — costing hours of rework.</div>
+          </div>
+          <div class="info-card" onclick="revealCard(this)">
+            <span class="card-icon">📱</span>
+            <div class="card-title">Digital Overload</div>
+            <div class="card-body">The average employee sends 40+ emails and checks Slack 60+ times a day. Fragmented channels mean context gets lost, tone is misread, and urgency signals blur.</div>
+          </div>
+          <div class="info-card" onclick="revealCard(this)">
+            <span class="card-icon">🌐</span>
+            <div class="card-title">Cultural Assumptions</div>
+            <div class="card-body">Directness, silence, and eye contact mean different things across cultures. What reads as confident in one culture can seem aggressive or dismissive in another.</div>
+          </div>
+          <div class="info-card" onclick="revealCard(this)">
+            <span class="card-icon">🧠</span>
+            <div class="card-title">Cognitive Bias</div>
+            <div class="card-body">Confirmation bias makes us hear what we expect. Attribution errors make us assume bad intent. Both sabotage productive dialogue before it even starts.</div>
+          </div>
+          <div class="info-card" onclick="revealCard(this)">
+            <span class="card-icon">😰</span>
+            <div class="card-title">Fear of Speaking Up</div>
+            <div class="card-body">Psychological safety is the #1 predictor of team performance (Google's Project Aristotle). When people fear judgment, critical information stays silent — until it becomes a crisis.</div>
+          </div>
+          <div class="info-card" onclick="revealCard(this)">
+            <span class="card-icon">🔇</span>
+            <div class="card-title">Feedback Avoidance</div>
+            <div class="card-body">70% of employees report they don't receive enough feedback. Without it, people operate on assumptions about their performance — leading to disengagement and turnover.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: ACTIVE LISTENING -->
+      <div class="slide slide-scroll" data-slide="3">
+        <div class="slide-tag">Active Listening</div>
+        <div class="two-col-wide">
+          <div>
+            <h2 class="slide-h2">Listen to <span class="hi">Understand</span>,<br>Not to Reply</h2>
+            <p class="slide-body">Active listening isn't passive silence — it's an intentional practice. <strong>Click each level to explore.</strong></p>
+            <div class="tips-list" style="margin-top:1rem">
+              <div class="tip-item" onclick="toggleTip(this)">
+                <div class="tip-num">L1</div>
+                <div>
+                  <div><strong>Pay Full Attention</strong></div>
+                  <div class="tip-detail">Put your phone face-down. Close unneeded tabs. Make eye contact. Signal with your body that this conversation matters. Research shows undivided attention increases information retention by 60%.</div>
+                </div>
+              </div>
+              <div class="tip-item" onclick="toggleTip(this)">
+                <div class="tip-num">L2</div>
+                <div>
+                  <div><strong>Withhold Judgment</strong></div>
+                  <div class="tip-detail">Let the speaker finish before forming a response. Notice when you're mentally drafting a reply — that's the moment to refocus on their words. The pause between listening and responding is where understanding lives.</div>
+                </div>
+              </div>
+              <div class="tip-item" onclick="toggleTip(this)">
+                <div class="tip-num">L3</div>
+                <div>
+                  <div><strong>Reflect &amp; Clarify</strong></div>
+                  <div class="tip-detail">Paraphrase back: "So what I'm hearing is..." This confirms understanding AND signals respect. Ask one clarifying question — not five. Depth over breadth.</div>
+                </div>
+              </div>
+              <div class="tip-item" onclick="toggleTip(this)">
+                <div class="tip-num">L4</div>
+                <div>
+                  <div><strong>Acknowledge Emotion</strong></div>
+                  <div class="tip-detail">Name what you sense: "That sounds frustrating." This validates the person before you solve the problem. People who feel heard are 4x more likely to accept difficult news constructively.</div>
+                </div>
               </div>
             </div>
-            <div class="tip-item" onclick="toggleTip(this)">
-              <div class="tip-num">🤲</div>
-              <div>
-                <div><strong>Open Posture</strong></div>
-                <div class="tip-detail">Uncrossed arms, slight forward lean, and open palms signal receptivity. These cues are processed subconsciously — before you say a word.</div>
+          </div>
+          <div>
+            <div class="hero-accent">
+              <div class="slide-tag" style="color:var(--yellow);margin-bottom:1rem">Communication Impact</div>
+              <div class="stat-bars">
+                <div class="stat-bar-item">
+                  <div class="stat-bar-label">Verbal Words <span>7%</span></div>
+                  <div class="stat-bar-track"><div class="stat-bar-fill" style="--target-w:7%;animation-delay:0.3s"></div></div>
+                </div>
+                <div class="stat-bar-item">
+                  <div class="stat-bar-label">Tone of Voice <span>38%</span></div>
+                  <div class="stat-bar-track"><div class="stat-bar-fill" style="--target-w:38%;animation-delay:0.55s"></div></div>
+                </div>
+                <div class="stat-bar-item">
+                  <div class="stat-bar-label">Body Language <span>55%</span></div>
+                  <div class="stat-bar-track"><div class="stat-bar-fill" style="--target-w:55%;animation-delay:0.8s"></div></div>
+                </div>
+              </div>
+              <p style="font-size:0.71rem;color:rgba(255,255,255,0.45);margin-top:1rem;line-height:1.6;">Mehrabian's model: when tone and words conflict, listeners rely primarily on <strong style="color:rgba(255,255,255,0.8)">nonverbal signals</strong> to judge meaning.</p>
+              <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--navy-border)">
+                <div class="slide-tag" style="color:var(--yellow);margin-bottom:0.5rem">Key Takeaway</div>
+                <p style="font-size:0.8rem;line-height:1.65;color:rgba(255,255,255,0.6)"><strong style="color:var(--yellow)">93%</strong> of communication is delivered through how you say something — not the words. Mastering active listening means tuning into the full signal.</p>
               </div>
             </div>
-            <div class="tip-item" onclick="toggleTip(this)">
-              <div class="tip-num">🎙️</div>
-              <div>
-                <div><strong>Pace & Pause</strong></div>
-                <div class="tip-detail">Slow down when making key points. Strategic pauses signal confidence and give listeners time to absorb information. Rushing signals anxiety.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: SCENARIO Q1 -->
+      <div class="slide slide-scroll" data-slide="4">
+        <div class="slide-tag">Scenario Check</div>
+        <div class="two-col">
+          <div>
+            <h2 class="slide-h2">What Would <span class="hi">You Do?</span></h2>
+            <div class="scenario-box">
+              <strong>Situation:</strong> During a team meeting, your colleague Maya starts sharing concerns about the new project timeline. While she's talking, you realize you have a strong rebuttal ready. What do you do?
+            </div>
+            <div class="choice-list" id="q1-choices">
+              <div class="choice-btn" onclick="answerQ('q1',this,'wrong')">
+                <div class="choice-label">A</div>
+                Interrupt Maya with your rebuttal to keep the meeting on schedule.
+              </div>
+              <div class="choice-btn" onclick="answerQ('q1',this,'wrong')">
+                <div class="choice-label">B</div>
+                Start drafting your response mentally while Maya is still talking.
+              </div>
+              <div class="choice-btn" onclick="answerQ('q1',this,'correct')">
+                <div class="choice-label">C</div>
+                Let Maya finish, then ask one clarifying question before sharing your perspective.
+              </div>
+              <div class="choice-btn" onclick="answerQ('q1',this,'wrong')">
+                <div class="choice-label">D</div>
+                Wait for Maya to finish, then immediately deliver your prepared rebuttal.
+              </div>
+            </div>
+            <div class="feedback-box good" id="q1-good">✅ <strong>Excellent!</strong> Letting Maya finish and asking a clarifying question demonstrates active listening. It ensures you fully understand her concern before responding — and makes Maya feel heard, which increases receptivity to your perspective.</div>
+            <div class="feedback-box bad" id="q1-bad">❌ <strong>Not quite.</strong> This approach prioritizes your response over understanding Maya's concern. Even well-intentioned interruptions or premature rebuttals signal that you've stopped listening — which often escalates tension.</div>
+          </div>
+          <div>
+            <div class="hero-accent" style="margin-top:0">
+              <div class="slide-tag" style="color:var(--yellow);margin-bottom:0.8rem">Why it matters</div>
+              <p style="font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:1rem">The best communicators resist the urge to respond immediately. They create a pause — and that pause builds trust.</p>
+              <div style="background:rgba(245,197,24,0.08);border:1px solid rgba(245,197,24,0.2);border-radius:10px;padding:1rem;">
+                <div style="font-size:1.4rem;margin-bottom:0.4rem">⏸️</div>
+                <div style="font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:0.3rem">The Strategic Pause</div>
+                <div style="font-size:0.75rem;color:rgba(255,255,255,0.55);line-height:1.6">Taking 2–3 seconds before responding signals thoughtfulness, not weakness. It's one of the most powerful tools in difficult conversations.</div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- SLIDE 7: SCENARIO Q2 (SORT/RANK) -->
-  <div class="slide slide-scroll" data-slide="7">
-    <div class="slide-tag">Drag to Rank</div>
-    <h2 class="slide-h2">Rank the <span class="hi">Feedback Steps</span></h2>
-    <p class="slide-body" style="margin-bottom:0.5rem">You need to give constructive feedback to a team member whose reports are often late. Drag the steps into the correct order, then check your answer.</p>
-    <div class="sort-instructions">⠿ Drag items to reorder</div>
-    <div class="sort-container" id="sort-list">
-      <div class="sort-item" draggable="true" data-correct="3">
-        <span class="grip">⠿</span>
-        <div class="rank">?</div>
-        Describe the specific behavior: "Your last three reports were submitted 2+ days late."
-      </div>
-      <div class="sort-item" draggable="true" data-correct="1">
-        <span class="grip">⠿</span>
-        <div class="rank">?</div>
-        Choose a private, calm setting — not in front of the team.
-      </div>
-      <div class="sort-item" draggable="true" data-correct="5">
-        <span class="grip">⠿</span>
-        <div class="rank">?</div>
-        Agree on a concrete action plan with a clear deadline.
-      </div>
-      <div class="sort-item" draggable="true" data-correct="4">
-        <span class="grip">⠿</span>
-        <div class="rank">?</div>
-        Invite their perspective: "What's been getting in the way?"
-      </div>
-      <div class="sort-item" draggable="true" data-correct="2">
-        <span class="grip">⠿</span>
-        <div class="rank">?</div>
-        Open with positive intent: "I want to help you succeed in this role."
-      </div>
-    </div>
-    <button class="check-sort-btn" onclick="checkSort()">Check My Answer</button>
-    <div id="sort-feedback" style="display:none;margin-top:0.8rem;font-size:0.83rem;line-height:1.6;"></div>
-  </div>
-
-  <!-- SLIDE 8: DIFFICULT CONVERSATIONS -->
-  <div class="slide slide-scroll" data-slide="8">
-    <div class="slide-tag">Difficult Conversations</div>
-    <h2 class="slide-h2">The <span class="hi">SBI</span> Framework</h2>
-    <p class="slide-body" style="margin-bottom:1.5rem">
-      Situation–Behavior–Impact (SBI) is the gold standard for delivering feedback and navigating tough conversations.
-    </p>
-    <div class="card-grid">
-      <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--accent)">
-        <span class="card-icon">📍</span>
-        <div class="card-title">S — Situation</div>
-        <div class="card-hint">↗ Click to reveal</div>
-        <div class="card-body">
-          <em style="color:var(--muted)">"During yesterday's client call..."</em><br><br>
-          Anchor the conversation to a specific time and place. Avoid "you always" or "you never" — these trigger defensiveness. Specificity signals fairness.
-        </div>
-      </div>
-      <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--accent2)">
-        <span class="card-icon">👁️</span>
-        <div class="card-title">B — Behavior</div>
-        <div class="card-hint">↗ Click to reveal</div>
-        <div class="card-body">
-          <em style="color:var(--muted)">"...you interrupted the client three times while they were explaining their concern..."</em><br><br>
-          Describe observable behavior only — not intent, not personality. "You were rude" vs. "You interrupted" — one is a label, one is a fact.
-        </div>
-      </div>
-      <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--accent3)">
-        <span class="card-icon">💥</span>
-        <div class="card-title">I — Impact</div>
-        <div class="card-hint">↗ Click to reveal</div>
-        <div class="card-body">
-          <em style="color:var(--muted)">"...and the client mentioned feeling unheard. They haven't responded to our follow-up since."</em><br><br>
-          Connect behavior to real consequences — for the team, the client, or the organization. Impact makes the conversation real and removes the sense of personal attack.
-        </div>
-      </div>
-      <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid #a84ff7">
-        <span class="card-icon">🚫</span>
-        <div class="card-title">Common Traps</div>
-        <div class="card-hint">↗ Click to reveal</div>
-        <div class="card-body">
-          Avoid the "feedback sandwich" — good/bad/good signals insincerity. Don't delay hard conversations until reviews. Don't give feedback when either person is emotionally flooded. Timing matters as much as technique.
-        </div>
-      </div>
-      <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid #f74f8e">
-        <span class="card-icon">🔁</span>
-        <div class="card-title">Receiving Feedback</div>
-        <div class="card-hint">↗ Click to reveal</div>
-        <div class="card-body">
-          Receiving feedback is a skill too. Default to "thank you" before defending. Ask: "Can you give me a specific example?" Sleep on strong emotional reactions before responding. Growth lives on the other side of discomfort.
-        </div>
-      </div>
-      <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--accent)">
-        <span class="card-icon">⚡</span>
-        <div class="card-title">Psychological Safety</div>
-        <div class="card-hint">↗ Click to reveal</div>
-        <div class="card-body">
-          The best communication happens in psychologically safe environments. As a leader or peer, you set the tone: normalize questions, celebrate admitting mistakes, and never punish candor.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SLIDE 9: SCENARIO Q3 + REFLECTION -->
-  <div class="slide slide-scroll" data-slide="9">
-    <div class="slide-tag">Final Scenario</div>
-    <div class="two-col">
-      <div>
-        <h2 class="slide-h2">Apply What<br>You've <span class="hi">Learned</span></h2>
-        <div class="scenario-box">
-          <strong>Situation:</strong> Your manager sends a Slack message: "The report you sent was not what I asked for." No further context. You feel defensive and hurt. Using SBI, how should you respond?
-        </div>
-        <div class="choice-list" id="q2-choices">
-          <div class="choice-btn" onclick="answerQ('q2',this,'wrong')">
-            <div class="choice-label">A</div>
-            Reply immediately: "I followed your exact instructions — here's the email thread."
-          </div>
-          <div class="choice-btn" onclick="answerQ('q2',this,'correct')">
-            <div class="choice-label">B</div>
-            Step away briefly, then respond: "I want to make sure I get this right. Can we connect for 10 minutes so I understand what was missing?"
-          </div>
-          <div class="choice-btn" onclick="answerQ('q2',this,'wrong')">
-            <div class="choice-label">C</div>
-            Forward the original brief to HR and CC your manager to establish a record.
-          </div>
-          <div class="choice-btn" onclick="answerQ('q2',this,'wrong')">
-            <div class="choice-label">D</div>
-            Send a detailed rebuttal explaining each section of the report and your reasoning.
-          </div>
-        </div>
-        <div class="feedback-box good" id="q2-good">
-          ✅ <strong>Perfect.</strong> You regulated your emotions first. Then you responded with curiosity — not defensiveness. Requesting a quick sync opens dialogue and gathers the context you need to actually fix the issue. This is SBI in reverse: you're creating a safe space for your manager to specify the Behavior and Impact.
-        </div>
-        <div class="feedback-box bad" id="q2-bad">
-          ❌ <strong>Think again.</strong> Reacting from an emotional state — or escalating immediately — closes dialogue and damages trust. The goal is understanding, not winning. What information do you actually need to move forward?
-        </div>
-      </div>
-      <div>
-        <div style="background:var(--surface2);border-radius:16px;padding:1.8rem;border:1px solid var(--border)">
-          <div class="slide-tag" style="margin-bottom:0.8rem">Personal Reflection</div>
-          <p style="font-size:0.82rem;color:var(--muted);line-height:1.6;margin-bottom:1rem;">Think of a communication challenge you've recently faced at work. How could you apply the SBI framework or active listening principles to approach it differently?</p>
-          <div class="reflection-area">
-            <textarea placeholder="Type your reflection here... (This stays private — it's for your own growth)" rows="5"></textarea>
-          </div>
-          <p style="font-size:0.7rem;color:var(--muted);margin-top:0.6rem;font-family:'Fira Code',monospace;">🔒 Your reflection is not submitted or stored.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SLIDE 10: COURSE COMPLETION -->
-  <div class="slide" data-slide="10">
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%">
-      <div class="slide-tag" style="justify-content:center;margin-bottom:1rem">Course Complete</div>
-      <h2 class="slide-h2" style="text-align:center;margin-bottom:1.5rem">Well Done — <span class="hi">You've Finished!</span></h2>
-      <div style="background:linear-gradient(135deg,var(--surface) 0%,#e8eef8 100%);border:1px solid var(--border);border-radius:16px;padding:2rem 2.5rem;text-align:center;max-width:580px;width:100%;position:relative;overflow:hidden;">
-        <div style="position:relative;z-index:1;">
-          <div style="font-size:3rem;margin-bottom:0.6rem">🏆</div>
-          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:1.5rem;background:linear-gradient(90deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.3rem">Course Complete</div>
-          <div style="font-family:'Fira Code',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem">Effective Communication at Work · 2025</div>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;text-align:left;margin-bottom:1.5rem">
-            <div style="background:rgba(37,99,235,0.04);border:1px solid var(--border);border-radius:8px;padding:0.8rem;">
-              <div style="font-size:1.2rem;margin-bottom:0.3rem">🗣️</div>
-              <div style="font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem">Active Listening</div>
-              <div style="font-size:0.68rem;color:var(--muted);line-height:1.5">Listen to understand, not reply. Use L1–L4 framework.</div>
+      <!-- SLIDE 5: CLARITY & STRUCTURE -->
+      <div class="slide" data-slide="5" style="flex-direction:row;align-items:stretch;padding:0;overflow:hidden;">
+        <div style="flex:1;min-width:0;overflow-y:auto;overflow-x:hidden;padding:1.8rem 1.5rem 1.8rem 2.2rem;scrollbar-width:thin;scrollbar-color:rgba(245,197,24,0.2) transparent;">
+          <div class="slide-tag">Clarity &amp; Structure</div>
+          <h2 class="slide-h2">Structure Your<br><span class="hi">Message</span> to Land</h2>
+          <p class="slide-body" style="margin-bottom:1rem">Clear communication isn't about saying more — it's about saying the <strong>right things in the right order</strong>. <strong>Click each PREP card to reveal.</strong></p>
+          <div class="card-grid-2">
+            <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--accent)">
+              <span class="card-icon">📌</span>
+              <div class="card-title">P — Point</div>
+              <div class="card-body">Lead with your main point. Don't bury the lede. "I recommend we delay the launch by two weeks." State it first, justify it after.</div>
             </div>
-            <div style="background:rgba(37,99,235,0.04);border:1px solid var(--border);border-radius:8px;padding:0.8rem;">
-              <div style="font-size:1.2rem;margin-bottom:0.3rem">📌</div>
-              <div style="font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem">PREP Framework</div>
-              <div style="font-size:0.68rem;color:var(--muted);line-height:1.5">Point → Reason → Evidence → Point.</div>
+            <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--yellow-dk)">
+              <span class="card-icon">🔍</span>
+              <div class="card-title">R — Reason</div>
+              <div class="card-body">Give the one most compelling reason. Not five. One strong reason is more persuasive than a list. "Because QA found 3 critical bugs that affect checkout."</div>
             </div>
-            <div style="background:rgba(37,99,235,0.04);border:1px solid var(--border);border-radius:8px;padding:0.8rem;">
-              <div style="font-size:1.2rem;margin-bottom:0.3rem">⚡</div>
-              <div style="font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:600;margin-bottom:0.2rem">SBI Feedback</div>
-              <div style="font-size:0.68rem;color:var(--muted);line-height:1.5">Situation → Behavior → Impact.</div>
+            <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--teal)">
+              <span class="card-icon">📊</span>
+              <div class="card-title">E — Evidence</div>
+              <div class="card-body">Support with one concrete data point or example. "In the last launch with similar bugs, we saw a 34% cart abandonment spike in week one."</div>
+            </div>
+            <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--purple)">
+              <span class="card-icon">🔁</span>
+              <div class="card-title">P — Point (Again)</div>
+              <div class="card-body">Circle back to your point, now with a call to action. "So I'd like us to agree on a two-week buffer today." This creates a memorable, action-oriented close.</div>
             </div>
           </div>
-          <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(79,247,168,0.1);border:1px solid rgba(79,247,168,0.3);border-radius:100px;padding:0.4rem 1.2rem;font-family:'Fira Code',monospace;font-size:0.63rem;color:var(--accent3);letter-spacing:0.1em;text-transform:uppercase;">
-            ✅ &nbsp; Completed · Effective Communication at Work
+        </div>
+        <div style="width:42%;flex-shrink:0;padding:1.8rem 2rem 1.8rem 1.5rem;display:flex;align-items:flex-start;background:var(--surface)">
+          <div class="white-panel" style="width:100%">
+            <div class="slide-tag" style="margin-bottom:1rem">Communication Principles</div>
+            <div class="v-timeline">
+              <div class="v-tl-item" onclick="toggleTL(this)">
+                <div class="tl-dot">✂️</div>
+                <div class="tl-content">
+                  <div class="tl-title">Edit Ruthlessly</div>
+                  <div class="tl-detail">If your email is over 5 sentences, it needs editing — not more sentences. Ask: "Can I cut 30% without losing meaning?" Usually, yes.</div>
+                </div>
+              </div>
+              <div class="v-tl-item" onclick="toggleTL(this)">
+                <div class="tl-dot">🎯</div>
+                <div class="tl-content">
+                  <div class="tl-title">One Ask Per Message</div>
+                  <div class="tl-detail">Multiple requests dilute urgency. "Can you review the doc AND confirm the meeting AND update the tracker?" → One gets done. One ask per message.</div>
+                </div>
+              </div>
+              <div class="v-tl-item" onclick="toggleTL(this)">
+                <div class="tl-dot">📅</div>
+                <div class="tl-content">
+                  <div class="tl-title">Specify Deadlines</div>
+                  <div class="tl-detail">"ASAP" is not a deadline. "By Thursday 5pm" is. Vague timelines create anxiety — specific ones create accountability.</div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:1rem;padding-top:0.75rem;border-top:1px solid var(--border);text-align:right;">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--muted);letter-spacing:0.06em;">👆 Click each principle to expand</span>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- SLIDE 6: NONVERBAL HOTSPOT -->
+      <div class="slide slide-scroll" data-slide="6">
+        <div class="slide-tag">Nonverbal Communication</div>
+        <div class="two-col-wide">
+          <div>
+            <h2 class="slide-h2">Your Body<br><span class="hi">Speaks</span> Volumes</h2>
+            <p class="slide-body" style="margin-bottom:1rem">In this virtual meeting scene, <strong>click each person</strong> to reveal how their nonverbal communication affects the conversation.</p>
+            <div>
+              <div class="hotspot-canvas">
+                <div class="meeting-scene">
+                  <div class="person-fig" onclick="toggleHS(this)">
+                    <div class="person-head">👩<div class="hs-badge">!</div></div>
+                    <div class="person-body" style="background:rgba(26,92,248,0.15)">SPEAKER</div>
+                    <div class="hs-tooltip"><strong>Sarah — Presenter</strong><br>Leaning forward, open palms, steady eye contact. Signals: confidence, openness, engagement. ✅</div>
+                  </div>
+                  <div class="person-fig" onclick="toggleHS(this)">
+                    <div class="person-head">👨<div class="hs-badge" style="background:var(--rose)">!</div></div>
+                    <div class="person-body" style="background:rgba(255,107,107,0.1)">DISTRACTED</div>
+                    <div class="hs-tooltip"><strong style="color:var(--rose)">Mark — Attendee</strong><br>Arms crossed, eyes down, slouching. Signals: disengagement or disagreement — even if unintentional. ⚠️</div>
+                  </div>
+                  <div class="person-fig" onclick="toggleHS(this)">
+                    <div class="person-head">👩‍💼<div class="hs-badge" style="background:var(--teal)">!</div></div>
+                    <div class="person-body" style="background:rgba(0,201,167,0.1)">ENGAGED</div>
+                    <div class="hs-tooltip"><strong style="color:var(--teal)">Priya — Listener</strong><br>Nodding, taking notes, slight forward lean. Signals: active listening, respect for speaker. ✅</div>
+                  </div>
+                  <div class="person-fig" onclick="toggleHS(this)">
+                    <div class="person-head">🧑<div class="hs-badge" style="background:var(--purple)">!</div></div>
+                    <div class="person-body" style="background:rgba(162,89,255,0.1)">NERVOUS</div>
+                    <div class="hs-tooltip"><strong style="color:var(--purple)">Alex — New Hire</strong><br>Tight smile, stiff posture, minimal expression. Signals: discomfort — needs psychological safety. 💛</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="white-panel">
+              <div class="slide-tag" style="margin-bottom:1rem">Key Nonverbal Signals</div>
+              <div class="tips-list">
+                <div class="tip-item" onclick="toggleTip(this)">
+                  <div class="tip-num">👁️</div>
+                  <div>
+                    <div><strong>Eye Contact</strong></div>
+                    <div class="tip-detail">Aim for 60–70% eye contact when speaking. Too little signals insecurity; too much can feel confrontational. In video calls, look at the camera — not the screen.</div>
+                  </div>
+                </div>
+                <div class="tip-item" onclick="toggleTip(this)">
+                  <div class="tip-num">🤲</div>
+                  <div>
+                    <div><strong>Open Posture</strong></div>
+                    <div class="tip-detail">Uncrossed arms, slight forward lean, and open palms signal receptivity. These cues are processed subconsciously — before you say a word.</div>
+                  </div>
+                </div>
+                <div class="tip-item" onclick="toggleTip(this)">
+                  <div class="tip-num">🎙️</div>
+                  <div>
+                    <div><strong>Pace &amp; Pause</strong></div>
+                    <div class="tip-detail">Slow down when making key points. Strategic pauses signal confidence and give listeners time to absorb information. Rushing signals anxiety.</div>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top:1rem;padding-top:0.75rem;border-top:1px solid var(--border);text-align:right;">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--muted);letter-spacing:0.06em;">👆 Click each signal to expand</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 7: DRAG TO RANK -->
+      <div class="slide slide-scroll" data-slide="7">
+        <div class="slide-tag">Drag to Rank</div>
+        <div class="two-col">
+          <div>
+            <h2 class="slide-h2">Rank the <span class="hi">Feedback Steps</span></h2>
+            <p class="slide-body" style="margin-bottom:0.5rem">You need to give constructive feedback to a team member whose reports are often late. <strong>Drag the steps into the correct order</strong>, then check your answer.</p>
+            <div class="sort-instructions">⠿ Drag items to reorder</div>
+            <div class="sort-container" id="sort-list">
+              <div class="sort-item" draggable="true" data-correct="3">
+                <span class="grip">⠿</span>
+                <div class="rank">?</div>
+                Describe the specific behavior: "Your last three reports were submitted 2+ days late."
+              </div>
+              <div class="sort-item" draggable="true" data-correct="1">
+                <span class="grip">⠿</span>
+                <div class="rank">?</div>
+                Choose a private, calm setting — not in front of the team.
+              </div>
+              <div class="sort-item" draggable="true" data-correct="5">
+                <span class="grip">⠿</span>
+                <div class="rank">?</div>
+                Agree on a concrete action plan with a clear deadline.
+              </div>
+              <div class="sort-item" draggable="true" data-correct="4">
+                <span class="grip">⠿</span>
+                <div class="rank">?</div>
+                Invite their perspective: "What's been getting in the way?"
+              </div>
+              <div class="sort-item" draggable="true" data-correct="2">
+                <span class="grip">⠿</span>
+                <div class="rank">?</div>
+                Open with positive intent: "I want to help you succeed in this role."
+              </div>
+            </div>
+            <button class="check-sort-btn" onclick="checkSort()">✓ Check My Answer</button>
+            <div id="sort-feedback" style="display:none;margin-top:0.8rem;font-size:0.83rem;line-height:1.6;"></div>
+          </div>
+          <div>
+            <div class="hero-accent">
+              <div class="slide-tag" style="color:var(--yellow);margin-bottom:0.8rem">Why order matters</div>
+              <p style="font-size:0.8rem;color:rgba(255,255,255,0.6);line-height:1.7">Feedback delivery sequence determines whether someone becomes defensive or receptive. The right order builds psychological safety before introducing the difficult truth.</p>
+              <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--navy-border)">
+                <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);line-height:1.7">
+                  💡 <strong style="color:rgba(255,255,255,0.8)">Research insight:</strong> Setting a private context first increases the likelihood of a productive conversation by 3x compared to impromptu public feedback.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 8: SBI FRAMEWORK -->
+      <div class="slide slide-scroll" data-slide="8">
+        <div class="slide-tag">Difficult Conversations</div>
+        <h2 class="slide-h2">The <span class="hi">SBI</span> Framework</h2>
+        <p class="slide-body" style="margin-bottom:1.2rem">Situation–Behavior–Impact (SBI) is the gold standard for feedback and tough conversations. <strong>Click each card to reveal.</strong></p>
+        <div class="card-grid">
+          <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--accent)">
+            <span class="card-icon">📍</span>
+            <div class="card-title">S — Situation</div>
+            <div class="card-body"><em style="color:var(--muted)">"During yesterday's client call..."</em><br><br>Anchor the conversation to a specific time and place. Avoid "you always" or "you never" — these trigger defensiveness. Specificity signals fairness.</div>
+          </div>
+          <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--yellow-dk)">
+            <span class="card-icon">👁️</span>
+            <div class="card-title">B — Behavior</div>
+            <div class="card-body"><em style="color:var(--muted)">"...you interrupted the client three times while they were explaining their concern..."</em><br><br>Describe observable behavior only — not intent, not personality. "You were rude" vs. "You interrupted" — one is a label, one is a fact.</div>
+          </div>
+          <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--teal)">
+            <span class="card-icon">💥</span>
+            <div class="card-title">I — Impact</div>
+            <div class="card-body"><em style="color:var(--muted)">"...the client mentioned feeling unheard. They haven't responded since."</em><br><br>Connect behavior to real consequences — for the team, the client, or the organization. Impact makes the conversation real and removes the sense of personal attack.</div>
+          </div>
+          <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--rose)">
+            <span class="card-icon">🚫</span>
+            <div class="card-title">Common Traps</div>
+            <div class="card-body">Avoid the "feedback sandwich" — good/bad/good signals insincerity. Don't delay hard conversations until reviews. Don't give feedback when either person is emotionally flooded. Timing matters as much as technique.</div>
+          </div>
+          <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--purple)">
+            <span class="card-icon">🔁</span>
+            <div class="card-title">Receiving Feedback</div>
+            <div class="card-body">Receiving feedback is a skill too. Default to "thank you" before defending. Ask: "Can you give me a specific example?" Sleep on strong emotional reactions before responding. Growth lives on the other side of discomfort.</div>
+          </div>
+          <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--yellow-dk)">
+            <span class="card-icon">⚡</span>
+            <div class="card-title">Psychological Safety</div>
+            <div class="card-body">The best communication happens in psychologically safe environments. As a leader or peer, you set the tone: normalize questions, celebrate admitting mistakes, and never punish candor.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 9: FINAL SCENARIO + REFLECTION -->
+      <div class="slide slide-scroll" data-slide="9">
+        <div class="slide-tag">Final Scenario</div>
+        <div class="two-col">
+          <div>
+            <h2 class="slide-h2">Apply What<br>You've <span class="hi">Learned</span></h2>
+            <div class="scenario-box">
+              <strong>Situation:</strong> Your manager sends a Slack message: "The report you sent was not what I asked for." No further context. You feel defensive and hurt. Using SBI, how should you respond?
+            </div>
+            <div class="choice-list" id="q2-choices">
+              <div class="choice-btn" onclick="answerQ('q2',this,'wrong')">
+                <div class="choice-label">A</div>
+                Reply immediately: "I followed your exact instructions — here's the email thread."
+              </div>
+              <div class="choice-btn" onclick="answerQ('q2',this,'correct')">
+                <div class="choice-label">B</div>
+                Step away briefly, then respond: "I want to make sure I get this right. Can we connect for 10 minutes so I understand what was missing?"
+              </div>
+              <div class="choice-btn" onclick="answerQ('q2',this,'wrong')">
+                <div class="choice-label">C</div>
+                Forward the original brief to HR and CC your manager to establish a record.
+              </div>
+              <div class="choice-btn" onclick="answerQ('q2',this,'wrong')">
+                <div class="choice-label">D</div>
+                Send a detailed rebuttal explaining each section of the report and your reasoning.
+              </div>
+            </div>
+            <div class="feedback-box good" id="q2-good">✅ <strong>Perfect.</strong> You regulated your emotions first. Then you responded with curiosity — not defensiveness. Requesting a quick sync opens dialogue and gathers the context needed to fix the issue. This is SBI in reverse: creating space for your manager to specify Behavior and Impact.</div>
+            <div class="feedback-box bad" id="q2-bad">❌ <strong>Think again.</strong> Reacting from an emotional state — or escalating immediately — closes dialogue and damages trust. The goal is understanding, not winning. What information do you actually need to move forward?</div>
+          </div>
+          <div>
+            <div class="white-panel">
+              <div class="slide-tag" style="margin-bottom:0.8rem">Personal Reflection</div>
+              <p style="font-size:0.82rem;color:var(--muted);line-height:1.65;margin-bottom:0.8rem">Think of a communication challenge you've recently faced at work. How could you apply the SBI framework or active listening principles to approach it differently?</p>
+              <div class="reflection-area">
+                <textarea placeholder="Type your reflection here... (This stays private — it's for your own growth)" rows="5"></textarea>
+              </div>
+              <p style="font-size:0.67rem;color:var(--muted);margin-top:0.5rem;font-family:'JetBrains Mono',monospace">🔒 Your reflection is not submitted or stored.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 10: COMPLETION -->
+      <div class="slide" data-slide="10">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%">
+          <h2 class="slide-h2" style="text-align:center;margin-bottom:1.5rem">Well Done — <span class="hi">You've Finished!</span></h2>
+          <div class="certificate">
+            <div class="cert-inner">
+              <div class="cert-badge">🏆</div>
+              <div class="cert-title">Course Complete</div>
+              <div class="cert-sub">EFFECTIVE COMMUNICATION AT WORK</div>
+              <div class="cert-grid">
+                <div class="cert-item">
+                  <div class="ci">🗣️</div>
+                  <div class="cert-item-title">Active Listening</div>
+                  <div class="cert-item-body">Listen to understand, not reply. Use L1–L4 framework.</div>
+                </div>
+                <div class="cert-item">
+                  <div class="ci">📌</div>
+                  <div class="cert-item-title">PREP Framework</div>
+                  <div class="cert-item-body">Point → Reason → Evidence → Point.</div>
+                </div>
+                <div class="cert-item">
+                  <div class="ci">⚡</div>
+                  <div class="cert-item-title">SBI Feedback</div>
+                  <div class="cert-item-body">Situation → Behavior → Impact.</div>
+                </div>
+              </div>
+              <div class="cert-seal">✅ &nbsp; Completed · Effective Communication at Work</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /slides-wrapper -->
+
+    <!-- VERTICAL NAVIGATION (right side) -->
+    <div class="vertical-nav">
+      <button class="v-arrow-btn primary" id="prev-btn" onclick="navigate(-1)" disabled title="Previous slide">&#8593;</button>
+      <div class="nav-divider"></div>
+      <button class="v-arrow-btn primary" id="next-btn" onclick="navigate(1)" title="Next slide">&#8595;</button>
     </div>
-  </div>
 
-</div>
+  </div><!-- /content-area -->
+</div><!-- /main -->
 
-<!-- INSTRUCTION PILL — fixed bottom-right above footer -->
+<!-- INSTRUCTION PILL -->
 <div class="instruction-pill" id="instruction-pill">
-  <span class="pill-dot"></span>
-  <span class="pill-icon" id="pill-icon">👆</span>
+  <span style="font-size:0.9rem" id="pill-icon">👆</span>
   <span id="pill-text"></span>
 </div>
 
-<!-- FOOTER NAV -->
-<div class="footer-nav">
-  <button class="nav-btn" id="prev-btn" onclick="navigate(-1)" disabled>
-    ← Previous
-  </button>
-  <button class="nav-btn primary" id="next-btn" onclick="navigate(1)">
-    Next →
-  </button>
-</div>
-
 <script>
+/* ══════════════════════════════════════════
+   SOUND ENGINE (Web Audio API)
+   ══════════════════════════════════════════ */
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let _ctx = null;
+function getCtx() {
+  if (!_ctx) _ctx = new AudioCtx();
+  if (_ctx.state === 'suspended') _ctx.resume();
+  return _ctx;
+}
+
+function playTone(opts) {
+  const ctx = getCtx();
+  const { type='sine', freq=440, freq2=freq, dur=0.15, vol=0.18, attack=0.01, decay=0.05, delay=0 } = opts;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.connect(gain); gain.connect(ctx.destination);
+  osc.type = type;
+  const t = ctx.currentTime + delay;
+  osc.frequency.setValueAtTime(freq, t);
+  if (freq2 !== freq) osc.frequency.exponentialRampToValueAtTime(freq2, t + dur);
+  gain.gain.setValueAtTime(0, t);
+  gain.gain.linearRampToValueAtTime(vol, t + attack);
+  gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+  osc.start(t); osc.stop(t + dur + 0.02);
+}
+
+// Click / card reveal
+function sndClick() {
+  playTone({ type:'sine', freq:520, freq2:620, dur:0.12, vol:0.14, attack:0.008 });
+}
+// Toggle / accordion open
+function sndToggle() {
+  playTone({ type:'triangle', freq:660, freq2:780, dur:0.14, vol:0.13, attack:0.005 });
+}
+// Next button
+function sndNext() {
+  playTone({ type:'sine',   freq:440, freq2:660, dur:0.14, vol:0.18, attack:0.01 });
+  playTone({ type:'sine',   freq:550, freq2:820, dur:0.14, vol:0.14, attack:0.01, delay:0.1 });
+}
+// Previous button
+function sndPrev() {
+  playTone({ type:'sine',   freq:660, freq2:440, dur:0.14, vol:0.18, attack:0.01 });
+  playTone({ type:'sine',   freq:520, freq2:360, dur:0.14, vol:0.14, attack:0.01, delay:0.1 });
+}
+// Quiz answer
+function sndAnswer() {
+  playTone({ type:'square', freq:600, freq2:700, dur:0.1, vol:0.1, attack:0.005 });
+}
+// Victory fanfare (slide 10)
+function sndVictory() {
+  const notes = [
+    {freq:523, delay:0},    // C5
+    {freq:659, delay:0.12}, // E5
+    {freq:784, delay:0.24}, // G5
+    {freq:1047,delay:0.36}, // C6
+    {freq:784, delay:0.50}, // G5
+    {freq:1047,delay:0.60}, // C6
+  ];
+  notes.forEach(n => {
+    playTone({ type:'sine', freq:n.freq, dur:0.22, vol:0.2, attack:0.02, decay:0.08, delay:n.delay });
+    playTone({ type:'triangle', freq:n.freq*0.5, dur:0.22, vol:0.08, attack:0.02, delay:n.delay });
+  });
+}
+
+/* ══════════════════════════════════════════
+   COURSE CONTROLLER
+   ══════════════════════════════════════════ */
 const TOTAL = 10;
 let current = 1;
+const visitedSlides = new Set([1]);
 
-// ── SLIDE INSTRUCTION MESSAGES ──
-// Shown in the footer pill. Quiz slides (4,9) excluded. No instruction for slide 10.
+const SLIDE_TOPICS = {
+  1: 'Welcome & Overview',
+  2: 'Why Communication Breaks Down',
+  3: 'Active Listening',
+  4: 'Scenario Check',
+  5: 'Clarity & Structure',
+  6: 'Nonverbal Communication',
+  7: 'Rank Feedback Steps',
+  8: 'SBI Framework',
+  9: 'Final Scenario',
+  10: 'Course Completion'
+};
+
 const SLIDE_INSTRUCTIONS = {
-  1:  { icon: '👆', text: 'Click each topic to explore' },
-  2:  { icon: '👆', text: 'Click each card to explore' },
-  3:  { icon: '👆', text: 'Click each level to explore' },
-  5:  { icon: '👆', text: 'Click all cards and topics to explore' },
-  6:  { icon: '👆', text: 'Click each person and signal to explore' },
-  7:  { icon: '✥',  text: 'Drag items to reorder' },
-  8:  { icon: '👆', text: 'Click each card to explore' },
+  1: { icon: '👆', text: 'Explore each topic, then click ↓ to continue' },
 };
 
-// ── INTERACTION TRACKING (required clicks before Next unlocks) ──
 const SLIDE_REQUIRED = {
-  1: 4,   // 4 timeline items
-  2: 6,   // 6 info cards
-  3: 4,   // 4 tip items
-  5: 7,   // 4 PREP cards (left) + 3 timeline items (right)
-  6: 7,   // 4 hotspot figures (left) + 3 tip items (right)
-  7: 1,   // Check answer button
-  8: 6,   // 6 SBI cards
+  1: 4, 2: 6, 3: 4, 4: 1, 5: 7, 6: 7, 7: 1, 8: 6
 };
-// slides 4, 9 unlock on answering quiz; all others with no entry are free
 const clickTracker = {};
 const slideUnlocked = {};
 for (let i = 1; i <= TOTAL; i++) {
@@ -1458,6 +1853,7 @@ function trackClick(slideNum, key) {
   if (clickTracker[slideNum].size >= SLIDE_REQUIRED[slideNum]) {
     slideUnlocked[slideNum] = true;
     updateNextBtn();
+    updatePill();
   }
 }
 
@@ -1469,110 +1865,134 @@ function unlockSlide(slideNum) {
 function updateNextBtn() {
   const nextBtn = document.getElementById('next-btn');
   if (current === TOTAL) {
-    nextBtn.textContent = '↺ Restart';
+    nextBtn.innerHTML = '↺';
+    nextBtn.title = 'Restart';
     nextBtn.disabled = false;
     return;
   }
-  nextBtn.textContent = 'Next →';
+  nextBtn.innerHTML = '&#8595;';
+  nextBtn.title = 'Next slide';
   nextBtn.disabled = !slideUnlocked[current];
 }
 
 function updatePill() {
   const pill = document.getElementById('instruction-pill');
   const inst = SLIDE_INSTRUCTIONS[current];
-
-  // Default pill position
-  pill.style.bottom = 'calc(68px + 12px)';
-
   if (inst && !slideUnlocked[current]) {
     document.getElementById('pill-icon').textContent = inst.icon;
     document.getElementById('pill-text').textContent = inst.text;
-    if (current === 7) {
-      // Raise pill above the Check My Answer button on slide 7
-      pill.style.bottom = 'calc(68px + 60px)';
-    }
     pill.classList.add('visible');
   } else {
     pill.classList.remove('visible');
   }
 }
 
-// ── BUILD BREADCRUMBS (removed — no-op kept for safety) ──
+function updateSidebar() {
+  document.querySelectorAll('.nav-item').forEach(item => {
+    const t = parseInt(item.getAttribute('data-target'));
+    item.classList.remove('active', 'done', 'locked');
+    if (t === current) {
+      item.classList.add('active');
+    } else if (t < current || visitedSlides.has(t)) {
+      item.classList.add('done');
+    } else {
+      item.classList.add('locked');
+    }
+    const dot = item.querySelector('.nav-dot');
+    if (t === current) dot.textContent = t;
+    else if (t < current || (visitedSlides.has(t) && t !== current)) dot.textContent = '✓';
+    else dot.textContent = t;
+  });
+}
+
+let maxVisited = 1;
+let victorySoundPlayed = false;
 
 function updateUI() {
-  const curNum = document.getElementById('cur-num');
-  const totNum = document.getElementById('tot-num');
-  const progressFill = document.getElementById('progress-fill');
-  if (curNum) curNum.textContent = current;
-  if (totNum) totNum.textContent = TOTAL;
-  if (progressFill) progressFill.style.width = (current / TOTAL * 100) + '%';
-  // Hide Previous on slide 1
+  if (current > maxVisited) maxVisited = current;
+  const pct = Math.round((maxVisited / TOTAL) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('pct-label').textContent = pct + '%';
+  document.getElementById('slide-topic').textContent = SLIDE_TOPICS[current] || '';
   const prevBtn = document.getElementById('prev-btn');
   prevBtn.style.visibility = current === 1 ? 'hidden' : 'visible';
   prevBtn.disabled = current === 1;
+  if (current === TOTAL && !victorySoundPlayed) {
+    victorySoundPlayed = true;
+    setTimeout(sndVictory, 420);
+  }
   updateNextBtn();
   updatePill();
+  updateSidebar();
 }
 
+let transitioning = false;
 function goTo(n, dir) {
+  if (transitioning) return;
   const curSlide = document.querySelector('.slide.active');
   const nextSlide = document.querySelector(`.slide[data-slide="${n}"]`);
   if (!nextSlide || curSlide === nextSlide) return;
-
   const forward = (dir !== undefined) ? dir > 0 : n > current;
-  curSlide.classList.remove('active');
-  curSlide.classList.add(forward ? 'exit-left' : 'enter-right');
-  nextSlide.style.display = 'flex';
-  nextSlide.style.opacity = '0';
-  nextSlide.style.transform = forward ? 'translateX(40px)' : 'translateX(-40px)';
 
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      nextSlide.style.transition = 'opacity 0.4s ease,transform 0.4s ease';
-      nextSlide.style.opacity = '1';
-      nextSlide.style.transform = 'translateX(0)';
-      nextSlide.classList.add('active');
-      setTimeout(() => {
-        curSlide.classList.remove('exit-left', 'enter-right');
-        curSlide.style.display = 'none';
-        nextSlide.style.transition = '';
-      }, 420);
-    });
-  });
+  transitioning = true;
+  const EXIT_DUR = 350;
+  const ENTER_DUR = 380;
+
+  // Phase 1: exit current slide
+  curSlide.classList.add(forward ? 'slide-out-up' : 'slide-out-down');
+
+  setTimeout(() => {
+    curSlide.classList.remove('active', 'slide-out-up', 'slide-out-down');
+    curSlide.style.display = 'none';
+
+    // Phase 2: enter next slide
+    nextSlide.style.display = 'flex';
+    nextSlide.classList.add(forward ? 'slide-in-up' : 'slide-in-down');
+    nextSlide.classList.add('active');
+
+    setTimeout(() => {
+      nextSlide.classList.remove('slide-in-up', 'slide-in-down');
+      transitioning = false;
+    }, ENTER_DUR);
+  }, EXIT_DUR);
+
   current = n;
+  visitedSlides.add(n);
   updateUI();
 }
 
 function navigate(dir) {
+  if (dir > 0) sndNext(); else sndPrev();
   if (current + dir > TOTAL) { goTo(1, 1); return; }
   if (current + dir < 1) return;
   goTo(current + dir, dir);
 }
 
-// ── INTERACTIVE FUNCTIONS ──
+/* ── INTERACTIVE FUNCTIONS ── */
 function revealCard(el) {
+  sndClick();
   el.classList.toggle('revealed');
   const slide = el.closest('.slide');
   if (slide) {
     const sn = parseInt(slide.getAttribute('data-slide'));
-    const key = el.querySelector('.card-title') ? el.querySelector('.card-title').textContent : el.innerHTML.slice(0,20);
+    const key = el.querySelector('.card-title') ? el.querySelector('.card-title').textContent : el.innerHTML.slice(0, 20);
     trackClick(sn, key);
-    if (slideUnlocked[sn]) updatePill();
   }
 }
 
 function toggleTL(el) {
+  sndToggle();
   el.classList.toggle('open');
   const slide = el.closest('.slide');
   if (slide) {
     const sn = parseInt(slide.getAttribute('data-slide'));
     const key = el.querySelector('.tl-title') ? el.querySelector('.tl-title').textContent : Math.random();
     trackClick(sn, key);
-    if (slideUnlocked[sn]) updatePill();
   }
 }
 
 function toggleTip(el) {
+  sndToggle();
   document.querySelectorAll('.tip-item.active').forEach(t => { if (t !== el) t.classList.remove('active'); });
   el.classList.toggle('active');
   const slide = el.closest('.slide');
@@ -1580,11 +2000,11 @@ function toggleTip(el) {
     const sn = parseInt(slide.getAttribute('data-slide'));
     const key = el.querySelector('strong') ? el.querySelector('strong').textContent : Math.random();
     trackClick(sn, key);
-    if (slideUnlocked[sn]) updatePill();
   }
 }
 
 function toggleHS(el) {
+  sndClick();
   document.querySelectorAll('.person-fig.hs-open').forEach(p => { if (p !== el) p.classList.remove('hs-open'); });
   el.classList.toggle('hs-open');
   const slide = el.closest('.slide');
@@ -1592,11 +2012,11 @@ function toggleHS(el) {
     const sn = parseInt(slide.getAttribute('data-slide'));
     const key = el.querySelector('.person-body') ? el.querySelector('.person-body').textContent : Math.random();
     trackClick(sn, key);
-    if (slideUnlocked[sn]) updatePill();
   }
 }
 
 function answerQ(qid, btn, result) {
+  sndAnswer();
   const container = document.getElementById(qid + '-choices');
   if (container.querySelector('.locked')) return;
   const btns = container.querySelectorAll('.choice-btn');
@@ -1606,43 +2026,28 @@ function answerQ(qid, btn, result) {
     document.getElementById(qid + '-good').classList.add('show');
   } else {
     document.getElementById(qid + '-bad').classList.add('show');
-    btns.forEach(b => {
-      if (b.getAttribute('onclick').includes("'correct'")) b.classList.add('correct');
-    });
+    btns.forEach(b => { if (b.getAttribute('onclick').includes("'correct'")) b.classList.add('correct'); });
   }
-  // Unlock quiz slides after answering
   const slide = btn.closest('.slide');
   if (slide) unlockSlide(parseInt(slide.getAttribute('data-slide')));
   updatePill();
 }
 
-// ── DRAG TO SORT ──
+/* ── DRAG SORT ── */
 let dragSrc = null;
 function initSort() {
   const items = document.querySelectorAll('.sort-item');
   items.forEach(item => {
-    item.addEventListener('dragstart', e => {
-      dragSrc = item;
-      item.classList.add('dragging');
-      e.dataTransfer.effectAllowed = 'move';
-    });
-    item.addEventListener('dragend', () => {
-      item.classList.remove('dragging');
-      document.querySelectorAll('.sort-item').forEach(i => i.classList.remove('drag-over'));
-    });
-    item.addEventListener('dragover', e => {
-      e.preventDefault();
-      e.dataTransfer.dropEffect = 'move';
-      if (item !== dragSrc) item.classList.add('drag-over');
-    });
+    item.addEventListener('dragstart', e => { dragSrc = item; item.classList.add('dragging'); e.dataTransfer.effectAllowed = 'move'; });
+    item.addEventListener('dragend', () => { item.classList.remove('dragging'); document.querySelectorAll('.sort-item').forEach(i => i.classList.remove('drag-over')); });
+    item.addEventListener('dragover', e => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; if (item !== dragSrc) item.classList.add('drag-over'); });
     item.addEventListener('dragleave', () => item.classList.remove('drag-over'));
     item.addEventListener('drop', e => {
       e.stopPropagation();
       if (dragSrc !== item) {
         const list = document.getElementById('sort-list');
-        const items = [...list.querySelectorAll('.sort-item')];
-        const si = items.indexOf(dragSrc);
-        const ti = items.indexOf(item);
+        const its = [...list.querySelectorAll('.sort-item')];
+        const si = its.indexOf(dragSrc), ti = its.indexOf(item);
         if (si < ti) list.insertBefore(dragSrc, item.nextSibling);
         else list.insertBefore(dragSrc, item);
         updateRanks();
@@ -1652,29 +2057,30 @@ function initSort() {
   });
 }
 function updateRanks() {
-  const items = document.querySelectorAll('#sort-list .sort-item');
-  items.forEach((item, i) => { item.querySelector('.rank').textContent = i + 1; });
+  document.querySelectorAll('#sort-list .sort-item').forEach((item, i) => { item.querySelector('.rank').textContent = i + 1; });
 }
 function checkSort() {
+  sndAnswer();
   const items = [...document.querySelectorAll('#sort-list .sort-item')];
   let correct = 0;
   items.forEach((item, i) => {
     const c = parseInt(item.getAttribute('data-correct'));
     if (c === i + 1) { item.classList.add('correct-pos'); correct++; }
-    else { item.classList.remove('correct-pos'); }
+    else item.classList.remove('correct-pos');
   });
   const fb = document.getElementById('sort-feedback');
   fb.style.display = 'block';
   if (correct === 5) {
-    fb.style.cssText = 'display:block;background:rgba(79,247,168,0.1);border:1px solid rgba(79,247,168,0.3);border-radius:8px;padding:1rem;color:var(--accent3);font-size:0.83rem;margin-top:0.8rem;line-height:1.6;';
+    fb.style.cssText = 'display:block;background:rgba(0,201,167,0.08);border:1.5px solid rgba(0,201,167,0.3);border-radius:10px;padding:1rem;color:#0a6b56;font-size:0.83rem;margin-top:0.8rem;line-height:1.65;';
     fb.innerHTML = '✅ <strong>Perfect!</strong> You nailed the order: Set the tone privately → lead with positive intent → cite specific behavior → invite their perspective → agree on an action plan. This is a research-backed feedback structure that minimizes defensiveness.';
   } else {
-    fb.style.cssText = 'display:block;background:rgba(247,90,79,0.1);border:1px solid rgba(247,90,79,0.3);border-radius:8px;padding:1rem;color:#b91c1c;font-size:0.83rem;margin-top:0.8rem;line-height:1.6;';
+    fb.style.cssText = 'display:block;background:rgba(255,107,107,0.08);border:1.5px solid rgba(255,107,107,0.25);border-radius:10px;padding:1rem;color:#c0392b;font-size:0.83rem;margin-top:0.8rem;line-height:1.65;';
     fb.innerHTML = `⚠️ <strong>${correct}/5 correct.</strong> Keep trying! Hint: Always start with the environment and intent before describing behavior. The action plan always closes the loop.`;
   }
   unlockSlide(7);
   updatePill();
 }
+
 initSort();
 updateRanks();
 updateUI();
