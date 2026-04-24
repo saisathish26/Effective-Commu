@@ -12,10 +12,10 @@
    ══════════════════════════════════════════════ */
 :root {
   /* Owly Tutor palette */
-  --navy:       #0f1f3d;
-  --navy-mid:   #172845;
-  --navy-light: #1e3560;
-  --navy-border:#2a4070;
+  --navy:       #000000;
+  --navy-mid:   #111111;
+  --navy-light: #1a1a1a;
+  --navy-border:#333333;
   --yellow:     #f5c518;
   --yellow-dk:  #d9a800;
   --teal:       #00c9a7;
@@ -27,8 +27,8 @@
   --border:     #e2e8f0;
   --text:       #0d1b33;
   --muted:      #64748b;
-  --accent:     #1a5cf8;
-  --accent-grad: linear-gradient(135deg, #1a5cf8 0%, #0ea5e9 100%);
+  --accent:     #000000;
+  --accent-grad: linear-gradient(135deg, #000000 0%, #333333 100%);
   --radius:     12px;
   --sidebar-w:  240px;
 }
@@ -384,7 +384,7 @@ body {
 }
 .slide-scroll::-webkit-scrollbar { width: 4px; }
 .slide-scroll::-webkit-scrollbar-track { background: transparent; }
-.slide-scroll::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#1a5cf8,#0ea5e9); border-radius: 2px; }
+.slide-scroll::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#000000,#333333); border-radius: 2px; }
 
 /* ─────────────────────────────────────
    SLIDE TYPOGRAPHY
@@ -432,7 +432,7 @@ body {
 .slide-body {
   font-size: 0.9rem;
   line-height: 1.8;
-  color: #3d4f6e;
+  color: #1a1a1a;
   max-width: 60ch;
   margin-bottom: 0.7rem;
 }
@@ -659,13 +659,13 @@ body {
 .scenario-box {
   background: linear-gradient(135deg, rgba(26,92,248,0.06) 0%, rgba(14,165,233,0.06) 100%);
   border-left: 3px solid transparent;
-  border-image: linear-gradient(180deg,#1a5cf8,#0ea5e9) 1;
+  border-image: linear-gradient(180deg,#000000,#333333) 1;
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: 1.2rem 1.6rem;
   margin-bottom: 1.2rem;
   font-size: 0.9rem;
   line-height: 1.75;
-  color: #2d3f60;
+  color: #000000;
 }
 .scenario-box strong { color: var(--yellow-dk); }
 
