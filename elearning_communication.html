@@ -292,8 +292,9 @@ body {
   box-shadow: 0 6px 18px rgba(245,197,24,0.35);
 }
 .v-arrow-btn:disabled {
-  opacity: 0.2;
+  opacity: 0.55;
   cursor: not-allowed;
+  box-shadow: 2px 3px 8px rgba(0,0,0,0.18), 0 1px 3px rgba(0,0,0,0.12);
 }
 .v-arrow-btn.primary {
   background: var(--yellow);
@@ -313,8 +314,8 @@ body {
   background: var(--border);
   border-color: var(--border);
   color: var(--muted);
-  box-shadow: none;
-  opacity: 0.5;
+  box-shadow: 2px 3px 8px rgba(0,0,0,0.18), 0 1px 3px rgba(0,0,0,0.12);
+  opacity: 0.65;
 }
 .nav-divider {
   width: 24px;
@@ -480,6 +481,7 @@ body {
   transition: all 0.25s;
   position: relative;
   overflow: hidden;
+  box-shadow: 3px 4px 12px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06);
 }
 .info-card::after {
   content: '↗ Click to explore';
@@ -540,7 +542,7 @@ body {
   height: 320px;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  box-shadow: 6px 8px 20px rgba(0,0,0,0.13), 2px 2px 6px rgba(0,0,0,0.07);
 }
 .sbi-panel {
   display: flex;
@@ -550,23 +552,24 @@ body {
   overflow: hidden;
   position: relative;
   cursor: pointer;
+  box-shadow: 4px 6px 14px rgba(0,0,0,0.10), 1px 2px 4px rgba(0,0,0,0.06);
 }
 .sbi-panel.active {
   flex: 1 1 0%;
   cursor: default;
 }
-.sbi-panel:nth-child(1) { background: #1a1a1a; }
-.sbi-panel:nth-child(2) { background: #111; }
-.sbi-panel:nth-child(3) { background: #0d1f1b; }
-.sbi-panel:nth-child(4) { background: #1a0d0d; }
-.sbi-panel:nth-child(5) { background: #160d1f; }
-.sbi-panel:nth-child(6) { background: #1a1600; }
-.sbi-panel:nth-child(1) .sbi-label { background: #000; border-right: 3px solid var(--accent); }
-.sbi-panel:nth-child(2) .sbi-label { background: #0a0a0a; border-right: 3px solid var(--yellow-dk); }
-.sbi-panel:nth-child(3) .sbi-label { background: #071a14; border-right: 3px solid var(--teal); }
-.sbi-panel:nth-child(4) .sbi-label { background: #140707; border-right: 3px solid var(--rose); }
-.sbi-panel:nth-child(5) .sbi-label { background: #0e0714; border-right: 3px solid var(--purple); }
-.sbi-panel:nth-child(6) .sbi-label { background: #141100; border-right: 3px solid var(--yellow); }
+.sbi-panel:nth-child(1) { background: #ffffff; }
+.sbi-panel:nth-child(2) { background: #ffffff; }
+.sbi-panel:nth-child(3) { background: #ffffff; }
+.sbi-panel:nth-child(4) { background: #ffffff; }
+.sbi-panel:nth-child(5) { background: #ffffff; }
+.sbi-panel:nth-child(6) { background: #ffffff; }
+.sbi-panel:nth-child(1) .sbi-label { background: #000000; }
+.sbi-panel:nth-child(2) .sbi-label { background: #000000; }
+.sbi-panel:nth-child(3) .sbi-label { background: #000000; }
+.sbi-panel:nth-child(4) .sbi-label { background: #000000; }
+.sbi-panel:nth-child(5) .sbi-label { background: #000000; }
+.sbi-panel:nth-child(6) .sbi-label { background: #000000; }
 .sbi-label {
   writing-mode: vertical-rl;
   text-orientation: mixed;
@@ -582,9 +585,10 @@ body {
   user-select: none;
   transition: filter 0.3s;
   flex-shrink: 0;
+  border-right: 1px solid rgba(255,255,255,0.30);
 }
-.sbi-label:hover { filter: brightness(1.3); }
-.sbi-panel.active .sbi-label { filter: brightness(1.4); }
+.sbi-label:hover { filter: brightness(1.25); }
+.sbi-panel.active .sbi-label { filter: brightness(1.35); }
 .sbi-label-icon {
   font-size: 1.1rem;
   writing-mode: horizontal-tb;
@@ -597,7 +601,7 @@ body {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255,255,255,0.90);
   white-space: nowrap;
 }
 .sbi-content {
@@ -631,13 +635,13 @@ body {
 .sbi-content-title {
   font-size: 1.15rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text);
   margin-bottom: 0.8rem;
   line-height: 1.3;
 }
 .sbi-content-body {
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.8);
+  color: var(--muted);
   line-height: 1.65;
   margin: 0;
 }
@@ -645,7 +649,7 @@ body {
   margin-top: 1rem;
   padding: 0.5rem 0.8rem;
   border-left: 2px solid #4d9fff;
-  background: rgba(255,255,255,0.04);
+  background: rgba(0,0,0,0.03);
   font-size: 0.72rem;
   color: #4d9fff;
   border-radius: 0 6px 6px 0;
@@ -670,6 +674,7 @@ body {
   border-radius: var(--radius);
   padding: 1.6rem;
   border: 1.5px solid var(--border);
+  box-shadow: 4px 6px 16px rgba(0,0,0,0.08), 1px 2px 5px rgba(0,0,0,0.05);
 }
 
 /* ─────────────────────────────────────
@@ -746,6 +751,7 @@ body {
   line-height: 1.6;
   cursor: pointer;
   transition: all 0.2s;
+  box-shadow: 4px 5px 12px rgba(0,0,0,0.08), 1px 2px 4px rgba(0,0,0,0.04);
 }
 .tip-item:hover { border-color: var(--yellow); box-shadow: 0 4px 12px rgba(245,197,24,0.12); }
 .tip-item.active {
@@ -803,6 +809,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.8rem;
+  box-shadow: 4px 5px 12px rgba(0,0,0,0.08), 1px 2px 4px rgba(0,0,0,0.04);
 }
 .choice-btn:hover:not(.locked) {
   border-color: var(--yellow);
@@ -867,6 +874,7 @@ body {
   font-size: 0.86rem;
   transition: all 0.2s;
   user-select: none;
+  box-shadow: 4px 5px 12px rgba(0,0,0,0.08), 1px 2px 4px rgba(0,0,0,0.04);
 }
 .sort-item:hover { border-color: var(--yellow); }
 .sort-item.dragging { opacity: 0.38; cursor: grabbing; }
@@ -935,7 +943,7 @@ body {
   background: linear-gradient(90deg, var(--yellow), var(--teal));
   width: 0;
 }
-.slide.active .stat-bar-fill {
+.stat-bar-fill.animated {
   animation: fillBar 1.2s cubic-bezier(.4,0,.2,1) forwards;
 }
 
@@ -1034,7 +1042,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   background: var(--navy);
-  border: 1.5px solid var(--yellow);
+  border: 1.5px solid #000000;
   border-radius: 10px;
   padding: 0.8rem 1rem;
   font-size: 0.72rem;
@@ -1055,7 +1063,7 @@ body {
   top: 100%; left: 50%;
   transform: translateX(-50%);
   border: 6px solid transparent;
-  border-top-color: var(--yellow);
+  border-top-color: #000000;
 }
 
 /* ─────────────────────────────────────
@@ -1734,7 +1742,7 @@ body {
         </div>
       </div>
 
-      <!-- SLIDE 8: SBI FRAMEWORK — HORIZONTAL ACCORDION -->
+      <!-- SLIDE 8: SBI FRAMEWORK — HORIZONTAL ACCORDION (light theme) -->
       <div class="slide slide-scroll" data-slide="8">
         <div class="slide-tag">Difficult Conversations</div>
         <h2 class="slide-h2">The <span class="hi">SBI</span> Framework</h2>
@@ -1749,7 +1757,7 @@ body {
               <div class="sbi-content-inner">
                 <div class="sbi-content-tag" style="color:#4d9fff">Step 01</div>
                 <div class="sbi-content-title">Set the Scene</div>
-                <p class="sbi-content-body"><em style="color:var(--muted);">"During yesterday's client call..."</em></p>
+                <p class="sbi-content-body"><em>"During yesterday's client call..."</em></p>
                 <p class="sbi-content-body" style="margin-top:0.8rem">Anchor the conversation to a specific time and place. Avoid "you always" or "you never" — these trigger defensiveness. Specificity signals fairness and opens dialogue.</p>
                 <div class="sbi-tip" style="border-color:#4d9fff;color:#4d9fff">💡 Be precise: date, meeting, context.</div>
               </div>
@@ -1764,7 +1772,7 @@ body {
               <div class="sbi-content-inner">
                 <div class="sbi-content-tag" style="color:var(--yellow-dk)">Step 02</div>
                 <div class="sbi-content-title">Name What Happened</div>
-                <p class="sbi-content-body"><em style="color:var(--muted);">"...you interrupted the client three times..."</em></p>
+                <p class="sbi-content-body"><em>"...you interrupted the client three times..."</em></p>
                 <p class="sbi-content-body" style="margin-top:0.8rem">Describe observable behavior only — not intent, not personality. <strong>"You were rude"</strong> vs. <strong>"You interrupted"</strong> — one is a label, one is a fact.</p>
                 <div class="sbi-tip" style="border-color:var(--yellow-dk);color:var(--yellow-dk)">💡 Stick to what eyes can see or ears can hear.</div>
               </div>
@@ -1779,7 +1787,7 @@ body {
               <div class="sbi-content-inner">
                 <div class="sbi-content-tag" style="color:var(--teal)">Step 03</div>
                 <div class="sbi-content-title">Connect the Dots</div>
-                <p class="sbi-content-body"><em style="color:var(--muted);">"...the client mentioned feeling unheard. They haven't responded since."</em></p>
+                <p class="sbi-content-body"><em>"...the client mentioned feeling unheard. They haven't responded since."</em></p>
                 <p class="sbi-content-body" style="margin-top:0.8rem">Connect behavior to real consequences — for the team, client, or organization. Impact removes the sense of personal attack and makes the conversation real.</p>
                 <div class="sbi-tip" style="border-color:var(--teal);color:var(--teal)">💡 Use "I noticed" or "the team felt" — not "you made everyone feel".</div>
               </div>
@@ -1822,11 +1830,11 @@ body {
             </div>
             <div class="sbi-content">
               <div class="sbi-content-inner">
-                <div class="sbi-content-tag" style="color:var(--yellow)">Foundation</div>
+                <div class="sbi-content-tag" style="color:var(--yellow-dk)">Foundation</div>
                 <div class="sbi-content-title">Psychological Safety</div>
                 <p class="sbi-content-body">The best communication happens in psychologically safe environments. As a leader or peer, you set the tone.</p>
                 <p class="sbi-content-body" style="margin-top:0.6rem">Normalize questions, celebrate admitting mistakes, and never punish candor.</p>
-                <div class="sbi-tip" style="border-color:var(--yellow);color:var(--yellow)">💡 Safety is built in small daily moments.</div>
+                <div class="sbi-tip" style="border-color:var(--yellow-dk);color:var(--yellow-dk)">💡 Safety is built in small daily moments.</div>
               </div>
             </div>
           </div>
@@ -2017,7 +2025,7 @@ const SLIDE_INSTRUCTIONS = {
 };
 
 const SLIDE_REQUIRED = {
-  1: 4, 2: 6, 3: 4, 4: 1, 5: 7, 6: 7, 7: 1, 8: 6
+  1: 4, 2: 6, 3: 4, 4: 1, 5: 7, 6: 7, 7: 1, 8: 5
 };
 const clickTracker = {};
 const slideUnlocked = {};
@@ -2131,6 +2139,22 @@ function goTo(n, dir) {
 
     setTimeout(() => {
       nextSlide.classList.remove('slide-in-up', 'slide-in-down');
+      // Animate stat bars only once (slide 3)
+      if (n === 3) {
+        nextSlide.querySelectorAll('.stat-bar-fill').forEach(bar => {
+          if (!bar.dataset.locked) {
+            bar.classList.add('animated');
+            const delay = parseFloat(getComputedStyle(bar).animationDelay) * 1000 || 0;
+            const duration = 1200;
+            setTimeout(() => {
+              const targetW = bar.style.getPropertyValue('--target-w');
+              bar.style.width = targetW;
+              bar.style.animation = 'none';
+              bar.dataset.locked = '1';
+            }, delay + duration + 50);
+          }
+        });
+      }
       transitioning = false;
     }, ENTER_DUR);
   }, EXIT_DUR);
@@ -2155,7 +2179,7 @@ function openSbiPanel(idx) {
     p.classList.toggle('active', i === idx);
   });
   sndClick();
-  trackClick(8, 'sbi-panel-' + idx);
+  if (idx !== 0) trackClick(8, 'sbi-panel-' + idx);
 }
 
 function revealCard(el) {
