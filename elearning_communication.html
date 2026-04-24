@@ -532,6 +532,125 @@ body {
   letter-spacing: 0.05em;
 }
 .info-card.revealed .click-hint { display: none; }
+/* ─────────────────────────────────────
+   SBI HORIZONTAL ACCORDION (Slide 8)
+   ───────────────────────────────────── */
+.sbi-accordion {
+  display: flex;
+  height: 320px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+.sbi-panel {
+  display: flex;
+  flex-direction: row;
+  transition: flex 0.55s cubic-bezier(.4,0,.2,1);
+  flex: 0 0 52px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+.sbi-panel.active {
+  flex: 1 1 0%;
+  cursor: default;
+}
+.sbi-panel:nth-child(1) { background: #1a1a1a; }
+.sbi-panel:nth-child(2) { background: #111; }
+.sbi-panel:nth-child(3) { background: #0d1f1b; }
+.sbi-panel:nth-child(4) { background: #1a0d0d; }
+.sbi-panel:nth-child(5) { background: #160d1f; }
+.sbi-panel:nth-child(6) { background: #1a1600; }
+.sbi-panel:nth-child(1) .sbi-label { background: #000; border-right: 3px solid var(--accent); }
+.sbi-panel:nth-child(2) .sbi-label { background: #0a0a0a; border-right: 3px solid var(--yellow-dk); }
+.sbi-panel:nth-child(3) .sbi-label { background: #071a14; border-right: 3px solid var(--teal); }
+.sbi-panel:nth-child(4) .sbi-label { background: #140707; border-right: 3px solid var(--rose); }
+.sbi-panel:nth-child(5) .sbi-label { background: #0e0714; border-right: 3px solid var(--purple); }
+.sbi-panel:nth-child(6) .sbi-label { background: #141100; border-right: 3px solid var(--yellow); }
+.sbi-label {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 52px;
+  max-width: 52px;
+  padding: 1.2rem 0;
+  cursor: pointer;
+  user-select: none;
+  transition: filter 0.3s;
+  flex-shrink: 0;
+}
+.sbi-label:hover { filter: brightness(1.3); }
+.sbi-panel.active .sbi-label { filter: brightness(1.4); }
+.sbi-label-icon {
+  font-size: 1.1rem;
+  writing-mode: horizontal-tb;
+  transform: rotate(180deg);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+.sbi-label-text {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.9);
+  white-space: nowrap;
+}
+.sbi-content {
+  flex: 1;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.35s 0.1s;
+  display: flex;
+  align-items: stretch;
+  pointer-events: none;
+}
+.sbi-panel.active .sbi-content {
+  opacity: 1;
+  pointer-events: auto;
+}
+.sbi-content-inner {
+  padding: 1.6rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+  width: 100%;
+}
+.sbi-content-tag {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.sbi-content-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+}
+.sbi-content-body {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.65;
+  margin: 0;
+}
+.sbi-tip {
+  margin-top: 1rem;
+  padding: 0.5rem 0.8rem;
+  border-left: 2px solid #4d9fff;
+  background: rgba(255,255,255,0.04);
+  font-size: 0.72rem;
+  color: #4d9fff;
+  border-radius: 0 6px 6px 0;
+  line-height: 1.5;
+}
 
 /* ─────────────────────────────────────
    PANEL / INFO BOX
@@ -1615,41 +1734,101 @@ body {
         </div>
       </div>
 
-      <!-- SLIDE 8: SBI FRAMEWORK -->
+      <!-- SLIDE 8: SBI FRAMEWORK — HORIZONTAL ACCORDION -->
       <div class="slide slide-scroll" data-slide="8">
         <div class="slide-tag">Difficult Conversations</div>
         <h2 class="slide-h2">The <span class="hi">SBI</span> Framework</h2>
-        <p class="slide-body" style="margin-bottom:1.2rem">Situation–Behavior–Impact (SBI) is the gold standard for feedback and tough conversations. <strong>Click each card to reveal.</strong></p>
-        <div class="card-grid">
-          <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--accent)">
-            <span class="card-icon">📍</span>
-            <div class="card-title">S — Situation</div>
-            <div class="card-body"><em style="color:var(--muted)">"During yesterday's client call..."</em><br><br>Anchor the conversation to a specific time and place. Avoid "you always" or "you never" — these trigger defensiveness. Specificity signals fairness.</div>
+        <p class="slide-body" style="margin-bottom:1.4rem">Situation–Behavior–Impact (SBI) is the gold standard for feedback and tough conversations. <strong>Click each label to explore.</strong></p>
+        <div class="sbi-accordion" id="sbi-accordion">
+          <div class="sbi-panel active" data-panel="0">
+            <div class="sbi-label" onclick="openSbiPanel(0)">
+              <span class="sbi-label-icon">📍</span>
+              <span class="sbi-label-text">S — Situation</span>
+            </div>
+            <div class="sbi-content">
+              <div class="sbi-content-inner">
+                <div class="sbi-content-tag" style="color:#4d9fff">Step 01</div>
+                <div class="sbi-content-title">Set the Scene</div>
+                <p class="sbi-content-body"><em style="color:var(--muted);">"During yesterday's client call..."</em></p>
+                <p class="sbi-content-body" style="margin-top:0.8rem">Anchor the conversation to a specific time and place. Avoid "you always" or "you never" — these trigger defensiveness. Specificity signals fairness and opens dialogue.</p>
+                <div class="sbi-tip" style="border-color:#4d9fff;color:#4d9fff">💡 Be precise: date, meeting, context.</div>
+              </div>
+            </div>
           </div>
-          <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--yellow-dk)">
-            <span class="card-icon">👁️</span>
-            <div class="card-title">B — Behavior</div>
-            <div class="card-body"><em style="color:var(--muted)">"...you interrupted the client three times while they were explaining their concern..."</em><br><br>Describe observable behavior only — not intent, not personality. "You were rude" vs. "You interrupted" — one is a label, one is a fact.</div>
+          <div class="sbi-panel" data-panel="1">
+            <div class="sbi-label" onclick="openSbiPanel(1)">
+              <span class="sbi-label-icon">👁️</span>
+              <span class="sbi-label-text">B — Behavior</span>
+            </div>
+            <div class="sbi-content">
+              <div class="sbi-content-inner">
+                <div class="sbi-content-tag" style="color:var(--yellow-dk)">Step 02</div>
+                <div class="sbi-content-title">Name What Happened</div>
+                <p class="sbi-content-body"><em style="color:var(--muted);">"...you interrupted the client three times..."</em></p>
+                <p class="sbi-content-body" style="margin-top:0.8rem">Describe observable behavior only — not intent, not personality. <strong>"You were rude"</strong> vs. <strong>"You interrupted"</strong> — one is a label, one is a fact.</p>
+                <div class="sbi-tip" style="border-color:var(--yellow-dk);color:var(--yellow-dk)">💡 Stick to what eyes can see or ears can hear.</div>
+              </div>
+            </div>
           </div>
-          <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--teal)">
-            <span class="card-icon">💥</span>
-            <div class="card-title">I — Impact</div>
-            <div class="card-body"><em style="color:var(--muted)">"...the client mentioned feeling unheard. They haven't responded since."</em><br><br>Connect behavior to real consequences — for the team, the client, or the organization. Impact makes the conversation real and removes the sense of personal attack.</div>
+          <div class="sbi-panel" data-panel="2">
+            <div class="sbi-label" onclick="openSbiPanel(2)">
+              <span class="sbi-label-icon">💥</span>
+              <span class="sbi-label-text">I — Impact</span>
+            </div>
+            <div class="sbi-content">
+              <div class="sbi-content-inner">
+                <div class="sbi-content-tag" style="color:var(--teal)">Step 03</div>
+                <div class="sbi-content-title">Connect the Dots</div>
+                <p class="sbi-content-body"><em style="color:var(--muted);">"...the client mentioned feeling unheard. They haven't responded since."</em></p>
+                <p class="sbi-content-body" style="margin-top:0.8rem">Connect behavior to real consequences — for the team, client, or organization. Impact removes the sense of personal attack and makes the conversation real.</p>
+                <div class="sbi-tip" style="border-color:var(--teal);color:var(--teal)">💡 Use "I noticed" or "the team felt" — not "you made everyone feel".</div>
+              </div>
+            </div>
           </div>
-          <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--rose)">
-            <span class="card-icon">🚫</span>
-            <div class="card-title">Common Traps</div>
-            <div class="card-body">Avoid the "feedback sandwich" — good/bad/good signals insincerity. Don't delay hard conversations until reviews. Don't give feedback when either person is emotionally flooded. Timing matters as much as technique.</div>
+          <div class="sbi-panel" data-panel="3">
+            <div class="sbi-label" onclick="openSbiPanel(3)">
+              <span class="sbi-label-icon">🚫</span>
+              <span class="sbi-label-text">Common Traps</span>
+            </div>
+            <div class="sbi-content">
+              <div class="sbi-content-inner">
+                <div class="sbi-content-tag" style="color:var(--rose)">Watch Out</div>
+                <div class="sbi-content-title">Pitfalls to Avoid</div>
+                <p class="sbi-content-body">Avoid the <strong>"feedback sandwich"</strong> — good/bad/good signals insincerity. Don't delay hard conversations until reviews. Don't give feedback when either person is emotionally flooded.</p>
+                <p class="sbi-content-body" style="margin-top:0.6rem">Timing matters as much as technique.</p>
+                <div class="sbi-tip" style="border-color:var(--rose);color:var(--rose)">💡 Ask yourself: is now the right moment?</div>
+              </div>
+            </div>
           </div>
-          <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--purple)">
-            <span class="card-icon">🔁</span>
-            <div class="card-title">Receiving Feedback</div>
-            <div class="card-body">Receiving feedback is a skill too. Default to "thank you" before defending. Ask: "Can you give me a specific example?" Sleep on strong emotional reactions before responding. Growth lives on the other side of discomfort.</div>
+          <div class="sbi-panel" data-panel="4">
+            <div class="sbi-label" onclick="openSbiPanel(4)">
+              <span class="sbi-label-icon">🔁</span>
+              <span class="sbi-label-text">Receiving</span>
+            </div>
+            <div class="sbi-content">
+              <div class="sbi-content-inner">
+                <div class="sbi-content-tag" style="color:var(--purple)">Flip Side</div>
+                <div class="sbi-content-title">Receiving Feedback</div>
+                <p class="sbi-content-body">Receiving feedback is a skill too. Default to <strong>"thank you"</strong> before defending. Ask: "Can you give me a specific example?"</p>
+                <p class="sbi-content-body" style="margin-top:0.6rem">Sleep on strong emotional reactions before responding. Growth lives on the other side of discomfort.</p>
+                <div class="sbi-tip" style="border-color:var(--purple);color:var(--purple)">💡 Pause. Breathe. Then respond.</div>
+              </div>
+            </div>
           </div>
-          <div class="info-card" onclick="revealCard(this)" style="border-top:3px solid var(--yellow-dk)">
-            <span class="card-icon">⚡</span>
-            <div class="card-title">Psychological Safety</div>
-            <div class="card-body">The best communication happens in psychologically safe environments. As a leader or peer, you set the tone: normalize questions, celebrate admitting mistakes, and never punish candor.</div>
+          <div class="sbi-panel" data-panel="5">
+            <div class="sbi-label" onclick="openSbiPanel(5)">
+              <span class="sbi-label-icon">⚡</span>
+              <span class="sbi-label-text">Safety</span>
+            </div>
+            <div class="sbi-content">
+              <div class="sbi-content-inner">
+                <div class="sbi-content-tag" style="color:var(--yellow)">Foundation</div>
+                <div class="sbi-content-title">Psychological Safety</div>
+                <p class="sbi-content-body">The best communication happens in psychologically safe environments. As a leader or peer, you set the tone.</p>
+                <p class="sbi-content-body" style="margin-top:0.6rem">Normalize questions, celebrate admitting mistakes, and never punish candor.</p>
+                <div class="sbi-tip" style="border-color:var(--yellow);color:var(--yellow)">💡 Safety is built in small daily moments.</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1969,6 +2148,16 @@ function navigate(dir) {
 }
 
 /* ── INTERACTIVE FUNCTIONS ── */
+function openSbiPanel(idx) {
+  const accordion = document.getElementById('sbi-accordion');
+  if (!accordion) return;
+  accordion.querySelectorAll('.sbi-panel').forEach((p, i) => {
+    p.classList.toggle('active', i === idx);
+  });
+  sndClick();
+  trackClick(8, 'sbi-panel-' + idx);
+}
+
 function revealCard(el) {
   sndClick();
   el.classList.toggle('revealed');
